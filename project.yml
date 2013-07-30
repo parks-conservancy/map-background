@@ -1,10 +1,10 @@
 # == Global project settings ===========================================
 
-name:             OSM Elemental
+name:             GGNPC Features
 description:      ''
 attribution:      'Map Data © OpenStreetMap'
-bounds:           [-180.0, -85.0511, 180.0, 85.0511]
-center:           [0, 20, 3]
+bounds:           [-123.640, 36.791, -121.025, 38.719]
+center:           [-122.5369, 37.8704, 11]
 format:           png
 interactivity:    false
 minzoom:          0
@@ -20,9 +20,9 @@ _layer_default:   &layer
 
 _pg_default:      &postgis
   type:           postgis
-  dbname:         osm2pgsql
-  host:           localhost
-  user:           postgres
+  dbname:         ggnpc
+  host:           geo.local
+  user:           ggnpc
   geometry_field: way
   extent:         '-20037508.34, -20037508.34, 20037508.34, 20037508.34'
   srs:            '+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over'
@@ -31,15 +31,25 @@ _pg_default:      &postgis
 # == Stylesheets =======================================================
 
 Stylesheet:
-  - mss/map.mss
-  - mss/park.mss
-  - mss/water.mss
-  - mss/road.mss
+  - map.mss
+  - park.mss
+  - water.mss
+  - road.mss
 
 
 # == Layers ============================================================
 
 Layer:
+
+  # ---- Land areas ----------------------------------------------------
+
+  - <<: *layer
+    name: land
+    id:   land
+    Datasource:
+      <<: *postgis
+      table: coastline
+      geometry_field: geom
 
   # ---- Landuse / landcover areas -------------------------------------
 
@@ -59,17 +69,17 @@ Layer:
 
   # ---- Water ---------------------------------------------------------
 
-  - <<: *layer
-    name: ocean_ne
-    id:   ocean_ne
-    Datasource:
-      file: layers/10m_ocean.shp
+  # - <<: *layer
+  #   name: ocean_ne
+  #   id:   ocean_ne
+  #   Datasource:
+  #     file: layers/10m_ocean.shp
 
-  - <<: *layer
-    name: ocean
-    id:   ocean
-    Datasource:
-      file: layers/water_polygons.shp
+  # - <<: *layer
+  #   name: ocean
+  #   id:   ocean
+  #   Datasource:
+  #     file: layers/water_polygons.shp
 
   - <<: *layer
     name: water

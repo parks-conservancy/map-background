@@ -13,6 +13,7 @@ install:
 	ln -s `pwd` ${HOME}/Documents/MapBox/project/GGNPC-basemap
 
 clean:
+	rm project.mml
 	rm -rf tmp/
 
 distclean:
