@@ -102,6 +102,7 @@ Layer:
         ) AS school
 
   # ---- Water (NHD) ---------------------------------------------------
+  # TODO split out Swamp/Marsh
 
   - <<: *layer
     name: water
@@ -114,18 +115,102 @@ Layer:
             SELECT ftype, ST_Union(geom) AS geom
             FROM nhdwaterbody
             WHERE geom && !bbox!
-            --  AND ftype IN ('Reservoir', 'LakePond', 'Estuary',
-            --                'SwampMarsh')
+              AND fcode IN (
+                39000, -- Lake/Pond
+                39004, -- Lake/Pond: Hydrographic Category = Perennial
+                39009, -- Lake/Pond: Hydrographic Category = Perennial; Stage = Average Water Elevation
+                39010, -- Lake/Pond: Hydrographic Category = Perennial; Stage = Normal Pool
+                39011, -- Lake/Pond: Hydrographic Category = Perennial; Stage = Date of Photography
+                39012, -- Lake/Pond: Hydrographic Category = Perennial; Stage = Spillway Elevation
+
+                43600, -- Reservoir
+                43601, -- Reservoir: Reservoir Type = Aquaculture
+                43603, -- Reservoir: Reservoir Type = Decorative Pool
+                43604, -- Reservoir: Reservoir Type = Tailings Pond; Construction Material = Earthen
+                43605, -- Reservoir: Reservoir Type = Tailings Pond
+                43606, -- Reservoir: Reservoir Type = Disposal
+                43607, -- Reservoir: Reservoir Type = Evaporator
+                43608, -- Reservoir: Reservoir Type = Swimming Pool
+                43609, -- Reservoir: Reservoir Type = Cooling Pond
+                43610, -- Reservoir: Reservoir Type = Filtration Pond
+                43611, -- Reservoir: Reservoir Type = Settling Pond
+                43612, -- Reservoir: Reservoir Type = Sewage Treatment Pond
+                43613, -- Reservoir: Reservoir Type = Water Storage; Construction Material = Nonearthen
+                43614, -- Reservoir: Reservoir Type = Water Storage; Construction Material = Earthen; Hydrographic Category = Intermittent
+                43615, -- Reservoir: Reservoir Type = Water Storage; Construction Material = Earthen; Hydrographic Category = Perennial
+                43617, -- Reservoir: Reservoir Type = Water Storage
+                43618, -- Reservoir: Construction Material = Earthen
+                43619, -- Reservoir: Construction Material = Nonearthen
+                43621, -- Reservoir: Reservoir Type = Water Storage; Hydrographic Category = Perennial
+                43623, -- Reservoir: Reservoir Type = Evaporator; Construction Material = Earthen
+                43624, -- Reservoir; Reservoir Type = Treatment
+                43625, -- Reservoir: Reservoir Type = Disposal; Construction Material = Earthen
+                43626, -- Reservoir: Reservoir Type = Disposal; Construction Material = Nonearthen
+
+                46600, -- Swamp/Marsh
+                46601, -- Swamp/Marsh: Hydrographic Category = Intermittent
+                46602, -- Swamp/Marsh: Hydrographic Category = Perennial
+
+                 -1
+              )
             GROUP BY ftype
           UNION
             SELECT ftype, ST_Union(geom) AS geom
             FROM nhdarea
             WHERE geom && !bbox!
-            --  AND ftype IN ('LakePond', 'StreamRiver', 'BayInlet',
-            --                'SeaOcean', 'Area of Complex Channels',
-            --                'CanalDitch', 'Foreshore')
+              AND fcode IN (
+                33600, -- Canal/Ditch
+                33601, -- Canal/Ditch: Canal/Ditch Type = Aqueduct
+
+                36400, -- Foreshore
+
+                44500, -- Sea/Ocean
+
+                45500, -- Spillway
+
+                46000, -- Stream/River
+                46006, -- Stream/River: Hydrographic Category = Perennial
+
+                 -1
+              )
             GROUP BY ftype
         ) AS water
+
+  # ---- Foreshore (NHD) -----------------------------------------------
+
+  - <<: *layer
+    name: foreshore
+    id:   foreshore
+    Datasource:
+      <<: *postgis
+      geometry_field: geom
+      table: >
+        (
+            SELECT ftype, ST_Union(geom) AS geom
+            FROM nhdarea
+            WHERE geom && !bbox!
+              AND ftype IN (
+                36400, -- Foreshore
+
+                 -1
+              )
+            GROUP BY ftype
+        ) AS water
+
+    # ---- Beach (OSM) ---------------------------------------------------
+
+  - <<: *layer
+    name: beach
+    id:   beach
+    Datasource:
+      <<: *postgis
+      table: >
+        (
+            SELECT way
+            FROM planet_osm_polygon
+            WHERE way && !bbox!
+              AND tags -> 'natural' = 'beach'
+        ) AS beach
 
   # ---- Roads ---------------------------------------------------------
 
@@ -143,6 +228,44 @@ Layer:
                                       'secondary', 'tertiary', 'residential',
                                       'service')
         ) AS highway
+
+  # ---- Trails --------------------------------------------------------
+
+  - <<: *layer
+    name: trails
+    id:   trails
+    Datasource:
+      <<: *postgis
+      geometry_field: geom
+      table: trails
+
+  # ---- Recreational Opportunities (OSM) ------------------------------
+
+  - <<: *layer
+    name: sports
+    id:   sports
+    Datasource:
+      <<: *postgis
+      table: >
+        (
+          SELECT tags -> 'sport' AS sport, way
+          FROM planet_osm_point
+          WHERE way && !bbox!
+            AND tags -> 'sport' IN ('surfing', 'kiteboarding', 'free_flying')
+        ) AS x
+
+  # ---- GGNPC Locations -----------------------------------------------
+
+  - <<: *layer
+    name: locations
+    id:   locations
+    Datasource:
+      <<: *postgis
+      geometry_field: geom
+      table: >
+        (
+          SELECT name, type, geom FROM locations
+        ) AS x
 
   # ---- GGNRA Unit Names ----------------------------------------------
 
@@ -237,14 +360,63 @@ Layer:
         (
           SELECT * FROM (
             SELECT gnis_name AS name, ftype, geom, areasqkm
-            FROM nhdarea
-            WHERE gnis_name IS NOT NULL AND fcode NOT IN (
-              46003 -- intermittent stream
-            )
-          UNION
-            SELECT gnis_name AS name, ftype, geom, areasqkm
             FROM nhdwaterbody WHERE
             gnis_name IS NOT NULL
+              AND ftype IN (
+                39000, -- Lake/Pond
+                39004, -- Lake/Pond: Hydrographic Category = Perennial
+                39009, -- Lake/Pond: Hydrographic Category = Perennial; Stage = Average Water Elevation
+                39010, -- Lake/Pond: Hydrographic Category = Perennial; Stage = Normal Pool
+                39011, -- Lake/Pond: Hydrographic Category = Perennial; Stage = Date of Photography
+                39012, -- Lake/Pond: Hydrographic Category = Perennial; Stage = Spillway Elevation
+
+                43600, -- Reservoir
+                43601, -- Reservoir: Reservoir Type = Aquaculture
+                43603, -- Reservoir: Reservoir Type = Decorative Pool
+                43604, -- Reservoir: Reservoir Type = Tailings Pond; Construction Material = Earthen
+                43605, -- Reservoir: Reservoir Type = Tailings Pond
+                43606, -- Reservoir: Reservoir Type = Disposal
+                43607, -- Reservoir: Reservoir Type = Evaporator
+                43608, -- Reservoir: Reservoir Type = Swimming Pool
+                43609, -- Reservoir: Reservoir Type = Cooling Pond
+                43610, -- Reservoir: Reservoir Type = Filtration Pond
+                43611, -- Reservoir: Reservoir Type = Settling Pond
+                43612, -- Reservoir: Reservoir Type = Sewage Treatment Pond
+                43613, -- Reservoir: Reservoir Type = Water Storage; Construction Material = Nonearthen
+                43614, -- Reservoir: Reservoir Type = Water Storage; Construction Material = Earthen; Hydrographic Category = Intermittent
+                43615, -- Reservoir: Reservoir Type = Water Storage; Construction Material = Earthen; Hydrographic Category = Perennial
+                43617, -- Reservoir: Reservoir Type = Water Storage
+                43618, -- Reservoir: Construction Material = Earthen
+                43619, -- Reservoir: Construction Material = Nonearthen
+                43621, -- Reservoir: Reservoir Type = Water Storage; Hydrographic Category = Perennial
+                43623, -- Reservoir: Reservoir Type = Evaporator; Construction Material = Earthen
+                43624, -- Reservoir; Reservoir Type = Treatment
+                43625, -- Reservoir: Reservoir Type = Disposal; Construction Material = Earthen
+                43626, -- Reservoir: Reservoir Type = Disposal; Construction Material = Nonearthen
+
+                46600, -- Swamp/Marsh
+                46601, -- Swamp/Marsh: Hydrographic Category = Intermittent
+                46602, -- Swamp/Marsh: Hydrographic Category = Perennial
+
+                 -1
+              )
+          UNION
+            SELECT gnis_name AS name, ftype, geom, areasqkm
+            FROM nhdarea
+            WHERE gnis_name IS NOT NULL
+              AND ftype IN (
+                33600, -- Canal/Ditch
+                33601, -- Canal/Ditch: Canal/Ditch Type = Aqueduct
+
+                36400, -- Foreshore
+
+                45500, -- Spillway
+
+                46000, -- Stream/River
+                46006, -- Stream/River: Hydrographic Category = Perennial
+
+                 -1
+              )
           ) AS water
           ORDER BY areasqkm DESC
         ) AS labels

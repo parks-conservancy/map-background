@@ -1,5 +1,6 @@
 @land: #e5e3df;
 @water: #b3d1ff;
+@beach: #f6e898;
 @park: #cadfaa;
 @no-access: #d6dbd0;
 @school: #e8ddbd;
@@ -25,9 +26,26 @@ Map {
   polygon-fill: @land;
 }
 
+#foreshore,
+#beach {
+  polygon-fill: @beach;
+}
+
 #cpad_units[zoom>=10] {
 
   polygon-fill: @park;
+}
+
+#sports {
+  marker-fill: blue;
+  marker-allow-overlap: true;
+  marker-ignore-placement: true;
+}
+
+#locations {
+  marker-fill: red;
+  marker-allow-overlap: true;
+  marker-ignore-placement: true;
 }
 
 #ggnra_boundary {
@@ -52,6 +70,11 @@ Map {
 #school
 {
   polygon-fill: @school;
+}
+
+#trails {
+  line-color: #fc0;
+  line-width: 2.5;
 }
 
 #road
