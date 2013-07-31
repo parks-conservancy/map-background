@@ -32,9 +32,6 @@ _pg_default:      &postgis
 
 Stylesheet:
   - map.mss
-  - park.mss
-  - water.mss
-  - road.mss
 
 
 # == Layers ============================================================
@@ -67,31 +64,68 @@ Layer:
             'village_green')
         ) as x
 
-  # ---- Water ---------------------------------------------------------
+  # ---- Protected Areas (CPAD) ----------------------------------------
 
-  # - <<: *layer
-  #   name: ocean_ne
-  #   id:   ocean_ne
-  #   Datasource:
-  #     file: layers/10m_ocean.shp
+  - <<: *layer
+    name: cpad_units
+    id:   cpad_units
+    Datasource:
+      <<: *postgis
+      geometry_field: geom
+      table: >
+        (SELECT access_typ AS access_type, geom FROM cpad_units) AS cpad
 
-  # - <<: *layer
-  #   name: ocean
-  #   id:   ocean
-  #   Datasource:
-  #     file: layers/water_polygons.shp
+  # ---- GGNRA Boundary ------------------------------------------------
+
+  - <<: *layer
+    name: ggnra_boundary
+    id:   ggnra_boundary
+    Datasource:
+      <<: *postgis
+      geometry_field: geom
+      table: >
+        (SELECT geom FROM ggnra_boundary) AS ggnra_boundary
+
+  # ---- School (OSM) --------------------------------------------------
+
+  - <<: *layer
+    name: school
+    id:   school
+    Datasource:
+      <<: *postgis
+      table: >
+        (
+          SELECT way
+          FROM planet_osm_polygon
+          WHERE way && !bbox!
+            AND tags -> 'amenity' = 'university'
+        ) AS school
+
+  # ---- Water (NHD) ---------------------------------------------------
 
   - <<: *layer
     name: water
     id:   water
     Datasource:
       <<: *postgis
+      geometry_field: geom
       table: >
-        ( select way from planet_osm_polygon
-          where tags->'natural' = 'water'
-            or tags->'waterway' in ('riverbank', 'dock')
-            or tags->'landuse' = 'reservoir'
-        ) as x
+        (
+            SELECT ftype, ST_Union(geom) AS geom
+            FROM nhdwaterbody
+            WHERE geom && !bbox!
+            --  AND ftype IN ('Reservoir', 'LakePond', 'Estuary',
+            --                'SwampMarsh')
+            GROUP BY ftype
+          UNION
+            SELECT ftype, ST_Union(geom) AS geom
+            FROM nhdarea
+            WHERE geom && !bbox!
+            --  AND ftype IN ('LakePond', 'StreamRiver', 'BayInlet',
+            --                'SeaOcean', 'Area of Complex Channels',
+            --                'CanalDitch', 'Foreshore')
+            GROUP BY ftype
+        ) AS water
 
   # ---- Roads ---------------------------------------------------------
 
@@ -101,16 +135,148 @@ Layer:
     Datasource:
       <<: *postgis
       table: >
-        ( select way, case
-            when tags->'highway' in ('living_street', 'pedestrian') then 5
-            when tags->'highway' in ('secondary_link', 'tertiary_link',
-              'unclassified', 'residential', 'road') then 4
-            when tags->'highway' in ('secondary', 'tertiary',
-              'trunk_link', 'primary_link') then 3
-            when tags->'highway' in ('trunk', 'primary', 'motorway_link') then 2
-            when tags->'highway' = 'motorway' then 1
-            else null end as class
-          from planet_osm_line
-          where tags ? 'highway'
-        ) as x
+        (
+          SELECT tags -> 'highway' AS highway, way
+          FROM planet_osm_line
+          WHERE way && !bbox!
+            AND tags -> 'highway' IN ('motorway', 'trunk', 'primary',
+                                      'secondary', 'tertiary', 'residential',
+                                      'service')
+        ) AS highway
+
+  # ---- GGNRA Unit Names ----------------------------------------------
+
+  - <<: *layer
+    name: ggnra_boundary_labels
+    id:   ggnra_boundary_labels
+    Datasource:
+      <<: *postgis
+      geometry_field: geom
+      table: >
+        (SELECT unit_name AS name, geom FROM ggnra_boundary) AS ggnra_boundary
+
+  # ---- Places --------------------------------------------------------
+
+  - <<: *layer
+    name: places
+    id:   places
+    Datasource:
+      <<: *postgis
+      table: >
+        (
+          SELECT *
+          FROM 
+          (
+            SELECT DISTINCT ON (name) name, way, place, population,
+                   priority
+            FROM
+            (
+              SELECT tags -> 'name' AS name, way,
+                     tags -> 'place' AS place,
+                     COALESCE(replace(tags -> 'population', ',', '')::numeric, 0) AS population,
+                     CASE
+                      WHEN tags -> 'place' IN ('city') THEN 1
+                      WHEN tags -> 'place' IN ('suburb') THEN 2
+                      WHEN tags -> 'place' IN('town') THEN 3
+                      WHEN tags -> 'place' IN ('neighbourhood') THEN 4
+                      WHEN tags -> 'place' IN ('village') THEN 5
+                      ELSE 10
+                    END AS priority
+              FROM planet_osm_point
+              WHERE way && !bbox!
+                AND tags ? 'name'
+                AND tags ? 'place'
+                AND tags->'place' IN ('city','town','village','suburb','neighbourhood')
+            UNION
+              SELECT tags -> 'name' AS name, way, tags -> 'place' AS place,
+              COALESCE(replace(tags -> 'population', ',', '')::numeric, 0) AS population,
+              CASE
+                WHEN tags->'place' IN ('city') THEN 1
+                WHEN tags->'place' IN ('suburb') THEN 2
+                WHEN tags->'place' IN('town') THEN 3
+                WHEN tags->'place' IN ('neighbourhood') THEN 4
+                WHEN tags->'place' IN ('village') THEN 5
+                ELSE 10
+              END AS priority
+              FROM planet_osm_polygon
+              WHERE way && !bbox!
+                AND tags ? 'name'
+                AND tags ? 'place'
+                AND tags -> 'place' IN ('city','town','village','suburb','neighbourhood')
+            ) AS stuff
+            ORDER BY name
+          ) AS stuff
+          ORDER BY priority, population DESC
+        ) AS places
+
+  # ---- CPAD Labels ---------------------------------------------------
+
+  - <<: *layer
+    name: cpad-labels
+    id:   cpad-labels
+    Datasource:
+      <<: *postgis
+      geometry_field: geom
+      table: >
+        (
+          SELECT unit_name AS name, gis_acres, geom
+          FROM cpad_superunits
+          WHERE unit_name IS NOT NULL
+          ORDER BY gis_acres DESC
+        ) AS cpad
+
+  # ---- Water Labels --------------------------------------------------
+
+  - <<: *layer
+    name: water-labels
+    id:   water-labels
+    Datasource:
+      <<: *postgis
+      geometry_field: geom
+      table: >
+        (
+          SELECT * FROM (
+            SELECT gnis_name AS name, ftype, geom, areasqkm
+            FROM nhdarea
+            WHERE gnis_name IS NOT NULL AND fcode NOT IN (
+              46003 -- intermittent stream
+            )
+          UNION
+            SELECT gnis_name AS name, ftype, geom, areasqkm
+            FROM nhdwaterbody WHERE
+            gnis_name IS NOT NULL
+          ) AS water
+          ORDER BY areasqkm DESC
+        ) AS labels
+
+  # ---- Bay Labels ----------------------------------------------------
+
+  - <<: *layer
+    name: bay
+    id:   bay
+    Datasource:
+      <<: *postgis
+      table: >
+        (
+          SELECT tags -> 'name' AS name, way
+          FROM planet_osm_point
+          WHERE tags -> 'natural' = 'bay'
+            AND tags ? 'name'
+        ) AS bay
+
+  # ---- Road Labels ---------------------------------------------------
+
+  - <<: *layer
+    name: highway-labels
+    id:   highway-labels
+    Datasource:
+      <<: *postgis
+      table: >
+        (
+          SELECT tags -> 'highway' AS highway, tags -> 'name' AS name, way
+          FROM planet_osm_line
+          WHERE way && !bbox!
+            AND tags -> 'highway' IN ('motorway', 'trunk', 'primary', 'secondary')
+            AND tags ? 'name'
+        ) AS labels
 
