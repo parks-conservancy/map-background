@@ -57,8 +57,6 @@ Map {
 #road
 {
   ::stroke {
-    line-join: miter;
-    line-cap: round;
     line-color: transparent;
     line-width: 0;
   }
