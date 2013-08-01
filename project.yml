@@ -254,7 +254,11 @@ Layer:
             WHERE way && !bbox!
               AND (
                 (tags ? 'sport'
-                AND string_to_array(tags -> 'sport', ';') && ARRAY['surfing', 'kiteboarding', 'free_flying'])
+                AND string_to_array(tags -> 'sport', ';') && ARRAY['surfing',
+                                                                   'kiteboarding',
+                                                                   'windsurfing',
+                                                                   'paddleboarding'
+                                                                   'free_flying'])
                 OR
                 (tags ? 'leisure'
                 AND string_to_array(tags -> 'leisure', ';') && ARRAY['fishing'])
@@ -265,7 +269,11 @@ Layer:
             WHERE way && !bbox!
               AND (
                 (tags ? 'sport'
-                AND string_to_array(tags -> 'sport', ';') && ARRAY['surfing', 'kiteboarding', 'free_flying'])
+                AND string_to_array(tags -> 'sport', ';') && ARRAY['surfing',
+                                                                   'kiteboarding',
+                                                                   'windsurfing',
+                                                                   'paddleboarding'
+                                                                   'free_flying'])
                 OR
                 (tags ? 'leisure'
                 AND string_to_array(tags -> 'leisure', ';') && ARRAY['fishing'])
