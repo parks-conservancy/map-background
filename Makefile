@@ -5,7 +5,9 @@ setup:
 
 install:
 	mkdir -p ${HOME}/Documents/MapBox/project
-	ln -s `pwd` ${HOME}/Documents/MapBox/project/GGNPC-basemap
+	ln -s "`pwd`" ${HOME}/Documents/MapBox/project/GGNPC-basemap
+	ln -s bin/hook .git/hooks/post-checkout
+	ln -s bin/hook .git/hooks/post-merge
 
 clean:
 	rm project.mml
