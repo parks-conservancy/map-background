@@ -1,16 +1,15 @@
 mml: project.mml
 
-setup:
-	npm install -g js-yaml
-
 install:
 	mkdir -p ${HOME}/Documents/MapBox/project
-	ln -s "`pwd`" ${HOME}/Documents/MapBox/project/GGNPC-basemap
-	ln -s bin/hook .git/hooks/post-checkout
-	ln -s bin/hook .git/hooks/post-merge
+	ln -sf "`pwd`" ${HOME}/Documents/MapBox/project/GGNPC-basemap
+	ln -sf bin/hook .git/hooks/post-checkout
+	ln -sf bin/hook .git/hooks/post-merge
+	npm install && npm rebuild
+	echo DATABASE_URL=postgres://ggnpc@geo.local:5432/ggnpc > .env
 
 clean:
 	rm project.mml
 
 project.mml: project.yml
-	js-yaml --to-json project.yml > project.mml
+	cat project.yml | (source .env && node jsonify.js $$DATABASE_URL) > project.mml
