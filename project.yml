@@ -248,10 +248,29 @@ Layer:
       <<: *postgis
       table: >
         (
-          SELECT tags -> 'sport' AS sport, way
-          FROM planet_osm_point
-          WHERE way && !bbox!
-            AND tags -> 'sport' IN ('surfing', 'kiteboarding', 'free_flying')
+          SELECT * FROM (
+            SELECT COALESCE(tags -> 'sport', tags -> 'leisure') AS sport, way
+            FROM planet_osm_point
+            WHERE way && !bbox!
+              AND (
+                (tags ? 'sport'
+                AND string_to_array(tags -> 'sport', ';') && ARRAY['surfing', 'kiteboarding', 'free_flying'])
+                OR
+                (tags ? 'leisure'
+                AND string_to_array(tags -> 'leisure', ';') && ARRAY['fishing'])
+              )
+          UNION
+            SELECT COALESCE(tags -> 'sport', tags -> 'leisure') AS sport, way
+            FROM planet_osm_polygon
+            WHERE way && !bbox!
+              AND (
+                (tags ? 'sport'
+                AND string_to_array(tags -> 'sport', ';') && ARRAY['surfing', 'kiteboarding', 'free_flying'])
+                OR
+                (tags ? 'leisure'
+                AND string_to_array(tags -> 'leisure', ';') && ARRAY['fishing'])
+              )
+          ) AS x
         ) AS x
 
   # ---- GGNPC Locations -----------------------------------------------

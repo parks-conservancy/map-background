@@ -40,6 +40,7 @@ Map {
   marker-fill: blue;
   marker-allow-overlap: true;
   marker-ignore-placement: true;
+  marker-placement: interior;
 }
 
 #locations {
