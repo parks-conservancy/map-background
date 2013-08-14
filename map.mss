@@ -130,7 +130,7 @@ Map {
   }
 
   [type='Visitor Center'] {
-    text-name: "'Å'"; // &#x212b; (information)
+    text-name: "'Å'"; // &#x212b; (information)
     // text-name: "'↌'"; // &#x218c; (ranger station)
   }
 }
