@@ -332,6 +332,22 @@ Layer:
           ORDER BY priority
         ) AS x
 
+    # ---- Lighthouses ---------------------------------------------------
+
+  - <<: *layer
+    name: lighthouses
+    id:   lighthouses
+    status: on
+    Datasource:
+      <<: *postgis
+      table: >
+        (
+          SELECT tags -> 'name', way
+          FROM planet_osm_point
+          WHERE way && !bbox!
+            AND tags -> 'man_made' = 'lighthouse'
+        ) AS _
+
   # ---- GGNRA Unit Names ----------------------------------------------
 
   - <<: *layer

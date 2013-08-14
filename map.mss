@@ -43,6 +43,20 @@ Map {
   marker-placement: interior;
 }
 
+#lighthouses {
+  ::box {
+    marker-fill: #333;
+    marker-ignore-placement: true;
+    marker-width: 45;
+    marker-height: 45;
+  }
+
+  text-face-name: "Symbola Medium";
+  text-name: "'ↅ'"; // &#2185; (lighthouse)
+  text-fill: #fff;
+  text-size: 24;
+}
+
 #locations {
   text-face-name: "Symbola Medium";
   text-name: "''";
@@ -50,7 +64,6 @@ Map {
   text-size: 14;
   text-min-distance: 25;
   text-min-padding: 50;
-  text-wrap-width: 48;
   text-halo-radius: 1;
 
   [type='Access'] {
