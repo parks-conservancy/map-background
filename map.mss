@@ -32,7 +32,6 @@ Map {
 }
 
 #cpad_units[zoom>=10] {
-
   polygon-fill: @park;
 }
 
