@@ -294,12 +294,13 @@ Layer:
   - <<: *layer
     name: locations
     id:   locations
-    status: off
+    status: on
     Datasource:
       <<: *postgis
       geometry_field: geom
       table: >
         (
+          -- TODO prioritize types
           SELECT name, type, geom FROM locations
         ) AS x
 

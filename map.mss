@@ -44,9 +44,188 @@ Map {
 }
 
 #locations {
+/*
   marker-fill: red;
   marker-allow-overlap: true;
   marker-ignore-placement: true;
+  */
+}
+
+#locations[type='Access'] {
+  text-face-name: "Symbola Medium";
+  text-name: "'↥'"; // &#x21a5; (person)
+  text-fill: #666;
+  text-size: 14;
+  text-min-distance: 15;
+  text-min-padding: 15;
+  text-wrap-width: 48;
+  text-halo-radius: 1;
+}
+
+#locations[type='Beach'] {
+  text-face-name: "Symbola Medium";
+  text-name: "'↔'"; // &#x2194; (kid on beach)
+  text-fill: #666;
+  text-size: 14;
+  text-min-distance: 15;
+  text-min-padding: 15;
+  text-wrap-width: 48;
+  text-halo-radius: 1;
+}
+
+#locations[type='Bike Rack'] {
+  text-face-name: "Symbola Medium";
+  text-name: "'⇠'"; // &#x21e0; (bike)
+  text-fill: #666;
+  text-size: 14;
+  text-min-distance: 15;
+  text-min-padding: 15;
+  text-wrap-width: 48;
+  text-halo-radius: 1;
+}
+
+#locations[type='Building'] {
+  text-face-name: "Symbola Medium";
+  text-name: "'Ⅹ'"; // &#x2169; (building)
+  text-fill: #666;
+  text-size: 14;
+  text-min-distance: 15;
+  text-min-padding: 15;
+  text-wrap-width: 48;
+  text-halo-radius: 1;
+}
+
+#locations[type='Cafe'] {
+  text-face-name: "Symbola Medium";
+  text-name: "'ℰ'"; // &#x2130; (cafe)
+  text-fill: #666;
+  text-size: 14;
+  text-min-distance: 15;
+  text-min-padding: 15;
+  text-wrap-width: 48;
+  text-halo-radius: 1;
+}
+
+#locations[type='Campground'] {
+  text-face-name: "Symbola Medium";
+  text-name: "'⇢'"; // &#x21e2; (tent)
+  text-fill: #666;
+  text-size: 14;
+  text-min-distance: 15;
+  text-min-padding: 15;
+  text-wrap-width: 48;
+  text-halo-radius: 1;
+}
+
+#locations[type='Meeting Place'] {
+  text-face-name: "Symbola Medium";
+  text-name: "'⇁'"; // &#x21c1; (amphitheater)
+  text-fill: #666;
+  text-size: 14;
+  text-min-distance: 15;
+  text-min-padding: 15;
+  text-wrap-width: 48;
+  text-halo-radius: 1;
+}
+
+#locations[type='Overlook'] {
+  text-face-name: "Symbola Medium";
+  text-name: "'⇨'"; // &#x21e8; (telescope)
+  text-fill: #666;
+  text-size: 14;
+  text-min-distance: 15;
+  text-min-padding: 15;
+  text-wrap-width: 48;
+  text-halo-radius: 1;
+}
+
+#locations[type='Park'] {
+  text-face-name: "Symbola Medium";
+  text-name: "'⅊'"; // &#x214a; (tree)
+  text-fill: #666;
+  text-size: 24;
+  text-min-distance: 15;
+  text-min-padding: 15;
+  text-wrap-width: 48;
+  text-halo-radius: 1;
+}
+
+#locations[type='Parking Lot'] {
+  text-face-name: "Symbola Medium";
+  text-name: "'ℨ'"; // &#x2128; (P)
+  text-fill: #666;
+  text-size: 10;
+  text-min-distance: 15;
+  text-min-padding: 15;
+  text-halo-radius: 1;
+}
+
+#locations[type='Restoration Site'] {
+  text-face-name: "Symbola Medium";
+  text-name: "'↣'"; // &#x21a3; (person with branches)
+  text-fill: #666;
+  text-size: 14;
+  text-min-distance: 15;
+  text-min-padding: 15;
+  text-wrap-width: 48;
+  text-halo-radius: 1;
+}
+
+#locations[type='Restroom'] {
+  text-face-name: "Symbola Medium";
+  text-name: "'№'"; // &#x2116; (restroom)
+  text-fill: #666;
+  text-size: 14;
+  text-min-distance: 15;
+  text-min-padding: 15;
+  text-wrap-width: 48;
+  text-halo-radius: 1;
+}
+
+#locations[type='Site of Interest'] {
+  text-face-name: "Symbola Medium";
+  text-name: "'↦'"; // &#x21a6; (arrow pointing at *)
+  text-fill: #666;
+  text-size: 14;
+  text-min-distance: 15;
+  text-min-padding: 15;
+  text-wrap-width: 48;
+  text-halo-radius: 1;
+}
+
+#locations[type='Trailhead'] {
+  text-face-name: "Symbola Medium";
+  text-name: "'↚'"; // &#x219a; (hiker)
+  text-fill: #666;
+  text-size: 14;
+  text-min-distance: 15;
+  text-min-padding: 15;
+  text-wrap-width: 48;
+  text-halo-radius: 1;
+}
+
+#locations[type='Water Fountain'] {
+  text-face-name: "Symbola Medium";
+  text-name: "'Ω'"; // &#x2126; (water fountain)
+  // alternately, glass of water: &#x21e1;
+  text-fill: #666;
+  text-size: 14;
+  text-min-distance: 15;
+  text-min-padding: 15;
+  text-wrap-width: 48;
+  text-halo-radius: 1;
+}
+
+#locations[type='Visitor Center'] {
+  text-face-name: "Symbola Medium";
+  text-name: "'Å'"; // &#x212b; (information)
+  // text-name: "'↌'"; // &#x218c; (ranger station)
+  text-fill: #666;
+  text-size: 14;
+  text-min-distance: 15;
+  text-min-padding: 15;
+  text-wrap-width: 48;
+  text-halo-radius: 1;
 }
 
 #park_units {
