@@ -55,15 +55,17 @@ Layer:
   - <<: *layer
     name: park
     id:   park
+    status: off
     Datasource:
       <<: *postgis
       table: >
         ( select way from planet_osm_polygon
-          where tags->'leisure' in (
-            'park',
-            'common',
-            'playground',
-            'village_green')
+          where way && !bbox!
+            AND tags->'leisure' in (
+              'park',
+              'common',
+              'playground',
+              'village_green')
         ) as x
 
   # ---- Protected Areas (CPAD) ----------------------------------------
@@ -75,7 +77,11 @@ Layer:
       <<: *postgis
       geometry_field: geom
       table: >
-        (SELECT access_typ AS access_type, geom FROM cpad_units) AS cpad
+        (
+          SELECT access_typ AS access_type, geom
+          FROM cpad_units
+          WHERE geom && !bbox!
+        ) AS _
 
   # ---- GGNRA Boundary ------------------------------------------------
 
@@ -89,7 +95,8 @@ Layer:
         (
           SELECT goga_man, geom
           FROM park_units
-          WHERE goga_man IN ('Yes', 'Trust')
+          WHERE geom && !bbox!
+            AND goga_man IN ('Yes', 'Trust')
         ) AS _
 
   # ---- School (OSM) --------------------------------------------------
@@ -301,7 +308,9 @@ Layer:
       table: >
         (
           -- TODO prioritize types
-          SELECT name, type, geom FROM locations
+          SELECT name, type, geom
+          FROM locations
+          WHERE geom && !bbox!
         ) AS x
 
   # ---- GGNRA Unit Names ----------------------------------------------
@@ -316,7 +325,8 @@ Layer:
         (
           SELECT unit_name AS name, geom
           FROM park_units
-          WHERE goga_man IN ('Yes', 'Trust', 'Pore')
+          WHERE geom && !bbox!
+            AND goga_man IN ('Yes', 'Trust', 'Pore')
         ) AS _
 
   # ---- Places --------------------------------------------------------
@@ -385,7 +395,8 @@ Layer:
         (
           SELECT unit_name AS name, gis_acres, geom
           FROM cpad_superunits
-          WHERE unit_name IS NOT NULL
+          WHERE geom && !bbox!
+            AND unit_name IS NOT NULL
           ORDER BY gis_acres DESC
         ) AS cpad
 
@@ -401,8 +412,9 @@ Layer:
         (
           SELECT * FROM (
             SELECT gnis_name AS name, ftype, geom, areasqkm
-            FROM nhdwaterbody WHERE
-            gnis_name IS NOT NULL
+            FROM nhdwaterbody
+            WHERE geom && !bbox!
+              AND gnis_name IS NOT NULL
               AND ftype IN (
                 39000, -- Lake/Pond
                 39004, -- Lake/Pond: Hydrographic Category = Perennial
@@ -444,7 +456,8 @@ Layer:
           UNION
             SELECT gnis_name AS name, ftype, geom, areasqkm
             FROM nhdarea
-            WHERE gnis_name IS NOT NULL
+            WHERE geom && !bbox!
+              AND gnis_name IS NOT NULL
               AND ftype IN (
                 33600, -- Canal/Ditch
                 33601, -- Canal/Ditch: Canal/Ditch Type = Aqueduct
@@ -473,7 +486,8 @@ Layer:
         (
           SELECT tags -> 'name' AS name, way
           FROM planet_osm_point
-          WHERE tags -> 'natural' = 'bay'
+          WHERE way && !bbox!
+            AND tags -> 'natural' = 'bay'
             AND tags ? 'name'
         ) AS bay
 
