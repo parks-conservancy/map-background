@@ -240,6 +240,7 @@ Layer:
   - <<: *layer
     name: trails
     id:   trails
+    status: off
     Datasource:
       <<: *postgis
       geometry_field: geom
@@ -250,6 +251,7 @@ Layer:
   - <<: *layer
     name: sports
     id:   sports
+    status: off
     Datasource:
       <<: *postgis
       table: >
@@ -292,6 +294,7 @@ Layer:
   - <<: *layer
     name: locations
     id:   locations
+    status: off
     Datasource:
       <<: *postgis
       geometry_field: geom
