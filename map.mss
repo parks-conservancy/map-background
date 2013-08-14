@@ -44,188 +44,82 @@ Map {
 }
 
 #locations {
-/*
-  marker-fill: red;
-  marker-allow-overlap: true;
-  marker-ignore-placement: true;
-  */
-}
-
-#locations[type='Access'] {
   text-face-name: "Symbola Medium";
-  text-name: "'↥'"; // &#x21a5; (person)
+  text-name: "''";
   text-fill: #666;
   text-size: 14;
-  text-min-distance: 15;
-  text-min-padding: 15;
+  text-min-distance: 25;
+  text-min-padding: 50;
   text-wrap-width: 48;
   text-halo-radius: 1;
-}
 
-#locations[type='Beach'] {
-  text-face-name: "Symbola Medium";
-  text-name: "'↔'"; // &#x2194; (kid on beach)
-  text-fill: #666;
-  text-size: 14;
-  text-min-distance: 15;
-  text-min-padding: 15;
-  text-wrap-width: 48;
-  text-halo-radius: 1;
-}
+  [type='Access'] {
+    text-name: "'↥'"; // &#x21a5; (person)
+  }
 
-#locations[type='Bike Rack'] {
-  text-face-name: "Symbola Medium";
-  text-name: "'⇠'"; // &#x21e0; (bike)
-  text-fill: #666;
-  text-size: 14;
-  text-min-distance: 15;
-  text-min-padding: 15;
-  text-wrap-width: 48;
-  text-halo-radius: 1;
-}
+  [type='Beach'] {
+    text-name: "'↔'"; // &#x2194; (kid on beach)
+  }
 
-#locations[type='Building'] {
-  text-face-name: "Symbola Medium";
-  text-name: "'Ⅹ'"; // &#x2169; (building)
-  text-fill: #666;
-  text-size: 14;
-  text-min-distance: 15;
-  text-min-padding: 15;
-  text-wrap-width: 48;
-  text-halo-radius: 1;
-}
+  [type='Bike Rack'] {
+    text-name: "'⇠'"; // &#x21e0; (bike)
+  }
 
-#locations[type='Cafe'] {
-  text-face-name: "Symbola Medium";
-  text-name: "'ℰ'"; // &#x2130; (cafe)
-  text-fill: #666;
-  text-size: 14;
-  text-min-distance: 15;
-  text-min-padding: 15;
-  text-wrap-width: 48;
-  text-halo-radius: 1;
-}
+  [type='Building'] {
+    text-name: "'Ⅹ'"; // &#x2169; (building)
+  }
 
-#locations[type='Campground'] {
-  text-face-name: "Symbola Medium";
-  text-name: "'⇢'"; // &#x21e2; (tent)
-  text-fill: #666;
-  text-size: 14;
-  text-min-distance: 15;
-  text-min-padding: 15;
-  text-wrap-width: 48;
-  text-halo-radius: 1;
-}
+  [type='Cafe'] {
+    text-name: "'ℰ'"; // &#x2130; (cafe)
+  }
 
-#locations[type='Meeting Place'] {
-  text-face-name: "Symbola Medium";
-  text-name: "'⇁'"; // &#x21c1; (amphitheater)
-  text-fill: #666;
-  text-size: 14;
-  text-min-distance: 15;
-  text-min-padding: 15;
-  text-wrap-width: 48;
-  text-halo-radius: 1;
-}
+  [type='Campground'] {
+    text-name: "'⇢'"; // &#x21e2; (tent)
+  }
 
-#locations[type='Overlook'] {
-  text-face-name: "Symbola Medium";
-  text-name: "'⇨'"; // &#x21e8; (telescope)
-  text-fill: #666;
-  text-size: 14;
-  text-min-distance: 15;
-  text-min-padding: 15;
-  text-wrap-width: 48;
-  text-halo-radius: 1;
-}
+  [type='Meeting Place'] {
+    text-name: "'⇁'"; // &#x21c1; (amphitheater)
+  }
 
-#locations[type='Park'] {
-  text-face-name: "Symbola Medium";
-  text-name: "'⅊'"; // &#x214a; (tree)
-  text-fill: #666;
-  text-size: 24;
-  text-min-distance: 15;
-  text-min-padding: 15;
-  text-wrap-width: 48;
-  text-halo-radius: 1;
-}
+  [type='Overlook'] {
+    text-name: "'⇨'"; // &#x21e8; (telescope)
+  }
 
-#locations[type='Parking Lot'] {
-  text-face-name: "Symbola Medium";
-  text-name: "'ℨ'"; // &#x2128; (P)
-  text-fill: #666;
-  text-size: 10;
-  text-min-distance: 15;
-  text-min-padding: 15;
-  text-halo-radius: 1;
-}
+  [type='Park'] {
+    text-name: "'⅊'"; // &#x214a; (tree)
+    text-size: 24;
+  }
 
-#locations[type='Restoration Site'] {
-  text-face-name: "Symbola Medium";
-  text-name: "'↣'"; // &#x21a3; (person with branches)
-  text-fill: #666;
-  text-size: 14;
-  text-min-distance: 15;
-  text-min-padding: 15;
-  text-wrap-width: 48;
-  text-halo-radius: 1;
-}
+  [type='Parking Lot'] {
+    text-name: "'ℨ'"; // &#x2128; (P)
+    text-size: 10;
+  }
 
-#locations[type='Restroom'] {
-  text-face-name: "Symbola Medium";
-  text-name: "'№'"; // &#x2116; (restroom)
-  text-fill: #666;
-  text-size: 14;
-  text-min-distance: 15;
-  text-min-padding: 15;
-  text-wrap-width: 48;
-  text-halo-radius: 1;
-}
+  [type='Restoration Site'] {
+    text-name: "'↣'"; // &#x21a3; (person with branches)
+  }
 
-#locations[type='Site of Interest'] {
-  text-face-name: "Symbola Medium";
-  text-name: "'↦'"; // &#x21a6; (arrow pointing at *)
-  text-fill: #666;
-  text-size: 14;
-  text-min-distance: 15;
-  text-min-padding: 15;
-  text-wrap-width: 48;
-  text-halo-radius: 1;
-}
+  [type='Restroom'] {
+    text-name: "'№'"; // &#x2116; (restroom)
+  }
 
-#locations[type='Trailhead'] {
-  text-face-name: "Symbola Medium";
-  text-name: "'↚'"; // &#x219a; (hiker)
-  text-fill: #666;
-  text-size: 14;
-  text-min-distance: 15;
-  text-min-padding: 15;
-  text-wrap-width: 48;
-  text-halo-radius: 1;
-}
+  [type='Site of Interest'] {
+    text-name: "'↦'"; // &#x21a6; (arrow pointing at *)
+  }
 
-#locations[type='Water Fountain'] {
-  text-face-name: "Symbola Medium";
-  text-name: "'Ω'"; // &#x2126; (water fountain)
-  // alternately, glass of water: &#x21e1;
-  text-fill: #666;
-  text-size: 14;
-  text-min-distance: 15;
-  text-min-padding: 15;
-  text-wrap-width: 48;
-  text-halo-radius: 1;
-}
+  [type='Trailhead'] {
+    text-name: "'↚'"; // &#x219a; (hiker)
+  }
 
-#locations[type='Visitor Center'] {
-  text-face-name: "Symbola Medium";
-  text-name: "'Å'"; // &#x212b; (information)
-  // text-name: "'↌'"; // &#x218c; (ranger station)
-  text-fill: #666;
-  text-size: 14;
-  text-min-distance: 15;
-  text-min-padding: 15;
-  text-wrap-width: 48;
-  text-halo-radius: 1;
+  [type='Water Fountain'] {
+    text-name: "'Ω'"; // &#x2126; (water fountain)
+    // alternately, glass of water: &#x21e1;
+  }
+
+  [type='Visitor Center'] {
+    text-name: "'Å'"; // &#x212b; (information)
+    // text-name: "'↌'"; // &#x218c; (ranger station)
+  }
 }
 
 #park_units {

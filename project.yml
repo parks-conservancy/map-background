@@ -307,10 +307,29 @@ Layer:
       geometry_field: geom
       table: >
         (
-          -- TODO prioritize types
-          SELECT name, type, geom
+          SELECT name, type, geom,
+            (CASE
+             WHEN type = 'Park' THEN 1
+             WHEN type = 'Campground' THEN 2
+             WHEN type = 'Trailhead' THEN 3
+             WHEN type = 'Visitor Center' THEN 4
+             WHEN type = 'Cafe' THEN 5
+             WHEN type = 'Site of Interest' THEN 6
+             WHEN type = 'Beach' THEN 7
+             WHEN type = 'Overlook' THEN 8
+             WHEN type = 'Meeting Place' THEN 9
+             WHEN type = 'Restroom' THEN 10
+             WHEN type = 'Parking Lot' THEN 11
+             WHEN type = 'Restoration Site' THEN 12
+             WHEN type = 'Access' THEN 13
+             WHEN type = 'Building' THEN 14
+             WHEN type = 'Water Fountain' THEN 15
+             WHEN type = 'Bike Rack' THEN 16
+             ELSE 100
+             END) AS priority
           FROM locations
           WHERE geom && !bbox!
+          ORDER BY priority
         ) AS x
 
   # ---- GGNRA Unit Names ----------------------------------------------
