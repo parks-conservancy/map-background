@@ -80,13 +80,17 @@ Layer:
   # ---- GGNRA Boundary ------------------------------------------------
 
   - <<: *layer
-    name: ggnra_boundary
-    id:   ggnra_boundary
+    name: park_units
+    id:   park_units
     Datasource:
       <<: *postgis
       geometry_field: geom
       table: >
-        (SELECT geom FROM ggnra_boundary) AS ggnra_boundary
+        (
+          SELECT goga_man, geom
+          FROM park_units
+          WHERE goga_man IN ('Yes', 'Trust')
+        ) AS _
 
   # ---- School (OSM) --------------------------------------------------
 
@@ -299,13 +303,17 @@ Layer:
   # ---- GGNRA Unit Names ----------------------------------------------
 
   - <<: *layer
-    name: ggnra_boundary_labels
-    id:   ggnra_boundary_labels
+    name: unit_labels
+    id:   unit_labels
     Datasource:
       <<: *postgis
       geometry_field: geom
       table: >
-        (SELECT unit_name AS name, geom FROM ggnra_boundary) AS ggnra_boundary
+        (
+          SELECT unit_name AS name, geom
+          FROM park_units
+          WHERE goga_man IN ('Yes', 'Trust')
+        ) AS _
 
   # ---- Places --------------------------------------------------------
 

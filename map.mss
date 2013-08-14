@@ -49,19 +49,18 @@ Map {
   marker-ignore-placement: true;
 }
 
-#ggnra_boundary {
+#park_units {
   polygon-fill: darken(@park, 5%);
 }
 
-#ggnra_boundary_labels
+#unit_labels
 {
-  text-face-name: "Roboto Black Italic";
+  text-face-name: "Roboto Medium Italic";
   text-name: [name];
-  text-fill: darken(@park, 25%);
+  text-fill: #22491b;
   text-opacity: 0.9;
-  text-size: 15;
+  text-size: 14;
   text-placement: interior;
-  text-label-position-tolerance: 5;
   text-min-distance: 15;
   text-min-padding: 15;
   text-wrap-width: 48;
