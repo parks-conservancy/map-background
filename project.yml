@@ -316,7 +316,7 @@ Layer:
         (
           SELECT unit_name AS name, geom
           FROM park_units
-          WHERE goga_man IN ('Yes', 'Trust')
+          WHERE goga_man IN ('Yes', 'Trust', 'Pore')
         ) AS _
 
   # ---- Places --------------------------------------------------------
