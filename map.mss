@@ -3,8 +3,8 @@
 @coastline: #58baef;
 @marsh: #70FFA9;
 @beach: #eed7b4;
-@park: #ddead3;
-@managed-park: #e2edda;
+@park: #e2edda;
+@managed-park: #c2dbaa;
 @school: #e6e2dc;
 
 @controlled-access: #cfa18f;
@@ -43,11 +43,11 @@ Map {
 }
 
 #cpad_units {
-  polygon-fill: #c2dbaa;
+  polygon-fill: @park;
 }
 
 #park_units {
-  polygon-fill: #e2edda;
+  polygon-fill: @managed-park;
 }
 
 #sports {
@@ -149,10 +149,6 @@ Map {
     text-name: "'Å'"; // &#x212b; (information)
     // text-name: "'↌'"; // &#x218c; (ranger station)
   }
-}
-
-#park_units {
-  polygon-fill: @managed-park;
 }
 
 #unit_labels
