@@ -1,20 +1,19 @@
-@land: #e5e3df;
-@water: #b3d1ff;
+@land: #f5f4ea;
+@water: #e0f3f8;
 @coastline: #58baef;
 @marsh: #70FFA9;
-@beach: #f6e898;
-@park: #cadfaa;
+@beach: #eed7b4;
+@park: #ddead3;
 @managed-park: #e2edda;
-@no-access: #d6dbd0;
-@school: #e8ddbd;
+@school: #e6e2dc;
 
-@controlled-access: #fa9e25;
-@controlled-access-stroke: #fa9e25;
-@highway: #ffe168;
-@highway-stroke: #e5bd4d;
-@arterial-stroke: #d1ccc0;
-@arterial: #fff;
-@local: #dedad4;
+@controlled-access: #cfd0d2;
+@controlled-access-stroke: #b3b3b3;
+@highway: #cfd0d2;
+@highway-stroke: #b3b3b3;
+@arterial-stroke: #b3b3b3;
+@arterial: #cfd0d2;
+@local: #cfd0d2;
 
 Map {
   background-color: @land;
@@ -40,11 +39,15 @@ Map {
 
 #coastline {
   line-color: @coastline;
-  line-width: 1;
+  line-width: 1.5;
 }
 
 #cpad_units {
-  polygon-fill: @park;
+  polygon-fill: #e2edda;
+}
+
+#park_units {
+  polygon-fill: #c2dbaa;
 }
 
 #sports {
@@ -57,11 +60,13 @@ Map {
 #lighthouses {
   ::box {
     marker-fill: #333;
+    marker-allow-overlap: true;
     marker-ignore-placement: true;
     marker-width: 45;
     marker-height: 45;
   }
 
+  text-allow-overlap: true;
   text-face-name: "Symbola Medium";
   text-name: "'ↅ'"; // &#2185; (lighthouse)
   text-fill: #fff;
