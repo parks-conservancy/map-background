@@ -254,7 +254,7 @@ Layer:
       <<: *postgis
       table: >
         (
-          SELECT tags -> 'highway' AS highway, way,
+          SELECT tags -> 'highway' AS highway, way
           FROM planet_osm_line
           WHERE way && !bbox!
             AND tags -> 'highway' IN ('motorway', 'trunk', 'primary',
