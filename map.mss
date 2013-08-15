@@ -1,8 +1,10 @@
 @land: #e5e3df;
 @water: #b3d1ff;
+@coastline: #58baef;
 @marsh: #70FFA9;
 @beach: #f6e898;
 @park: #cadfaa;
+@managed-park: #e2edda;
 @no-access: #d6dbd0;
 @school: #e8ddbd;
 
@@ -37,11 +39,11 @@ Map {
 }
 
 #coastline {
-  line-color: #5bbaef;
+  line-color: @coastline;
   line-width: 1;
 }
 
-#cpad_units[zoom>=10] {
+#cpad_units {
   polygon-fill: @park;
 }
 
@@ -145,7 +147,7 @@ Map {
 }
 
 #park_units {
-  polygon-fill: darken(@park, 5%);
+  polygon-fill: @managed-park;
 }
 
 #unit_labels
