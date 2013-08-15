@@ -15,7 +15,7 @@
 @local: #dedad4;
 
 Map {
-  background-color: @water;
+  background-color: @land;
   buffer-size: 128;
 }
 
@@ -34,6 +34,11 @@ Map {
 #foreshore,
 #beach {
   polygon-fill: @beach;
+}
+
+#coastline {
+  line-color: #5bbaef;
+  line-width: 1;
 }
 
 #cpad_units[zoom>=10] {

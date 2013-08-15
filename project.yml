@@ -114,6 +114,42 @@ Layer:
             AND tags -> 'amenity' = 'university'
         ) AS school
 
+  # ---- Foreshore (NHD) -----------------------------------------------
+
+  - <<: *layer
+    name: foreshore
+    id:   foreshore
+    Datasource:
+      <<: *postgis
+      geometry_field: geom
+      table: >
+        (
+            SELECT ftype, ST_Union(geom) AS geom
+            FROM nhdarea
+            WHERE geom && !bbox!
+              AND fcode IN (
+                36400, -- Foreshore
+
+                 -1
+              )
+            GROUP BY ftype
+        ) AS _
+
+    # ---- Beach (OSM) ---------------------------------------------------
+
+  - <<: *layer
+    name: beach
+    id:   beach
+    Datasource:
+      <<: *postgis
+      table: >
+        (
+            SELECT way
+            FROM planet_osm_polygon
+            WHERE way && !bbox!
+              AND tags -> 'natural' = 'beach'
+        ) AS beach
+
   # ---- Water (NHD) ---------------------------------------------------
 
   - <<: *layer
@@ -188,41 +224,27 @@ Layer:
             GROUP BY ftype
         ) AS water
 
-  # ---- Foreshore (NHD) -----------------------------------------------
+  # ---- Coastline (NHD) -----------------------------------------------
 
   - <<: *layer
-    name: foreshore
-    id:   foreshore
+    name: coastline
+    id:   coastline
     Datasource:
       <<: *postgis
       geometry_field: geom
       table: >
         (
             SELECT ftype, ST_Union(geom) AS geom
-            FROM nhdarea
+            FROM nhdflowline
             WHERE geom && !bbox!
-              AND ftype IN (
-                36400, -- Foreshore
+              AND fcode IN (
+                56600, -- Coastline
+                -- 56700, -- Shoreline
 
                  -1
               )
             GROUP BY ftype
-        ) AS water
-
-    # ---- Beach (OSM) ---------------------------------------------------
-
-  - <<: *layer
-    name: beach
-    id:   beach
-    Datasource:
-      <<: *postgis
-      table: >
-        (
-            SELECT way
-            FROM planet_osm_polygon
-            WHERE way && !bbox!
-              AND tags -> 'natural' = 'beach'
-        ) AS beach
+        ) AS _
 
   # ---- Roads ---------------------------------------------------------
 
