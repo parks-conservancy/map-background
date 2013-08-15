@@ -255,13 +255,48 @@ Layer:
       <<: *postgis
       table: >
         (
-          SELECT tags -> 'highway' AS highway, way
+          SELECT tags -> 'highway' AS highway, way,
+
+          -- explicit layering
+          (
+            CASE
+            WHEN tags -> 'layer' ~ E'^-?[[:digit:]]+(\.[[:digit:]]+)?$' THEN CAST (tags -> 'layer' AS FLOAT)
+            ELSE 0
+            END
+          ) AS explicit_layer,
+
+          -- implied layering (bridges and tunnels
+          (
+            CASE
+            WHEN tags -> 'tunnel' in ('yes', 'true') THEN -1
+            WHEN tags -> 'bridge' in ('yes', 'true') THEN 1
+            ELSE 0
+            END
+          ) AS implied_layer,
+
+          -- implicit priorities
+          (
+            CASE
+            WHEN tags -> 'highway' IN ('motorway') THEN 0
+            WHEN tags -> 'highway' IN ('trunk') THEN 1
+            WHEN tags -> 'highway' IN ('primary') THEN 2
+            WHEN tags -> 'highway' IN ('secondary') THEN 3
+            WHEN tags -> 'highway' IN ('tertiary') THEN 4
+            WHEN tags -> 'highway' LIKE '%_link' THEN 5
+            WHEN tags -> 'highway' IN ('residential', 'unclassified', 'road') THEN 5
+            WHEN tags -> 'highway' IN ('service', 'minor') THEN 7
+            ELSE 100
+            END
+          ) AS priority
           FROM planet_osm_line
           WHERE way && !bbox!
             AND tags -> 'highway' IN ('motorway', 'trunk', 'primary',
                                       'secondary', 'tertiary', 'residential',
                                       'service')
-        ) AS highway
+          ORDER BY explicit_layer ASC,
+            implied_layer ASC,
+            priority DESC
+        ) AS _
 
   # ---- Trails --------------------------------------------------------
 
