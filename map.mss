@@ -7,12 +7,12 @@
 @managed-park: #e2edda;
 @school: #e6e2dc;
 
-@controlled-access: #cfd0d2;
-@controlled-access-stroke: #b3b3b3;
-@highway: #cfd0d2;
-@highway-stroke: #b3b3b3;
-@arterial-stroke: #b3b3b3;
-@arterial: #cfd0d2;
+@controlled-access: #cfa18f;
+@controlled-access-stroke: #cfa18f;
+@highway: #cfa18f;
+@highway-stroke: #cfa18f;
+@arterial-stroke: #cfa18f;
+@arterial: #cfa18f;
 @local: #cfd0d2;
 
 Map {
@@ -43,11 +43,11 @@ Map {
 }
 
 #cpad_units {
-  polygon-fill: #e2edda;
+  polygon-fill: #c2dbaa;
 }
 
 #park_units {
-  polygon-fill: #c2dbaa;
+  polygon-fill: #e2edda;
 }
 
 #sports {
@@ -243,6 +243,7 @@ Map {
     text-placement: line;
     /*
     text-halo-radius: 1;
+    text-halo-fill: #cfa18f;
     text-opacity: 0.9;
     text-dy: -5;
     text-min-distance: 15;
@@ -338,7 +339,7 @@ Map {
 {
   text-face-name: "Roboto Italic";
   text-name: [name];
-  text-fill: #4f698c;
+  text-fill: #00a6da;
   text-size: 10;
   text-placement: interior;
   // text-spacing: 0;
@@ -348,16 +349,16 @@ Map {
   text-min-padding: 15;
   text-wrap-width: 24;
   text-halo-radius: 1;
-  text-halo-fill: #cee3ff;
+  text-halo-fill: @water;
 }
 
 #cpad-labels
 {
-  text-face-name: "Roboto Italic";
+  text-face-name: "Roboto Bold";
   text-name: [name];
-  text-fill: #22491b;
-  text-opacity: 0.9;
-  text-size: 11;
+  text-fill: #169d50;
+  text-opacity: 1;
+  text-size: 13;
   text-placement: interior;
   // text-spacing: 0;
   // text-character-spacing: 1;
@@ -365,5 +366,7 @@ Map {
   text-min-distance: 50;
   text-min-padding: 50;
   text-wrap-width: 24;
+  /*
   text-halo-radius: 1;
+  */
 }
