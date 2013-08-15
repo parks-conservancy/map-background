@@ -222,7 +222,7 @@ Layer:
                  -1
               )
             GROUP BY ftype
-        ) AS water
+        ) AS _
 
   # ---- Coastline (NHD) -----------------------------------------------
 
@@ -234,7 +234,7 @@ Layer:
       geometry_field: geom
       table: >
         (
-            SELECT ftype, ST_Union(geom) AS geom
+            SELECT ftype, geom AS geom
             FROM nhdflowline
             WHERE geom && !bbox!
               AND fcode IN (
@@ -243,7 +243,6 @@ Layer:
 
                  -1
               )
-            GROUP BY ftype
         ) AS _
 
   # ---- Roads ---------------------------------------------------------
