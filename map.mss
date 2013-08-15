@@ -153,16 +153,18 @@ Map {
 
 #unit_labels
 {
-  text-face-name: "Roboto Medium Italic";
+  text-face-name: "Roboto Bold";
   text-name: [name];
-  text-fill: #22491b;
+  text-fill: #169d50;
   text-opacity: 0.9;
   text-size: 14;
   text-placement: interior;
   text-min-distance: 15;
   text-min-padding: 15;
   text-wrap-width: 48;
+  /*
   text-halo-radius: 1;
+  */
 }
 
 #school
@@ -237,11 +239,12 @@ Map {
     text-name: [name];
     text-face-name: "Roboto Regular";
     text-placement: line;
+    text-dy: -5;
     /*
     text-halo-radius: 1;
     text-halo-fill: #cfa18f;
     text-opacity: 0.9;
-    text-dy: -5;
+    
     text-min-distance: 15;
     text-min-padding: 15;
     */
@@ -350,11 +353,11 @@ Map {
 
 #cpad-labels
 {
-  text-face-name: "Roboto Bold";
+  text-face-name: "Roboto Regular";
   text-name: [name];
   text-fill: #169d50;
   text-opacity: 1;
-  text-size: 13;
+  text-size: 11;
   text-placement: interior;
   // text-spacing: 0;
   // text-character-spacing: 1;
