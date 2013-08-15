@@ -1,5 +1,6 @@
 @land: #e5e3df;
 @water: #b3d1ff;
+@marsh: #70FFA9;
 @beach: #f6e898;
 @park: #cadfaa;
 @no-access: #d6dbd0;
@@ -20,6 +21,10 @@ Map {
 
 #water {
   polygon-fill: @water;
+
+  [ftype=466] {
+    polygon-fill: @marsh;
+  }
 }
 
 #land {

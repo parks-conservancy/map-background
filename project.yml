@@ -115,7 +115,6 @@ Layer:
         ) AS school
 
   # ---- Water (NHD) ---------------------------------------------------
-  # TODO split out Swamp/Marsh
 
   - <<: *layer
     name: water
