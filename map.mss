@@ -146,7 +146,7 @@ Map {
   }
 
   [type='Visitor Center'] {
-    text-name: "'Å'"; // &#x212b; (information)
+    text-name: "'Å'"; // &#x212b; (information)
     // text-name: "'↌'"; // &#x218c; (ranger station)
   }
 }
@@ -234,27 +234,32 @@ Map {
 }
 
 #highway-labels {
-  text-fill: #666;
-  text-size: 10;
-  text-name: [name];
-  text-face-name: "Roboto Regular";
-  text-placement: line;
-  text-halo-radius: 1;
-  text-opacity: 0.9;
-  /*
-  text-min-distance: 15;
-  text-min-padding: 15;
-  */
+ [zoom>=14]
+  {
+    text-fill: #000;
+    text-size: 10;
+    text-name: [name];
+    text-face-name: "Roboto Regular";
+    text-placement: line;
+    /*
+    text-halo-radius: 1;
+    text-opacity: 0.9;
+    text-dy: -5;
+    text-min-distance: 15;
+    text-min-padding: 15;
+    */
 
-  [highway='motorway']
-  {
-    text-size: 11;
-  }
+    [highway='motorway']
+  	{
+      text-size: 14;
+    }
   
-  [highway='primary'],
-  [highway='secondary'],
-  {
-    text-size: 9;
+  	[highway='primary'],
+  	[highway='secondary'],
+  	{
+      text-size: 9;
+  	}
+    
   }
 }
 
@@ -316,7 +321,7 @@ Map {
 {
   text-face-name: "Roboto Italic";
   text-name: [name];
-  text-fill: #4f698c;
+  text-fill: #00a6da;
   text-size: 11;
   text-placement: interior;
   // text-spacing: 0;
@@ -326,7 +331,7 @@ Map {
   text-min-padding: 15;
   text-wrap-width: 24;
   text-halo-radius: 1;
-  text-halo-fill: #cee3ff;
+  text-halo-fill: @water;
 }
 
 #water-labels[areasqkm>1],
