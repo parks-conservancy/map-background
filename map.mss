@@ -8,9 +8,9 @@
 @school: #e6e2dc;
 
 @controlled-access: #cfa18f;
-@controlled-access-stroke: #cfa18f;
+@controlled-access-stroke: #f5f4ea;
 @highway: #cfa18f;
-@highway-stroke: #cfa18f;
+@highway-stroke: #f5f4ea;
 @arterial-stroke: #cfa18f;
 @arterial: #cfa18f;
 @local: #cfd0d2;
@@ -252,7 +252,7 @@ Map {
   [highway='trunk'],
   {
     ::stroke {
-      line-color: @highway-stroke;
+      line-color: #cfa18f;
       line-width: 0;
 
       [zoom>=8] {
@@ -288,7 +288,7 @@ Map {
       }
     }
     
-    line-color: @highway;
+    line-color: #fee273;
     line-width: 0;
 
     [zoom>=6] {
@@ -331,7 +331,7 @@ Map {
   [highway='primary'],
   {
     ::stroke {
-      line-color: @arterial-stroke;
+      line-color: @local;
       line-width: 0;
 
       [zoom>=9] {
@@ -359,7 +359,7 @@ Map {
       }
     }
     
-    line-color: @arterial;
+    line-color: #fff;
     line-width: 0;
 
     [zoom>=9] {
@@ -391,7 +391,7 @@ Map {
   [highway='secondary'],
   [highway='tertiary'],
   {
-    line-color: @arterial-stroke;
+    line-color: #fff;
     line-width: 1;
 
     [zoom>=9] {
