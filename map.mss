@@ -57,6 +57,7 @@ Map {
   marker-placement: interior;
 }
 
+/*
 #lighthouses {
   ::box {
     marker-fill: #333;
@@ -72,6 +73,23 @@ Map {
   text-fill: #fff;
   text-size: 24;
 }
+*/
+
+#lighthouses {
+    shield-file: url("images/box28px.png");
+    shield-name: "'ↅ'"; // &#2185; (lighthouse)
+    shield-face-name: 'Symbola Medium';
+    shield-size: 16;
+    shield-fill: #fff;
+    shield-text-dy: 2.2;
+    /*
+    shield-halo-radius: 1;
+    shield-halo-fill: @land;
+    shield-spacing: 400;
+    shield-min-distance: 200;
+    shield-wrap-width: 30;
+    */
+  }
 
 #locations {
   text-face-name: "Symbola Medium";
