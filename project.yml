@@ -124,7 +124,7 @@ Layer:
       geometry_field: geom
       table: >
         (
-            SELECT ftype, ST_Union(geom) AS geom
+            SELECT ftype, ST_Collect(geom) AS geom
             FROM nhdarea
             WHERE geom && !bbox!
               AND fcode IN (
@@ -160,7 +160,7 @@ Layer:
       geometry_field: geom
       table: >
         (
-            SELECT ftype, ST_Union(geom) AS geom
+            SELECT ftype, ST_Collect(geom) AS geom
             FROM nhdwaterbody
             WHERE geom && !bbox!
               AND fcode IN (
@@ -203,7 +203,7 @@ Layer:
               )
             GROUP BY ftype
           UNION
-            SELECT ftype, ST_Union(geom) AS geom
+            SELECT ftype, ST_Collect(geom) AS geom
             FROM nhdarea
             WHERE geom && !bbox!
               AND fcode IN (
@@ -234,7 +234,7 @@ Layer:
       geometry_field: geom
       table: >
         (
-            SELECT ftype, geom AS geom
+            SELECT ftype, ST_Collect(geom) AS geom
             FROM nhdflowline
             WHERE geom && !bbox!
               AND fcode IN (
@@ -243,6 +243,7 @@ Layer:
 
                  -1
               )
+            GROUP BY ftype
         ) AS _
 
   # ---- Roads ---------------------------------------------------------
