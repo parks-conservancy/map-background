@@ -221,7 +221,7 @@ Map {
       }
     }
     
-    line-color: @controlled-access;
+    line-color: #fc9e36;
     line-width: 0;
 
     [zoom>=6] {
@@ -391,11 +391,22 @@ Map {
   [highway='secondary'],
   [highway='tertiary'],
   {
-    line-color: #fff;
-    line-width: 1;
+    ::stroke {
+      
+      line-color: @local;
+      line-width: 1.5;
 
     [zoom>=9] {
-
+	  line-width: 1.5;
+    }
+      
+    line-color: #fff;
+    line-width: 1;
+      
+    [zoom>=9] {
+      line-width: 1;
+    }
+      
     }
   }
 }
