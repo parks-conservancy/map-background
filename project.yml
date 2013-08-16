@@ -453,6 +453,7 @@ Layer:
           FROM cpad_superunits
           WHERE geom && !bbox!
             AND unit_name IS NOT NULL
+            AND gis_acres > 5
           ORDER BY gis_acres DESC
         ) AS cpad
 
