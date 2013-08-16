@@ -221,7 +221,6 @@ Map {
   
   /* controlled access highways */
   [highway='motorway'],
-  [highway='motorway_link'], // TODO narrower
   {
     ::stroke {
       line-color: @controlled_access_stroke;
@@ -280,9 +279,54 @@ Map {
     }
   }
 
+  //
+  // highway on/off ramps
+  //
+  [highway='motorway_link'],
+  {
+    ::stroke {
+      line-color: @highway_stroke;
+      line-width: 0;
+
+      [zoom>=14] {
+        line-width: 2.5;
+      }
+
+      [zoom>=15] {
+        line-width: 4;
+      }
+
+      [zoom>=16] {
+        line-width: 5;
+      }
+
+      [zoom>=17] {
+        line-width: 8;
+      }
+    }
+
+    line-color: @highway;
+    line-width: 0;
+
+    [zoom>=14] {
+      line-width: 2;
+    }
+
+    [zoom>=15] {
+      line-width: 3.5;
+    }
+
+    [zoom>=16] {
+      line-width: 4.5;
+    }
+
+    [zoom>=17] {
+      line-width: 7.5;
+    }
+  }
+
   /* trunk highways */
   [highway='trunk'],
-  [highway='trunk_link'], // TODO narrower
   {
     ::stroke {
       line-color: @highway_stroke;
@@ -361,13 +405,57 @@ Map {
     }
   }
 
+  //
+  // trunk links
+  //
+  [highway='trunk_link'],
+  {
+    ::stroke {
+      line-color: @highway_stroke;
+      line-width: 0;
+
+      [zoom>=14] {
+        line-width: 3;
+      }
+
+      [zoom>=15] {
+        line-width: 4;
+      }
+
+      [zoom>=16] {
+        line-width: 5;
+      }
+
+      [zoom>=17] {
+        line-width: 8;
+      }
+    }
+
+    line-color: @highway;
+    line-width: 0;
+
+    [zoom>=14] {
+      line-width: 2.5;
+    }
+
+    [zoom>=15] {
+      line-width: 3.5;
+    }
+
+    [zoom>=16] {
+      line-width: 4.5;
+    }
+
+    [zoom>=17] {
+      line-width: 7.5;
+    }
+  }
+
   /* major arterial */
   [highway='primary'],
-  [highway='primary_link'], // TODO narrower
   {
     ::stroke {
       line-color: @arterial_stroke;
-      line-color: #a9a9a9;
       line-width: 0;
 
       [zoom>=9] {
@@ -420,6 +508,51 @@ Map {
 
     [zoom>=17] {
       line-width: 13;
+    }
+  }
+
+  [highway='primary_link'],
+  [highway='secondary_link'],
+  [highway='tertiary_link'],
+  {
+    ::stroke {
+      line-color: @arterial_stroke;
+      line-width: 0;
+
+      [zoom>=14] {
+        line-width: 3.5;
+      }
+
+      [zoom>=15] {
+        line-width: 4.5;
+      }
+
+      [zoom>=16] {
+        line-width: 5.5;
+      }
+
+      [zoom>=17] {
+        line-width: 8.5;
+      }
+    }
+
+    line-color: @arterial;
+    line-width: 0;
+
+    [zoom>=14] {
+      line-width: 2.5;
+    }
+
+    [zoom>=15] {
+      line-width: 3.5;
+    }
+
+    [zoom>=16] {
+      line-width: 4.5;
+    }
+
+    [zoom>=17] {
+      line-width: 7.5;
     }
   }
 
@@ -490,6 +623,7 @@ Map {
   // local roads
   //
   [highway='residential'],
+  [highway='residential_link'],
   [highway='service'],
   [highway='unclassified'],
   [highway='road'],

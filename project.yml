@@ -258,9 +258,18 @@ Layer:
           SELECT tags -> 'highway' AS highway, way
           FROM planet_osm_line
           WHERE way && !bbox!
-            AND tags -> 'highway' IN ('motorway', 'trunk', 'primary',
-                                      'secondary', 'tertiary', 'residential',
-                                      'service')
+            AND (
+              (zoom(!scale_denominator!) >= 14 AND
+               tags -> 'highway' IN ('motorway', 'trunk', 'primary',
+                                     'motorway_link', 'trunk_link', 'primary_link',
+                                     'secondary_link', 'tertiary_link',
+                                     'secondary', 'tertiary', 'residential',
+                                     'service'))
+              OR
+              tags -> 'highway' IN ('motorway', 'trunk', 'primary',
+                                    'secondary', 'tertiary', 'residential',
+                                    'service')
+            )
           ORDER BY z_order ASC
         ) AS _
 
