@@ -194,40 +194,209 @@ Map {
   {
     ::stroke {
       line-color: @controlled-access-stroke;
-      line-width: 4;
+      line-width: 0;
+
+      [zoom>=6] {
+        line-width: 1;
+      }
+
+      [zoom>=8] {
+        line-width: 3;
+      }
+
+      [zoom>=11] {
+        line-width: 4;
+      }
+
+      [zoom>=15] {
+        line-width: 7;
+      }
+
+      [zoom>=16] {
+        line-width: 12;
+      }
+
+      [zoom>=17] {
+        line-width: 13;
+      }
     }
     
     line-color: @controlled-access;
-    line-width: 3;
+    line-width: 0;
+
+    [zoom>=6] {
+      line-width: 0.5;
+    }
+
+    [zoom>=8] {
+      line-width: 1.5;
+    }
+
+    [zoom>=9] {
+      line-width: 2;
+    }
+
+    [zoom>=15] {
+      line-width: 5;
+    }
+
+    [zoom>=16] {
+      line-width: 10;
+    }
+
+    [zoom>=17] {
+      line-width: 11;
+    }
   }
 
   [highway='trunk'],
   {
     ::stroke {
       line-color: @highway-stroke;
-      line-width: 3;
+      line-width: 0;
+
+      [zoom>=8] {
+        line-width: 1;
+      }
+
+      [zoom>=9] {
+        line-width: 2;
+      }
+
+      [zoom>=10] {
+        line-width: 3;
+      }
+
+      [zoom>=12] {
+        line-width: 4;
+      }
+
+      [zoom>=13] {
+        line-width: 5;
+      }
+
+      [zoom>=15] {
+        line-width: 12;
+      }
+
+      [zoom>=16] {
+        line-width: 15;
+      }
+
+      [zoom>=17] {
+        line-width: 20;
+      }
     }
     
     line-color: @highway;
-    line-width: 2;
+    line-width: 0;
+
+    [zoom>=6] {
+      line-width: 0.5;
+    }
+
+    [zoom>=7] {
+      line-width: 1;
+    }
+
+    [zoom>=8] {
+      /* color changes */
+    }
+
+    [zoom>=10] {
+      line-width: 1.5;
+    }
+
+    [zoom>=12] {
+      line-width: 2;
+    }
+
+    [zoom>=13] {
+      line-width: 3;
+    }
+
+    [zoom>=15] {
+      line-width: 10;
+    }
+
+    [zoom>=16] {
+      line-width: 13;
+    }
+
+    [zoom>=17] {
+      line-width: 17;
+    }
   }
 
   [highway='primary'],
   {
     ::stroke {
       line-color: @arterial-stroke;
-      line-width: 4;
+      line-width: 0;
+
+      [zoom>=9] {
+        line-width: 3;
+      }
+
+      [zoom>=12] {
+        line-width: 4;
+      }
+
+      [zoom>=14] {
+        line-width: 5;
+      }
+
+      [zoom>=15] {
+        line-width: 8;
+      }
+
+      [zoom>=16] {
+        line-width: 12;
+      }
+
+      [zoom>=17] {
+        line-width: 15;
+      }
     }
     
     line-color: @arterial;
-    line-width: 2;
+    line-width: 0;
+
+    [zoom>=9] {
+      line-width: 1;
+    }
+
+    [zoom>=12] {
+      line-width: 2;
+    }
+
+    [zoom>=14] {
+      line-width: 3;
+    }
+
+    [zoom>=15] {
+      line-width: 6;
+    }
+
+    [zoom>=16] {
+      line-width: 10;
+    }
+
+    [zoom>=17] {
+      line-width: 13;
+    }
   }
 
+  /* minor arterial, e.g. Noriega St. */
   [highway='secondary'],
   [highway='tertiary'],
   {
     line-color: @arterial-stroke;
     line-width: 1;
+
+    [zoom>=9] {
+
+    }
   }
 }
 
