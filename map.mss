@@ -7,13 +7,17 @@
 @managed-park: #c2dbaa;
 @school: #e6e2dc;
 
-@controlled-access: #cfa18f;
+@controlled-access: #fc9e36;
 @controlled-access-stroke: #f5f4ea;
-@highway: #cfa18f;
-@highway-stroke: #f5f4ea;
-@arterial-stroke: #cfa18f;
-@arterial: #cfa18f;
-@local: #cfd0d2;
+
+@highway: #fee273;
+@highway-stroke: #cfa18f;
+
+@arterial: #fff;
+@arterial-stroke: #cfd0d2;
+
+@minor-arterial: #fff;
+@minor-arterial-stroke: #cfd0d2;
 
 Map {
   background-color: @land;
@@ -200,6 +204,9 @@ Map {
   ::stroke {
     line-color: transparent;
     line-width: 0;
+
+    line-join: miter;
+    line-cap: round;
   }
 
   line-join: miter;
@@ -208,7 +215,9 @@ Map {
   line-color: #ccc;
   line-width: 0.35;
   
-  [highway='motorway']
+  /* controlled access highways */
+  [highway='motorway'],
+  [highway='motorway_link'], // TODO narrower
   {
     ::stroke {
       line-color: #cfa18f;
@@ -239,7 +248,7 @@ Map {
       }
     }
     
-    line-color: #fc9e36;
+    line-color: @controlled-access;
     line-width: 0;
 
     [zoom>=6] {
@@ -267,10 +276,12 @@ Map {
     }
   }
 
+  /* trunk highways */
   [highway='trunk'],
+  [highway='trunk_link'], // TODO narrower
   {
     ::stroke {
-      line-color: #cfa18f;
+      line-color: @highway-stroke;
       line-width: 0;
 
       [zoom>=8] {
@@ -306,7 +317,7 @@ Map {
       }
     }
     
-    line-color: #fee273;
+    line-color: @highway;
     line-width: 0;
 
     [zoom>=6] {
@@ -346,10 +357,12 @@ Map {
     }
   }
 
+  /* major arterial */
   [highway='primary'],
+  [highway='primary_link'], // TODO narrower
   {
     ::stroke {
-      line-color: @local;
+      line-color: @arterial-stroke;
       line-width: 0;
 
       [zoom>=9] {
@@ -377,7 +390,7 @@ Map {
       }
     }
     
-    line-color: #fff;
+    line-color: @arterial;
     line-width: 0;
 
     [zoom>=9] {
@@ -407,23 +420,24 @@ Map {
 
   /* minor arterial, e.g. Noriega St. */
   [highway='secondary'],
+  [highway='secondary_link'],
   [highway='tertiary'],
+  [highway='tertiary_link'],
   {
     ::stroke {
-      line-color: #f0f0f0;
-      line-width: 0;
+      line-color: @minor-arterial-stroke;
+      line-width: 1.5;
 
-    [zoom>=9] {
-	  line-width: 2;
+      [zoom>=9] {
+            line-width: 1.5;
+      }
     }
       
-    line-color: #000;
-    line-width: 0;
+    line-color: @minor-arterial;
+    line-width: 1;
       
     [zoom>=9] {
       line-width: 1.5;
-    }
-      
     }
   }
 }
