@@ -193,7 +193,7 @@ Map {
   [highway='motorway']
   {
     ::stroke {
-      line-color: @controlled-access-stroke;
+      line-color: #cfa18f;
       line-width: 0;
 
       [zoom>=6] {
@@ -392,19 +392,18 @@ Map {
   [highway='tertiary'],
   {
     ::stroke {
-      
-      line-color: @local;
-      line-width: 1.5;
+      line-color: #f0f0f0;
+      line-width: 0;
 
     [zoom>=9] {
-	  line-width: 1.5;
+	  line-width: 2;
     }
       
-    line-color: #fff;
-    line-width: 1;
+    line-color: #000;
+    line-width: 0;
       
     [zoom>=9] {
-      line-width: 1;
+      line-width: 1.5;
     }
       
     }
