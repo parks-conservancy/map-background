@@ -261,7 +261,7 @@ Layer:
             AND tags -> 'highway' IN ('motorway', 'trunk', 'primary',
                                       'secondary', 'tertiary', 'residential',
                                       'service')
-          ORDER BY z_order DESC
+          ORDER BY z_order ASC
         ) AS _
 
   # ---- Trails --------------------------------------------------------
