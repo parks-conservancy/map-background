@@ -1,4 +1,4 @@
-@land: #f5f4ea;
+@land: #f8f7ed;
 @water: #e0f3f8;
 @coastline: #58baef;
 @marsh: #70FFA9;
@@ -216,7 +216,7 @@ Map {
 #highway-labels {
   [zoom>=14]
   {
-    text-fill: #000;
+    text-fill: #5a5c5b;
     text-size: 10;
     text-name: [name];
     text-face-name: "Frutiger LT 55 Roman Regular";
@@ -244,7 +244,7 @@ Map {
     [highway='primary'],
     [highway='secondary'],
     {
-      text-size: 10;
+      text-size: 0;
       /*
       text-dy: 5;
       */
