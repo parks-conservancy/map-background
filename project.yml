@@ -265,13 +265,65 @@ Layer:
                                      'motorway_link', 'trunk_link', 'primary_link',
                                      'secondary_link', 'tertiary_link',
                                      'secondary', 'tertiary', 'residential',
-                                     'unclassified', 'service'))
+                                     'unclassified', 'service', 'road'))
               OR
               tags -> 'highway' IN ('motorway', 'trunk', 'primary',
                                     'secondary', 'tertiary', 'residential',
-                                    'unclassified', 'service')
+                                    'unclassified', 'service', 'road')
             )
           ORDER BY z_order ASC
+        ) AS _
+
+
+  # ---- Dual Carriageways ---------------------------------------------
+
+  # select s.tags -> 'name', t.tags -> 'name'
+  # from planet_osm_line s
+  # left join planet_osm_line t
+  #   on t.tags -> 'name' = s.tags -> 'name'
+  #     AND ST_DWithin(t.way, s.way, 25)
+  #     AND ST_Disjoint(t.way, s.way)
+  # WHERE t.tags ? 'highway'
+  #   AND s.tags ? 'highway'
+  #   AND s.tags ? 'name'
+  #   AND t.tags ? 'name';
+
+  - <<: *layer
+    name: dual-carriageways
+    id:   dual-carriageways
+    status: off
+    Datasource:
+      <<: *postgis
+      table: >
+        ( 
+        SELECT * FROM (
+        SELECT tags -> 'name' AS name,
+          way
+        FROM planet_osm_line ms
+        WHERE osm_id IN (
+            SELECT UNNEST(ids)
+            FROM (
+              SELECT ARRAY_AGG(osm_id) AS ids
+              FROM planet_osm_line
+              WHERE way && !bbox!
+                AND tags ? 'highway'
+                AND tags ? 'name'
+                GROUP BY tags -> 'name'
+                HAVING COUNT(osm_id) > 1
+            ) AS _
+          )
+          AND (
+            SELECT COUNT(osm_id) AS count
+            FROM planet_osm_line n
+            WHERE way && !bbox!
+              AND tags ? 'highway'
+              AND tags -> 'name' = ms.tags -> 'name'
+              AND ST_DWithin(ms.way, n.way, 25)
+              AND ST_Disjoint(ms.way, n.way)
+          ) > 1
+        ORDER BY tags -> 'name'
+        ) AS _
+        WHERE zoom(!scale_denominator!) >= 15
         ) AS _
 
   # ---- Trails --------------------------------------------------------
@@ -571,7 +623,14 @@ Layer:
           SELECT tags -> 'highway' AS highway, tags -> 'name' AS name, way
           FROM planet_osm_line
           WHERE way && !bbox!
-            AND tags -> 'highway' IN ('motorway', 'trunk', 'primary', 'secondary')
-            AND tags ? 'name'
-        ) AS labels
+            AND (
+            (zoom(!scale_denominator!) >= 14 AND
+              tags -> 'highway' IN ('motorway', 'trunk', 'primary',
+                                    'secondary', 'tertiary', 'residential',
+                                    'unclassified', 'service', 'road'))
+            OR
+              tags -> 'highway' IN ('motorway', 'trunk', 'primary')
+            )
+          ORDER BY z_order
+        ) AS _
 

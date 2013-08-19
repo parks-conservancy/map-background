@@ -214,51 +214,88 @@ Map {
 }
 
 #highway-labels {
-  [zoom>=14]
+  [highway='motorway']
   {
-    text-fill: #5a5c5b;
-    text-size: 10;
-    text-name: [name];
-    text-face-name: "Frutiger LT 55 Roman Regular";
-    text-placement: line;
-    /*
-    text-halo-radius: 1;
-    text-halo-fill: #cfa18f;
-    text-opacity: 0.9;
-    
-    text-min-distance: 15;
-    text-min-padding: 15;
-    */
+    [zoom>=14] {
+      text-fill: #5a5c5b;
+      text-name: [name];
+      text-face-name: "Frutiger LT 55 Roman Regular";
+      text-placement: line;
 
-    [highway='motorway']
-    {
-      text-size: 0;
-      /*
-      text-dy: 10;
-      */
-      [zoom>=14] {
-        text-size: 14;
-      }
+      text-size: 14;
     }
-  
-    [highway='primary'],
-    [highway='secondary'],
-    {
-      text-size: 0;
-      /*
-      text-dy: 5;
-      */
-      [zoom>=14] {
-        text-size: 12;
-      }
+
+    [zoom>=15] {
+      text-size: 18;
     }
-    
+  }
+
+  [highway='trunk']
+  {
+    [zoom>=14] {
+      text-fill: #5a5c5b;
+      text-name: [name];
+      text-face-name: "Frutiger LT 55 Roman Regular";
+      text-placement: line;
+
+      text-size: 14;
+    }
+  }
+
+  //
+  // arterials
+  //
+  [highway='primary'],
+  {
+    [zoom>=14] {
+      text-fill: #5a5c5b;
+      text-name: [name];
+      text-face-name: "Frutiger LT 55 Roman Regular";
+      text-placement: line;
+
+      text-size: 12;
+    }
+  }
+
+  //
+  // minor arterials
+  //
+  [highway='secondary'],
+  [highway='tertiary'],
+  {
+    [zoom>=14] {
+      text-fill: #5a5c5b;
+      text-name: [name];
+      text-face-name: "Frutiger LT 55 Roman Regular";
+      text-placement: line;
+
+      text-size: 12;
+    }
+  }
+
+  //
+  // local roads
+  //
+  [highway='residential'],
+  [highway='residential_link'],
+  [highway='service'],
+  [highway='unclassified'],
+  [highway='road'],
+  {
+    [zoom>=14] {
+      text-fill: #5a5c5b;
+      text-name: [name];
+      text-face-name: "Frutiger LT 55 Roman Regular";
+      text-placement: line;
+
+      text-size: 12;
+    }
   }
 }
 
 #places
 {
-  text-face-name: "Roboto Regular";
+  text-face-name: "Frutiger LT 55 Roman Regular";
   text-name: [name];
   text-fill: #5f4f2a;
   text-opacity: 0.9;
