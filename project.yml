@@ -34,6 +34,7 @@ _pg_default:      &postgis
 
 Stylesheet:
   - map.mss
+  - roads.mss
 
 
 # == Layers ============================================================
