@@ -22,6 +22,9 @@
 
   [highway='motorway']
   {
+    text-transform: uppercase;
+    text-character-spacing: 4;
+
     [zoom>=14] {
       text-name: [name];
 
