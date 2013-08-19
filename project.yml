@@ -53,24 +53,6 @@ Layer:
       table: coastline
       geometry_field: geom
 
-  # ---- Landuse / landcover areas -------------------------------------
-
-  - <<: *layer
-    name: park
-    id:   park
-    status: off
-    Datasource:
-      <<: *postgis
-      table: >
-        ( select way from planet_osm_polygon
-          where way && !bbox!
-            AND tags->'leisure' in (
-              'park',
-              'common',
-              'playground',
-              'village_green')
-        ) as x
-
   # ---- Protected Areas (CPAD) ----------------------------------------
 
   - <<: *layer
