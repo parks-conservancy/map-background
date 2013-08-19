@@ -265,11 +265,11 @@ Layer:
                                      'motorway_link', 'trunk_link', 'primary_link',
                                      'secondary_link', 'tertiary_link',
                                      'secondary', 'tertiary', 'residential',
-                                     'service'))
+                                     'unclassified', 'service'))
               OR
               tags -> 'highway' IN ('motorway', 'trunk', 'primary',
                                     'secondary', 'tertiary', 'residential',
-                                    'service')
+                                    'unclassified', 'service')
             )
           ORDER BY z_order ASC
         ) AS _
