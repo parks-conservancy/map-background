@@ -3,8 +3,8 @@
 @coastline: #58baef;
 @marsh: #70FFA9;
 @beach: #eed7b4;
-@park: #e2edda;
-@managed_park: #c2dbaa;
+@park: #f3ebc4;
+@managed_park: #dce8cb;
 @school: #e6e2dc;
 
 @controlled_access: #fc9e36;
@@ -86,19 +86,12 @@ Map {
 */
 
 #lighthouses {
-    shield-file: url("images/box28px.png");
+    shield-file: url("images/box20px.png");
     shield-name: "'ↅ'"; // &#2185; (lighthouse)
     shield-face-name: 'Symbola Medium';
-    shield-size: 16;
+    shield-size: 13;
     shield-fill: #fff;
     shield-text-dy: 2.2;
-    /*
-    shield-halo-radius: 1;
-    shield-halo-fill: @land;
-    shield-spacing: 400;
-    shield-min-distance: 200;
-    shield-wrap-width: 30;
-    */
   }
 
 #locations {
@@ -690,15 +683,25 @@ Map {
 
     [highway='motorway']
     {
-      text-size: 14;
+      text-size: 0;
+      /*
       text-dy: 10;
+      */
+      [zoom>=14] {
+        text-size: 14;
+      }
     }
   
     [highway='primary'],
     [highway='secondary'],
     {
-      text-size: 9;
+      text-size: 10;
+      /*
       text-dy: 5;
+      */
+      [zoom>=14] {
+        text-size: 12;
+      }
     }
     
   }
