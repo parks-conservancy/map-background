@@ -15,13 +15,15 @@
 }
 
 #highway-labels {
+  text-fill: #5a5c5b;
+  text-name: "''";
+  text-face-name: "Frutiger LT 55 Roman Regular";
+  text-placement: line;
+
   [highway='motorway']
   {
     [zoom>=14] {
-      text-fill: #5a5c5b;
       text-name: [name];
-      text-face-name: "Frutiger LT 55 Roman Regular";
-      text-placement: line;
 
       text-size: 14;
     }
@@ -34,10 +36,7 @@
   [highway='trunk']
   {
     [zoom>=14] {
-      text-fill: #5a5c5b;
       text-name: [name];
-      text-face-name: "Frutiger LT 55 Roman Regular";
-      text-placement: line;
 
       text-size: 14;
     }
@@ -49,10 +48,7 @@
   [highway='primary'],
   {
     [zoom>=14] {
-      text-fill: #5a5c5b;
       text-name: [name];
-      text-face-name: "Frutiger LT 55 Roman Regular";
-      text-placement: line;
 
       text-size: 12;
     }
@@ -65,10 +61,7 @@
   [highway='tertiary'],
   {
     [zoom>=14] {
-      text-fill: #5a5c5b;
       text-name: [name];
-      text-face-name: "Frutiger LT 55 Roman Regular";
-      text-placement: line;
 
       text-size: 12;
     }
@@ -84,10 +77,7 @@
   [highway='road'],
   {
     [zoom>=14] {
-      text-fill: #5a5c5b;
       text-name: [name];
-      text-face-name: "Frutiger LT 55 Roman Regular";
-      text-placement: line;
 
       text-size: 12;
     }
