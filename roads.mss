@@ -72,20 +72,20 @@
       line-width: 1.5;
     }
 
-    [zoom>=9] {
-      line-width: 2;
+    [zoom>=11] {
+      line-width: 2.5;
     }
 
     [zoom>=15] {
-      line-width: 5;
+      line-width: 5.5;
     }
 
     [zoom>=16] {
-      line-width: 10;
+      line-width: 10.5;
     }
 
     [zoom>=17] {
-      line-width: 11;
+      line-width: 11.5;
     }
   }
 
@@ -199,15 +199,15 @@
     }
 
     [zoom>=13] {
-      line-width: 3;
+      line-width: 3.5;
     }
 
     [zoom>=15] {
-      line-width: 10;
+      line-width: 10.5;
     }
 
     [zoom>=16] {
-      line-width: 13;
+      line-width: 13.5;
     }
 
     [zoom>=17] {
@@ -273,6 +273,10 @@
       }
 
       [zoom>=11] {
+        line-width: 3;
+      }
+
+      [zoom>=12] {
         line-width: 3.5;
       }
 
@@ -301,6 +305,10 @@
     }
 
     [zoom>=11] {
+      line-width: 1.5;
+    }
+
+    [zoom>=12] {
       line-width: 2;
     }
 
@@ -309,15 +317,15 @@
     }
 
     [zoom>=15] {
-      line-width: 6;
+      line-width: 6.5;
     }
 
     [zoom>=16] {
-      line-width: 10;
+      line-width: 10.5;
     }
 
     [zoom>=17] {
-      line-width: 13;
+      line-width: 13.5;
     }
   }
 
@@ -480,4 +488,3 @@
     }
   }
 }
-
