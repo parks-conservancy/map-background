@@ -677,9 +677,8 @@ Map {
     text-fill: #000;
     text-size: 10;
     text-name: [name];
-    text-face-name: "Roboto Regular";
+    text-face-name: "Frutiger LT 55 Roman Regular";
     text-placement: line;
-    text-dy: -5;
     /*
     text-halo-radius: 1;
     text-halo-fill: #cfa18f;
@@ -692,12 +691,14 @@ Map {
     [highway='motorway']
     {
       text-size: 14;
+      text-dy: 10;
     }
   
     [highway='primary'],
     [highway='secondary'],
     {
       text-size: 9;
+      text-dy: 5;
     }
     
   }
