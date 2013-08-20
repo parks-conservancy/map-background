@@ -1,17 +1,23 @@
 #unit_labels
-{
-  text-face-name: "Frutiger LT 45 Light Bold";
-  text-name: [name];
-  text-fill: #15984d;
-  text-opacity: 0.9;
-  text-size: 14;
-  text-min-distance: 15;
-  text-min-padding: 15;
-  text-wrap-width: 48;
-  text-transform: uppercase;
-  text-halo-fill: @managed_park;
-  text-halo-radius: 1.5;
-  text-character-spacing: 3;
+{ 
+  [zoom>=12] {
+    text-face-name: "Frutiger LT 45 Light Bold";
+    text-name: [name];
+    text-fill: #15984d;
+    text-opacity: 0.9;
+    text-size: 9;
+    text-min-distance: 15;
+    text-min-padding: 15;
+    text-wrap-width: 48;
+    text-transform: uppercase;
+    text-halo-fill: @managed_park;
+    text-halo-radius: 1.5;
+    text-character-spacing: 2;
+  }
+  
+  [zoom>=13] {
+    text-size: 10;
+  }
 }
 
 #highway-labels {
@@ -155,8 +161,12 @@
   text-halo-radius: 1.5;
   text-character-spacing: 2;
   text-wrap-width: 32;
-  text-size: 14;
+  text-size: 12;
   text-fill: #262626;
+  
+  [zoom>=13] {
+    text-size: 14;
+  }
 }
 
 #places[place='suburb']
@@ -168,6 +178,14 @@
 #places[place='neighbourhood']
 {
   text-face-name: "Frutiger LT 55 Roman Regular";
+
+  [zoom>=12] {
+    text-size: 9;
+  }
+  
+  [zoom>=14] {
+    text-size: 10;
+  }
 }
 
 #places[place='village']
