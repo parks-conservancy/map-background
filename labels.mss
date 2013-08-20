@@ -5,7 +5,6 @@
   text-fill: #15984d;
   text-opacity: 0.9;
   text-size: 16;
-  text-placement: interior;
   text-min-distance: 15;
   text-min-padding: 15;
   text-wrap-width: 48;

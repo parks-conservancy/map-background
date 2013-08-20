@@ -321,6 +321,23 @@ Layer:
       geometry_field: geom
       table: trails
 
+  # ---- GGNRA Unit Names ----------------------------------------------
+
+  - <<: *layer
+    name: unit_labels
+    id:   unit_labels
+    status: on
+    Datasource:
+      <<: *postgis
+      geometry_field: geom
+      table: >
+        (
+          SELECT name, geom
+          FROM locations
+          WHERE geom && !bbox!
+            AND type='Park'
+        ) AS _
+
   # ---- Recreational Opportunities (OSM) ------------------------------
 
   - <<: *layer
@@ -377,7 +394,7 @@ Layer:
         (
           SELECT name, type, geom,
             (CASE
-             WHEN type = 'Park' THEN 1
+            -- WHEN type = 'Park' THEN 1
              WHEN type = 'Campground' THEN 2
              WHEN type = 'Trailhead' THEN 3
              WHEN type = 'Visitor Center' THEN 4
@@ -414,22 +431,6 @@ Layer:
           FROM planet_osm_point
           WHERE way && !bbox!
             AND tags -> 'man_made' = 'lighthouse'
-        ) AS _
-
-  # ---- GGNRA Unit Names ----------------------------------------------
-
-  - <<: *layer
-    name: unit_labels
-    id:   unit_labels
-    Datasource:
-      <<: *postgis
-      geometry_field: geom
-      table: >
-        (
-          SELECT unit_name AS name, geom
-          FROM park_units
-          WHERE geom && !bbox!
-            AND goga_man IN ('Yes', 'Trust', 'Pore')
         ) AS _
 
   # ---- Places --------------------------------------------------------
