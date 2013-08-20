@@ -13,4 +13,4 @@ clean:
 	rm project.mml
 
 project.mml: project.yml
-	cat project.yml | (source .env && node jsonify.js $$DATABASE_URL) > project.mml
+	cat project.yml | (source .env && node jsonify.js $$DATABASE_URL)

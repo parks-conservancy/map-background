@@ -1,6 +1,7 @@
 "use strict";
 
-var url = require("url");
+var fs = require("fs"),
+    url = require("url");
 var yaml = require("js-yaml");
 
 process.stdin.resume();
@@ -29,5 +30,5 @@ process.stdin.on("end", function() {
   var cfg = yaml.safeLoad(body);
 
   // output JSON
-  process.stdout.write(JSON.stringify(cfg, null, "  "));
+  fs.writeFileSync("project.mml", JSON.stringify(cfg, null, "  "), "utf8");
 });
