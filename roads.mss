@@ -810,7 +810,7 @@
     }
 
     [zoom>=13] {
-      line-width: 4;
+      line-width: 3;
     }
 
     [zoom>=14] {
@@ -850,7 +850,7 @@
     }
 
     [zoom>=13] {
-      line-width: 2;
+      line-width: 1.5;
     }
 
     [zoom>=14] {
