@@ -878,3 +878,29 @@
     }
   }
 }
+
+#ferry
+{
+  line-join: miter;
+  line-cap: round;
+  line-width: 0;
+  line-color: @coastline;
+
+  [zoom>=11] {
+    line-dasharray: 7.5, 2.5;
+    line-width: 0.25;
+  }
+
+  [zoom>=12] {
+    line-dasharray: 15, 5;
+    line-width: 0.75;
+  }
+
+  [zoom>=14] {
+    line-width: 1.5;
+  }
+
+  [zoom>=16] {
+    line-width: 2;
+  }
+}

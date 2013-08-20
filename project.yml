@@ -231,6 +231,22 @@ Layer:
             GROUP BY ftype
         ) AS _
 
+  # ---- Ferries--------------------------------------------------------
+
+  - <<: *layer
+    name: ferry
+    id:   ferry
+    Datasource:
+      <<: *postgis
+      table: >
+        (
+          SELECT way
+          FROM planet_osm_line
+          WHERE way && !bbox!
+            AND tags -> 'route' = 'ferry'
+          ORDER BY z_order ASC
+        ) AS _
+
   # ---- Roads ---------------------------------------------------------
 
   - <<: *layer
