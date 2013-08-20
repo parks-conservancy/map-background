@@ -650,13 +650,15 @@ Layer:
           FROM planet_osm_line
           WHERE way && !bbox!
             AND (
-            (zoom(!scale_denominator!) >= 14 AND
-              tags -> 'highway' IN ('motorway', 'trunk', 'primary',
+              (zoom(!scale_denominator!) >= 14 AND
+               tags -> 'highway' IN ('motorway', 'trunk', 'primary',
                                     'secondary', 'tertiary', 'residential',
-                                    'unclassified', 'service', 'road'))
-            OR
+                                    'unclassified', 'service', 'road')
+              )
+              OR
               tags -> 'highway' IN ('motorway', 'trunk', 'primary')
             )
+            AND (NOT tags ? 'access' OR tags -> 'access' NOT IN ('no', 'false'))
             AND NOT tags ?| ARRAY['bridge', 'tunnel']
           ORDER BY priority ASC
         ) AS _
