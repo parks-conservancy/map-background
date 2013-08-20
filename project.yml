@@ -650,6 +650,10 @@ Layer:
           SELECT tags -> 'name' AS name, way
           FROM planet_osm_point
           WHERE way && !bbox!
+            AND (zoom(!scale_denominator!) >= 13
+              OR tags -> 'name' LIKE '% Bay'
+              OR tags -> 'name' LIKE 'Gulf %'
+            )
             AND tags -> 'natural' = 'bay'
             AND tags ? 'name'
         ) AS bay
