@@ -606,7 +606,20 @@ Layer:
       <<: *postgis
       table: >
         (
-          SELECT tags -> 'highway' AS highway, tags -> 'name' AS name, way
+          SELECT tags -> 'highway' AS highway,
+            tags -> 'name' AS name,
+            tags -> 'bridge' AS bridge,
+            tags -> 'tunnel' AS tunnel,
+            way,
+            (CASE
+            WHEN tags -> 'highway' IN ('motorway') THEN 1
+            WHEN tags -> 'highway' IN ('trunk') THEN 2
+            WHEN tags -> 'highway' IN ('primary') THEN 3
+            WHEN tags -> 'highway' IN ('secondary') THEN 4
+            WHEN tags -> 'highway' IN ('tertiary') THEN 5
+            WHEN tags -> 'highway' IN ('residential', 'unclassified', 'service', 'road') THEN 6
+            ELSE 100
+            END) priority
           FROM planet_osm_line
           WHERE way && !bbox!
             AND (
@@ -617,6 +630,7 @@ Layer:
             OR
               tags -> 'highway' IN ('motorway', 'trunk', 'primary')
             )
-          ORDER BY z_order
+            AND NOT tags ?| ARRAY['bridge', 'tunnel']
+          ORDER BY priority ASC
         ) AS _
 
