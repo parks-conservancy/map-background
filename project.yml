@@ -413,7 +413,7 @@ Layer:
         (
           SELECT name, type, geom,
             (CASE
-            -- WHEN type = 'Park' THEN 1
+             WHEN type = 'Park' THEN 1
              WHEN type = 'Campground' THEN 2
              WHEN type = 'Trailhead' THEN 3
              WHEN type = 'Visitor Center' THEN 4
@@ -433,6 +433,8 @@ Layer:
              END) AS priority
           FROM locations
           WHERE geom && !bbox!
+            AND type NOT IN ('park')
+            AND zoom(!scale_denominator!) >= 14
           ORDER BY priority
         ) AS x
 
@@ -450,6 +452,7 @@ Layer:
           FROM planet_osm_point
           WHERE way && !bbox!
             AND tags -> 'man_made' = 'lighthouse'
+            AND zoom(!scale_denominator!) >= 14
         ) AS _
 
   # ---- Places --------------------------------------------------------
