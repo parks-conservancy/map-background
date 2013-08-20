@@ -15,6 +15,8 @@
 @local_road: #fff;
 @local_road_stroke: #cfd0d2;
 
+@runway: #cfc7bb;
+
 #road
 {
   ::stroke {
@@ -790,6 +792,86 @@
         bridge-left/line-offset: 5.75;
         bridge-right/line-offset: -5.75;
       }
+    }
+  }
+
+  [aeroway='runway'] {
+    line-color: @runway;
+
+    [zoom>=11] {
+      line-width: 0.75;
+    }
+
+    [zoom>=12] {
+      line-width: 1.5;
+    }
+
+    [zoom>=13] {
+      line-width: 4;
+    }
+
+    [zoom>=14] {
+      line-width: 8;
+    }
+
+    [zoom>=15] {
+      line-width: 16;
+    }
+
+    [zoom>=16] {
+      line-width: 32;
+    }
+
+    [zoom>=17] {
+      line-width: 64;
+    }
+
+    [zoom>=18] {
+      line-width: 128;
+    }
+
+    [zoom>=18] {
+      line-width: 256;
+    }
+  }
+
+  [aeroway='taxiway'] {
+    line-color: @runway;
+
+    [zoom>=11] {
+      line-width: 0.25;
+    }
+
+    [zoom>=12] {
+      line-width: 0.75;
+    }
+
+    [zoom>=13] {
+      line-width: 2;
+    }
+
+    [zoom>=14] {
+      line-width: 3;
+    }
+
+    [zoom>=15] {
+      line-width: 4;
+    }
+
+    [zoom>=16] {
+      line-width: 8;
+    }
+
+    [zoom>=17] {
+      line-width: 20;
+    }
+
+    [zoom>=18] {
+      line-width: 40;
+    }
+
+    [zoom>=19] {
+      line-width: 80;
     }
   }
 }

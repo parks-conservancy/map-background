@@ -241,6 +241,7 @@ Layer:
       table: >
         (
           SELECT tags -> 'highway' AS highway,
+            tags -> 'aeroway' AS aeroway,
             (CASE
             WHEN tags ? 'bridge' AND tags -> 'bridge' NOT IN ('no', 'false') THEN 'yes'
             ELSE NULL
@@ -254,15 +255,24 @@ Layer:
           WHERE way && !bbox!
             AND (
               (zoom(!scale_denominator!) >= 14 AND
-               tags -> 'highway' IN ('motorway', 'trunk', 'primary',
+               ((tags -> 'highway' IN ('motorway', 'trunk', 'primary',
                                      'motorway_link', 'trunk_link', 'primary_link',
                                      'secondary_link', 'tertiary_link',
                                      'secondary', 'tertiary', 'residential',
-                                     'unclassified', 'service', 'road'))
+                                     'unclassified', 'service', 'road')
+                  AND
+                  (NOT tags ? 'access' OR tags -> 'access' NOT IN ('no', 'false')))
+                OR
+                tags -> 'aeroway' IN ('runway', 'taxiway'))
+              )
               OR
-              tags -> 'highway' IN ('motorway', 'trunk', 'primary',
+              ((tags -> 'highway' IN ('motorway', 'trunk', 'primary',
                                     'secondary', 'tertiary', 'residential',
                                     'unclassified', 'service', 'road')
+                AND
+                (NOT tags ? 'access' OR tags -> 'access' NOT IN ('no', 'false')))
+              OR
+              tags -> 'aeroway' IN ('runway', 'taxiway'))
             )
           ORDER BY z_order ASC
         ) AS _
