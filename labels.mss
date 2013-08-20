@@ -4,14 +4,14 @@
   text-name: [name];
   text-fill: #15984d;
   text-opacity: 0.9;
-  text-size: 16;
+  text-size: 14;
   text-min-distance: 15;
   text-min-padding: 15;
   text-wrap-width: 48;
   text-transform: uppercase;
   text-halo-fill: @managed_park;
   text-halo-radius: 1.5;
-  text-character-spacing: 1;
+  text-character-spacing: 3;
 }
 
 #highway-labels {
