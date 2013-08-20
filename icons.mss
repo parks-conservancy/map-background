@@ -1,10 +1,12 @@
 #lighthouses {
-  shield-file: url("images/box20px.png");
-  shield-name: "'ↅ'"; // &#2185; (lighthouse)
-  shield-face-name: 'Symbola Medium';
-  shield-size: 13;
-  shield-fill: #fff;
-  shield-text-dy: 2.2;
+  [zoom>=14] {
+    shield-file: url("images/box20px.png");
+    shield-name: "'ↅ'"; // &#2185; (lighthouse)
+    shield-face-name: 'Symbola Medium';
+    shield-size: 13;
+    shield-fill: #fff;
+    shield-text-dy: 2.2;
+  }
 }
 
 #locations {
