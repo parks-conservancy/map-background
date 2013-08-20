@@ -510,13 +510,21 @@ Layer:
               FROM planet_osm_point
               WHERE way && !bbox!
                 AND tags ? 'name'
-                -- AND tags ? 'place'
-                -- island is intentionally omitted
-                AND tags -> 'place' IN ('city','town','village','suburb','neighbourhood','hamlet','islet','locale','locality')
                 AND tags -> 'name' NOT LIKE '%Home%'
                 AND tags -> 'name' NOT LIKE '%Trailer Court%'
                 AND tags -> 'name' NOT IN ('Doelger City')
                 AND NOT tags ? 'historic'
+                AND (
+                  (
+                    zoom(!scale_denominator!) <= 10
+                    AND tags -> 'place' IN ('city','town','village')
+                  )
+                  OR (
+                    zoom(!scale_denominator!) > 10
+                    -- island is intentionally omitted
+                    AND tags -> 'place' IN ('city','town','village','suburb','neighbourhood','hamlet','islet','locale','locality')
+                  )
+                )
             UNION
               SELECT tags -> 'name' AS name, way, tags -> 'place' AS place,
                 way_area size,
@@ -532,10 +540,19 @@ Layer:
               FROM planet_osm_polygon
               WHERE way && !bbox!
                 AND tags ? 'name'
-                -- AND tags ? 'place'
-                AND tags -> 'place' IN ('city','town','village','suburb','neighbourhood','hamlet','islet','island','locale','locality')
                 AND tags -> 'name' NOT LIKE '%Home%'
                 AND tags -> 'name' NOT LIKE '%Trailer Court%'
+                AND (
+                  (
+                    zoom(!scale_denominator!) <= 10
+                    AND tags -> 'place' IN ('city','town','village')
+                  )
+                  OR (
+                    -- island is intentionally omitted
+                    zoom(!scale_denominator!) > 10
+                    AND tags -> 'place' IN ('city','town','village','suburb','neighbourhood','hamlet','islet','locale','locality')
+                  )
+                )
             ) AS stuff
             ORDER BY name
           ) AS stuff
@@ -650,12 +667,11 @@ Layer:
           SELECT tags -> 'name' AS name, way
           FROM planet_osm_point
           WHERE way && !bbox!
-            AND (zoom(!scale_denominator!) >= 13
-              OR tags -> 'name' LIKE '% Bay'
-              OR tags -> 'name' LIKE 'Gulf %'
-            )
             AND tags -> 'natural' = 'bay'
             AND tags ? 'name'
+            AND (zoom(!scale_denominator!) >= 13
+              OR tags -> 'name' IN ('San Pablo Bay', 'San Francisco Bay', 'Gulf of the Farallones')
+            )
         ) AS bay
 
   # ---- Road Labels ---------------------------------------------------
