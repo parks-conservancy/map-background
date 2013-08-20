@@ -32,7 +32,15 @@ Map {
 
 #coastline {
   line-color: @coastline;
-  line-width: 0.75;
+  line-width: 0.25;
+
+  [zoom>=12] {
+    line-width: 0.75;
+  }
+
+  [zoom>=14] {
+    line-width: 1.5;
+  }
 }
 
 #cpad_units {
