@@ -333,8 +333,11 @@
       }
 
       [zoom>=17] {
-        bridge-left/line-offset: 9.75;
-        bridge-right/line-offset: -9.75;
+        bridge-left/line-width: 1.5;
+        bridge-right/line-width: 1.5;
+
+        bridge-left/line-offset: 9.5;
+        bridge-right/line-offset: -9.5;
       }
     }
   }
