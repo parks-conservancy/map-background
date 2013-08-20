@@ -5,13 +5,30 @@
   text-fill: #15984d;
   text-opacity: 0.9;
   text-size: 14;
-  text-min-distance: 15;
-  text-min-padding: 15;
+  text-min-distance: 10;
+  // text-min-padding: 15;
   text-wrap-width: 48;
   text-transform: uppercase;
   text-halo-fill: @managed_park;
   text-halo-radius: 1.5;
-  text-character-spacing: 3;
+  text-character-spacing: 2;
+
+  text-placement-type: simple;
+  text-placements: "X,S,W,N,E,SW,NE,SE,NE,14,13,12,11,10";
+  text-dx: 7.5;
+  text-dy: 2.5;
+
+
+  ::icon {
+    text-fill: darken(#15984d, 10%);
+    text-face-name: "Symbola Medium";
+    text-halo-radius: 0.75;
+    text-halo-fill: @managed_park;
+    text-name: "'⅊'"; // &#x214a; (tree)
+
+    text-size: 12;
+    text-allow-overlap: false;
+  }
 }
 
 #highway-labels {
