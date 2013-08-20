@@ -474,7 +474,7 @@ Layer:
                      CASE
                       WHEN tags -> 'place' IN ('city') THEN 1
                       WHEN tags -> 'place' IN ('suburb') THEN 2
-                      WHEN tags -> 'place' IN('town') THEN 3
+                      WHEN tags -> 'place' IN ('town') THEN 3
                       WHEN tags -> 'place' IN ('neighbourhood') THEN 4
                       WHEN tags -> 'place' IN ('village') THEN 5
                       ELSE 10
@@ -482,8 +482,13 @@ Layer:
               FROM planet_osm_point
               WHERE way && !bbox!
                 AND tags ? 'name'
-                AND tags ? 'place'
-                AND tags->'place' IN ('city','town','village','suburb','neighbourhood')
+                -- AND tags ? 'place'
+                -- island is intentionally omitted
+                AND tags -> 'place' IN ('city','town','village','suburb','neighbourhood','hamlet','islet','locale','locality')
+                AND tags -> 'name' NOT LIKE '%Home%'
+                AND tags -> 'name' NOT LIKE '%Trailer Court%'
+                AND tags -> 'name' NOT IN ('Doelger City')
+                AND NOT tags ? 'historic'
             UNION
               SELECT tags -> 'name' AS name, way, tags -> 'place' AS place,
               COALESCE(replace(tags -> 'population', ',', '')::numeric, 0) AS population,
@@ -498,12 +503,14 @@ Layer:
               FROM planet_osm_polygon
               WHERE way && !bbox!
                 AND tags ? 'name'
-                AND tags ? 'place'
-                AND tags -> 'place' IN ('city','town','village','suburb','neighbourhood')
+                -- AND tags ? 'place'
+                AND tags -> 'place' IN ('city','town','village','suburb','neighbourhood','hamlet','islet','island','locale','locality')
+                AND tags -> 'name' NOT LIKE '%Home%'
+                AND tags -> 'name' NOT LIKE '%Trailer Court%'
             ) AS stuff
             ORDER BY name
           ) AS stuff
-          ORDER BY priority, population DESC
+          ORDER BY priority ASC, population DESC
         ) AS places
 
   # ---- CPAD Labels ---------------------------------------------------
