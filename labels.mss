@@ -15,19 +15,23 @@
 
   text-placement-type: simple;
   text-placements: "X,S,W,N,E,SW,NE,SE,NE,14,13,12,11,10";
-  text-dx: 7.5;
-  text-dy: 2.5;
+  text-dx: 5;
+  text-dy: 5;
 
+  [zoom>=12] {
+    text-dx: 10;
+    text-dy: 10;
+  }
 
-  ::icon {
-    text-fill: darken(#15984d, 10%);
-    text-face-name: "Symbola Medium";
-    text-halo-radius: 0.75;
-    text-halo-fill: @managed_park;
-    text-name: "'⅊'"; // &#x214a; (tree)
+  [zoom>=14] {
+    text-dx: 32;
+    text-dy: 32;
 
-    text-size: 12;
-    text-allow-overlap: false;
+    text-size: 16;
+  }
+
+  [zoom>=15] {
+    text-size: 16;
   }
 }
 

@@ -10,6 +10,7 @@ interactivity:    false
 minzoom:          0
 maxzoom:          20
 srs:              '+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over'
+metatile:         2
 
 
 # == Layer & Datasource defaults =======================================
@@ -434,16 +435,24 @@ Layer:
       geometry_field: geom
       table: >
         (
-          SELECT name, type, geom,
+          SELECT name, type,
+            ST_SnapToGrid(geom,
+              ST_MakePoint(ST_XMin(!bbox!), ST_YMax(!bbox!)),
+              !pixel_width! * 16,
+              !pixel_height! * 16,
+              0,
+              0
+            ) geom,
             (CASE
              WHEN type = 'Park' THEN 1
-             WHEN type = 'Campground' THEN 2
+             WHEN type = 'Visitor Center' THEN 2
              WHEN type = 'Trailhead' THEN 3
-             WHEN type = 'Visitor Center' THEN 4
+             WHEN type = 'Site of Interest' THEN 4
              WHEN type = 'Cafe' THEN 5
-             WHEN type = 'Site of Interest' THEN 6
-             WHEN type = 'Beach' THEN 7
-             WHEN type = 'Overlook' THEN 8
+             WHEN type = 'Overlook' THEN 6
+             WHEN type = 'Campground' THEN 8
+
+             WHEN type = 'Beach' THEN 8
              WHEN type = 'Meeting Place' THEN 9
              WHEN type = 'Restroom' THEN 10
              WHEN type = 'Parking Lot' THEN 11
@@ -456,7 +465,8 @@ Layer:
              END) AS priority
           FROM locations
           WHERE geom && !bbox!
-            AND type NOT IN ('park')
+            AND type NOT IN ('Park')
+            AND type IN ('Campground', 'Trailhead', 'Visitor Center', 'Site of Interest', 'Overlook', 'Restroom', 'Water Fountain', 'Parking Lot')
             AND zoom(!scale_denominator!) >= 14
           ORDER BY priority
         ) AS x
@@ -466,7 +476,7 @@ Layer:
   - <<: *layer
     name: lighthouses
     id:   lighthouses
-    status: on
+    status: off
     Datasource:
       <<: *postgis
       table: >
@@ -583,7 +593,7 @@ Layer:
   - <<: *layer
     name: water-labels
     id:   water-labels
-    status: on
+    status: off
     Datasource:
       <<: *postgis
       geometry_field: geom
