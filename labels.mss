@@ -1,22 +1,41 @@
 #unit_labels
-{ 
+{
+  text-face-name: "Frutiger LT 45 Light Bold";
+  text-name: [name];
+  text-fill: #15984d;
+  text-opacity: 0.9;
+  text-size: 9;
+  text-min-distance: 10;
+  // text-min-padding: 15;
+  text-wrap-width: 48;
+  text-transform: uppercase;
+  text-halo-fill: @managed_park;
+  text-halo-radius: 1.5;
+  text-character-spacing: 2;
+
+  text-placement-type: simple;
+  text-placements: "X,S,W,N,E,SW,NE,SE,NE,14,13,12,11,10";
+  text-dx: 5;
+  text-dy: 5;
+
   [zoom>=12] {
-    text-face-name: "Frutiger LT 45 Light Bold";
-    text-name: [name];
-    text-fill: #15984d;
-    text-opacity: 0.9;
-    text-size: 9;
-    text-min-distance: 15;
-    text-min-padding: 15;
-    text-wrap-width: 48;
-    text-transform: uppercase;
-    text-halo-fill: @managed_park;
-    text-halo-radius: 1.5;
-    text-character-spacing: 2;
+    text-dx: 10;
+    text-dy: 10;
   }
-  
+
   [zoom>=13] {
     text-size: 10;
+  }
+
+  [zoom>=14] {
+    text-dx: 32;
+    text-dy: 32;
+
+    text-size: 16;
+  }
+
+  [zoom>=15] {
+    text-size: 16;
   }
 }
 
