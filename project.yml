@@ -492,6 +492,7 @@ Layer:
   - <<: *layer
     name: cpad-labels
     id:   cpad-labels
+    status: off
     Datasource:
       <<: *postgis
       geometry_field: geom
