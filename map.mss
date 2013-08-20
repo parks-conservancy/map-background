@@ -1,7 +1,7 @@
 @land: #f8f7ed;
 @water: #e0f3f8;
 @coastline: #58baef;
-@marsh: #70FFA9;
+@marsh: #ecf1de;
 @beach: #eed7b4;
 @park: #f3ebc4;
 @managed_park: #dce8cb;

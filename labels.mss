@@ -1,14 +1,18 @@
 #unit_labels
 {
-  text-face-name: "Roboto Bold";
+  text-face-name: "Frutiger LT 45 Light Bold";
   text-name: [name];
-  text-fill: #169d50;
+  text-fill: #15984d;
   text-opacity: 0.9;
-  text-size: 14;
+  text-size: 16;
   text-placement: interior;
   text-min-distance: 15;
   text-min-padding: 15;
   text-wrap-width: 48;
+  text-transform: uppercase;
+  text-halo-fill: @managed_park;
+  text-halo-radius: 1.5;
+  text-character-spacing: 1;
   /*
   text-halo-radius: 1;
   */
@@ -22,26 +26,37 @@
 
   [highway='motorway']
   {
+    /*
     text-transform: uppercase;
     text-character-spacing: 4;
+    */
 
-    [zoom>=14] {
+    [zoom>=12] {
       text-name: [name];
+      text-halo-fill: #fcefba;
+      text-halo-radius: 1.5;
 
-      text-size: 14;
+      text-size: 11;
+    }
+    
+    [zoom>=14] {
+      text-size: 13;
     }
 
-    [zoom>=15] {
-      text-size: 18;
-    }
   }
 
   [highway='trunk']
   {
-    [zoom>=14] {
+    [zoom>=12] {
       text-name: [name];
+      text-halo-fill: #fcefba;
+      text-halo-radius: 1.5;
 
-      text-size: 14;
+      text-size: 11;
+    }
+    
+    [zoom>=15] {
+      text-size: 13;
     }
   }
 
@@ -50,9 +65,15 @@
   //
   [highway='primary'],
   {
-    [zoom>=14] {
+    [zoom>=13] {
       text-name: [name];
+      text-halo-fill: #fff;
+      text-halo-radius: 1.5;
 
+      text-size: 11;
+    }
+    
+    [zoom>=15] {
       text-size: 12;
     }
   }
@@ -63,9 +84,15 @@
   [highway='secondary'],
   [highway='tertiary'],
   {
-    [zoom>=14] {
+    [zoom>=13] {
       text-name: [name];
+      text-halo-fill: #fff;
+      text-halo-radius: 1.5;
 
+      text-size: 11;
+    }
+    
+    [zoom>=15] {
       text-size: 12;
     }
   }
@@ -79,10 +106,12 @@
   [highway='unclassified'],
   [highway='road'],
   {
-    [zoom>=14] {
+    [zoom>=15] {
       text-name: [name];
+      text-halo-fill: #fff;
+      text-halo-radius: 1.5;
 
-      text-size: 12;
+      text-size: 11;
     }
   }
 }
@@ -143,19 +172,29 @@
 
 #bay
 {
-  text-face-name: "Roboto Italic";
+  text-face-name: "Frutiger LT 55 Roman Italic";
   text-name: [name];
   text-fill: #00a6da;
   text-size: 11;
   text-placement: interior;
+  text-transform: uppercase;
+  text-character-spacing: 4;
   // text-spacing: 0;
   // text-character-spacing: 1;
   text-label-position-tolerance: 5;
   text-min-distance: 15;
   text-min-padding: 15;
-  text-wrap-width: 24;
+  text-wrap-width: 42;
   text-halo-radius: 1;
   text-halo-fill: @water;
+  
+  [zoom>=14] {
+    text-size: 12;
+  }
+  
+  [zoom>=15] {
+    text-size: 15;
+  }
 }
 
 #water-labels[areasqkm>1],
