@@ -240,7 +240,16 @@ Layer:
       <<: *postgis
       table: >
         (
-          SELECT tags -> 'highway' AS highway, way
+          SELECT tags -> 'highway' AS highway,
+            (CASE
+            WHEN tags ? 'bridge' AND tags -> 'bridge' NOT IN ('no', 'false') THEN 'yes'
+            ELSE NULL
+            END) bridge,
+            (CASE
+            WHEN tags ? 'tunnel' AND tags -> 'tunnel' NOT IN ('no', 'false') THEN 'yes'
+            ELSE NULL
+            END) tunnel,
+            way
           FROM planet_osm_line
           WHERE way && !bbox!
             AND (
@@ -608,8 +617,6 @@ Layer:
         (
           SELECT tags -> 'highway' AS highway,
             tags -> 'name' AS name,
-            tags -> 'bridge' AS bridge,
-            tags -> 'tunnel' AS tunnel,
             way,
             (CASE
             WHEN tags -> 'highway' IN ('motorway') THEN 1

@@ -48,6 +48,12 @@
         line-width: 4;
       }
 
+      [zoom>=14] {
+        [tunnel='yes'] {
+          line-opacity: 0.3;
+        }
+      }
+
       [zoom>=15] {
         line-width: 7;
       }
@@ -76,6 +82,12 @@
       line-width: 2.5;
     }
 
+    [zoom>=14] {
+      [tunnel='yes'] {
+        line-opacity: 0.2;
+      }
+    }
+
     [zoom>=15] {
       line-width: 5.5;
     }
@@ -86,6 +98,36 @@
 
     [zoom>=17] {
       line-width: 11.5;
+    }
+
+    [bridge='yes'] {
+      bridge-left/line-color: @highway_stroke;
+      bridge-right/line-color: @highway_stroke;
+      bridge-left/line-width: 0;
+      bridge-right/line-width: 0;
+
+      [zoom>=14] {
+        bridge-left/line-width: 0.75;
+        bridge-right/line-width: 0.75;
+
+        bridge-left/line-offset: 1.75;
+        bridge-right/line-offset: -1.75;
+      }
+
+      [zoom>=15] {
+        bridge-left/line-offset: 3.25;
+        bridge-right/line-offset: -3.25;
+      }
+
+      [zoom>=16] {
+        bridge-left/line-offset: 5.75;
+        bridge-right/line-offset: -5.75;
+      }
+
+      [zoom>=17] {
+        bridge-left/line-offset: 6.25;
+        bridge-right/line-offset: -6.25;
+      }
     }
   }
 
@@ -99,6 +141,10 @@
       line-width: 0;
 
       [zoom>=14] {
+        [tunnel='yes'] {
+          line-opacity: 0.3;
+        }
+
         line-width: 2.5;
       }
 
@@ -119,6 +165,10 @@
     line-width: 0;
 
     [zoom>=14] {
+      [tunnel='yes'] {
+        line-opacity: 0.2;
+      }
+
       line-width: 2;
     }
 
@@ -132,6 +182,36 @@
 
     [zoom>=17] {
       line-width: 7.5;
+    }
+
+    [bridge='yes'] {
+      bridge-left/line-color: @highway_stroke;
+      bridge-right/line-color: @highway_stroke;
+      bridge-left/line-width: 0;
+      bridge-right/line-width: 0;
+
+      [zoom>=14] {
+        bridge-left/line-width: 0.25;
+        bridge-right/line-width: 0.25;
+
+        bridge-left/line-offset: 1;
+        bridge-right/line-offset: -1;
+      }
+
+      [zoom>=15] {
+        bridge-left/line-offset: 1.75;
+        bridge-right/line-offset: -1.75;
+      }
+
+      [zoom>=16] {
+        bridge-left/line-offset: 2.25;
+        bridge-right/line-offset: -2.25;
+      }
+
+      [zoom>=17] {
+        bridge-left/line-offset: 3.75;
+        bridge-right/line-offset: -3.75;
+      }
     }
   }
 
@@ -160,6 +240,12 @@
 
       [zoom>=13] {
         line-width: 5;
+      }
+
+      [zoom>=14] {
+        [tunnel='yes'] {
+          line-opacity: 0.3;
+        }
       }
 
       [zoom>=15] {
@@ -202,6 +288,12 @@
       line-width: 3.5;
     }
 
+    [zoom>=14] {
+      [tunnel='yes'] {
+        line-opacity: 0.2;
+      }
+    }
+
     [zoom>=15] {
       line-width: 10.5;
     }
@@ -212,6 +304,36 @@
 
     [zoom>=17] {
       line-width: 17;
+    }
+
+    [bridge='yes'] {
+      bridge-left/line-color: @highway_stroke;
+      bridge-right/line-color: @highway_stroke;
+      bridge-left/line-width: 0;
+      bridge-right/line-width: 0;
+
+      [zoom>=14] {
+        bridge-left/line-width: 0.75;
+        bridge-right/line-width: 0.75;
+
+        bridge-left/line-offset: 2.25;
+        bridge-right/line-offset: -2.25;
+      }
+
+      [zoom>=15] {
+        bridge-left/line-offset: 5.75;
+        bridge-right/line-offset: -5.75;
+      }
+
+      [zoom>=16] {
+        bridge-left/line-offset: 7.25;
+        bridge-right/line-offset: -7.25;
+      }
+
+      [zoom>=17] {
+        bridge-left/line-offset: 9.75;
+        bridge-right/line-offset: -9.75;
+      }
     }
   }
 
@@ -225,6 +347,10 @@
       line-width: 0;
 
       [zoom>=14] {
+        [tunnel='yes'] {
+          line-opacity: 0.3;
+        }
+
         line-width: 3;
       }
 
@@ -245,6 +371,10 @@
     line-width: 0;
 
     [zoom>=14] {
+      [tunnel='yes'] {
+        line-opacity: 0.2;
+      }
+
       line-width: 2.5;
     }
 
@@ -258,6 +388,36 @@
 
     [zoom>=17] {
       line-width: 7.5;
+    }
+
+    [bridge='yes'] {
+      bridge-left/line-color: @highway_stroke;
+      bridge-right/line-color: @highway_stroke;
+      bridge-left/line-width: 0;
+      bridge-right/line-width: 0;
+
+      [zoom>=14] {
+        bridge-left/line-width: 0.25;
+        bridge-right/line-width: 0.25;
+
+        bridge-left/line-offset: 1.25;
+        bridge-right/line-offset: -1.25;
+      }
+
+      [zoom>=15] {
+        bridge-left/line-offset: 1.75;
+        bridge-right/line-offset: -1.75;
+      }
+
+      [zoom>=16] {
+        bridge-left/line-offset: 2.25;
+        bridge-right/line-offset: -2.25;
+      }
+
+      [zoom>=17] {
+        bridge-left/line-offset: 3.75;
+        bridge-right/line-offset: -3.75;
+      }
     }
   }
 
@@ -281,6 +441,10 @@
       }
 
       [zoom>=14] {
+        [tunnel='yes'] {
+          line-opacity: 0.3;
+        }
+
         line-width: 4.5;
       }
 
@@ -313,6 +477,10 @@
     }
 
     [zoom>=14] {
+      [tunnel='yes'] {
+        line-opacity: 0.2;
+      }
+
       line-width: 3;
     }
 
@@ -327,6 +495,36 @@
     [zoom>=17] {
       line-width: 13.5;
     }
+
+    [bridge='yes'] {
+      bridge-left/line-color: @arterial_stroke;
+      bridge-right/line-color: @arterial_stroke;
+      bridge-left/line-width: 0;
+      bridge-right/line-width: 0;
+
+      [zoom>=14] {
+        bridge-left/line-width: 0.75;
+        bridge-right/line-width: 0.75;
+
+        bridge-left/line-offset: 2;
+        bridge-right/line-offset: -2;
+      }
+
+      [zoom>=15] {
+        bridge-left/line-offset: 3.75;
+        bridge-right/line-offset: -3.75;
+      }
+
+      [zoom>=16] {
+        bridge-left/line-offset: 5.75;
+        bridge-right/line-offset: -5.75;
+      }
+
+      [zoom>=17] {
+        bridge-left/line-offset: 7.25;
+        bridge-right/line-offset: -7.25;
+      }
+    }
   }
 
   [highway='primary_link'],
@@ -338,19 +536,23 @@
       line-width: 0;
 
       [zoom>=14] {
-        line-width: 3.5;
+        [tunnel='yes'] {
+          line-opacity: 0.3;
+        }
+
+        line-width: 4;
       }
 
       [zoom>=15] {
-        line-width: 4.5;
+        line-width: 5;
       }
 
       [zoom>=16] {
-        line-width: 5.5;
+        line-width: 6;
       }
 
       [zoom>=17] {
-        line-width: 8.5;
+        line-width: 8;
       }
     }
 
@@ -358,6 +560,10 @@
     line-width: 0;
 
     [zoom>=14] {
+      [tunnel='yes'] {
+        line-opacity: 0.2;
+      }
+
       line-width: 2.5;
     }
 
@@ -371,6 +577,36 @@
 
     [zoom>=17] {
       line-width: 7.5;
+    }
+
+    [bridge='yes'] {
+      bridge-left/line-color: @minor_arterial_stroke;
+      bridge-right/line-color: @minor_arterial_stroke;
+      bridge-left/line-width: 0;
+      bridge-right/line-width: 0;
+
+      [zoom>=14] {
+        bridge-left/line-width: 0.75;
+        bridge-right/line-width: 0.75;
+
+        bridge-left/line-offset: 1.75;
+        bridge-right/line-offset: -1.75;
+      }
+
+      [zoom>=15] {
+        bridge-left/line-offset: 2.25;
+        bridge-right/line-offset: -2.25;
+      }
+
+      [zoom>=16] {
+        bridge-left/line-offset: 2.75;
+        bridge-right/line-offset: -2.75;
+      }
+
+      [zoom>=17] {
+        bridge-left/line-offset: 3.75;
+        bridge-right/line-offset: -3.75;
+      }
     }
   }
 
@@ -389,6 +625,10 @@
       }
 
       [zoom>=14] {
+        [tunnel='yes'] {
+          line-opacity: 0.3;
+        }
+
         line-width: 4;
       }
 
@@ -406,12 +646,10 @@
     }
       
     line-color: @minor_arterial_low_zoom;
-    line-color: #fff;
     line-width: 0;
 
     [zoom>=10] {
-      line-color: #bbb;
-      line-width: 0.5;
+      line-width: 0.75;
     }
 
     [zoom>=12] {
@@ -420,6 +658,10 @@
     }
 
     [zoom>=14] {
+      [tunnel='yes'] {
+        line-opacity: 0.2;
+      }
+
       line-width: 2.5;
     }
 
@@ -434,6 +676,36 @@
     [zoom>=17] {
       line-color: #fff;
       line-width: 12.5;
+    }
+
+    [bridge='yes'] {
+      bridge-left/line-color:  @minor_arterial_stroke;
+      bridge-right/line-color: @minor_arterial_stroke;
+      bridge-left/line-width: 0;
+      bridge-right/line-width: 0;
+
+      [zoom>=14] {
+        bridge-left/line-width: 0.75;
+        bridge-right/line-width: 0.75;
+
+        bridge-left/line-offset: 1.75;
+        bridge-right/line-offset: -1.75;
+      }
+
+      [zoom>=15] {
+        bridge-left/line-offset: 3.25;
+        bridge-right/line-offset: -3.25;
+      }
+
+      [zoom>=16] {
+        bridge-left/line-offset: 5.25;
+        bridge-right/line-offset: -5.25;
+      }
+
+      [zoom>=17] {
+        bridge-left/line-offset: 6.75;
+        bridge-right/line-offset: -6.75;
+      }
     }
   }
 
@@ -451,6 +723,10 @@
       line-width: 0;
 
       [zoom>=15] {
+        [tunnel='yes'] {
+          line-opacity: 0.3;
+        }
+
         line-width: 5;
       }
 
@@ -475,6 +751,10 @@
     }
 
     [zoom>=15] {
+      [tunnel='yes'] {
+        line-opacity: 0.2;
+      }
+
       line-color: @local_road;
       line-width: 3.5;
     }
@@ -485,6 +765,31 @@
 
     [zoom>=17] {
       line-width: 10.5;
+    }
+
+    [bridge='yes'] {
+      bridge-left/line-color: @local_road_stroke;
+      bridge-right/line-color: @local_road_stroke;
+      bridge-left/line-width: 0;
+      bridge-right/line-width: 0;
+
+      [zoom>=15] {
+        bridge-left/line-width: 0.75;
+        bridge-right/line-width: 0.75;
+
+        bridge-left/line-offset: 2;
+        bridge-right/line-offset: -2;
+      }
+
+      [zoom>=16] {
+        bridge-left/line-offset: 3.75;
+        bridge-right/line-offset: -3.75;
+      }
+
+      [zoom>=17] {
+        bridge-left/line-offset: 5.75;
+        bridge-right/line-offset: -5.75;
+      }
     }
   }
 }
