@@ -58,6 +58,7 @@ Layer:
   - <<: *layer
     name: cpad_units
     id:   cpad_units
+    status: on
     Datasource:
       <<: *postgis
       geometry_field: geom
@@ -73,6 +74,7 @@ Layer:
   - <<: *layer
     name: park_units
     id:   park_units
+    status: on
     Datasource:
       <<: *postgis
       geometry_field: geom
@@ -89,6 +91,7 @@ Layer:
   - <<: *layer
     name: school
     id:   school
+    status: on
     Datasource:
       <<: *postgis
       table: >
@@ -104,6 +107,7 @@ Layer:
   - <<: *layer
     name: foreshore
     id:   foreshore
+    status: on
     Datasource:
       <<: *postgis
       geometry_field: geom
@@ -125,6 +129,7 @@ Layer:
   - <<: *layer
     name: beach
     id:   beach
+    status: on
     Datasource:
       <<: *postgis
       table: >
@@ -140,6 +145,7 @@ Layer:
   - <<: *layer
     name: water
     id:   water
+    status: on
     Datasource:
       <<: *postgis
       geometry_field: geom
@@ -214,6 +220,7 @@ Layer:
   - <<: *layer
     name: coastline
     id:   coastline
+    status: on
     Datasource:
       <<: *postgis
       geometry_field: geom
@@ -476,6 +483,7 @@ Layer:
   - <<: *layer
     name: places
     id:   places
+    status: on
     Datasource:
       <<: *postgis
       table: >
@@ -556,6 +564,7 @@ Layer:
   - <<: *layer
     name: water-labels
     id:   water-labels
+    status: on
     Datasource:
       <<: *postgis
       geometry_field: geom
@@ -631,6 +640,7 @@ Layer:
   - <<: *layer
     name: bay
     id:   bay
+    status: on
     Datasource:
       <<: *postgis
       table: >
@@ -647,6 +657,7 @@ Layer:
   - <<: *layer
     name: highway-labels
     id:   highway-labels
+    status: on
     Datasource:
       <<: *postgis
       table: >
