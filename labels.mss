@@ -12,9 +12,6 @@
   text-halo-fill: @managed_park;
   text-halo-radius: 1.5;
   text-character-spacing: 1;
-  /*
-  text-halo-radius: 1;
-  */
 }
 
 #highway-labels {
@@ -23,13 +20,11 @@
   text-face-name: "Frutiger LT 55 Roman Regular";
   text-placement: line;
 
+  //
+  // separated highways
+  //
   [highway='motorway']
   {
-    /*
-    text-transform: uppercase;
-    text-character-spacing: 4;
-    */
-
     [zoom>=12] {
       text-name: [name];
       text-halo-fill: #fcefba;
@@ -44,6 +39,9 @@
 
   }
 
+  //
+  // trunk roads
+  //
   [highway='trunk']
   {
     [zoom>=12] {
@@ -184,7 +182,7 @@
   text-min-distance: 15;
   text-min-padding: 15;
   text-wrap-width: 42;
-  text-halo-radius: 1;
+  text-halo-radius: 1.5;
   text-halo-fill: @water;
   
   [zoom>=14] {

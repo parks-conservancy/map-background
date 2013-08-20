@@ -10,6 +10,7 @@
 Map {
   background-color: @land;
   buffer-size: 128;
+  font-directory: url("fonts/");
 }
 
 #water {
