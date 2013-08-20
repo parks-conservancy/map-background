@@ -32,7 +32,7 @@ Map {
 
 #coastline {
   line-color: @coastline;
-  line-width: 1.5;
+  line-width: 0.75;
 }
 
 #cpad_units {
