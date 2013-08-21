@@ -134,7 +134,7 @@
       shield-size: 16;
       shield-min-distance: 0;
       shield-min-padding: 0;
-      shield-dy: -4.75;
+      shield-dy: -5.75;
     }
   }
 
@@ -178,7 +178,7 @@
       shield-size: 16;
       shield-min-distance: 0;
       shield-min-padding: 0;
-      shield-dy: -4.75;
+      shield-dy: -5.75;
     }
   }
 
@@ -279,14 +279,14 @@
       shield-size: 16;
       shield-min-distance: 0;
       shield-min-padding: 0;
-      shield-dy: -5.5;
+      shield-dy: -5.75;
     }
   }
 
   [type='Water Fountain'] {
     [zoom>=16] {
       shield-file: url("images/box20px.png");
-      shield-name: "'Ω'"; // &#x2126; (water fountain)
+      shield-name: "'Ω'"; // &#x2126; (water fountain)
       // alternately, glass of water: &#x21e1;
 
       shield-size: 16;
@@ -311,8 +311,8 @@
 
       shield-file: url("images/box20px.png");
 
-      // shield-name: "'Å'"; // &#x212b; (information)
-      shield-name: "'↌'"; // &#x218c; (ranger station)
+      shield-name: "'Å'"; // &#x212b; (information)
+      // shield-name: "'↌'"; // &#x218c; (ranger station)
 
       shield-size: 14;
       shield-min-distance: 0;
@@ -322,6 +322,7 @@
 
     [zoom>=15] {
       shield-size: 16;
+      shield-dy: -5.75;
     }
   }
 }
