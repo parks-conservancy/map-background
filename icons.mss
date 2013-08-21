@@ -13,7 +13,9 @@
   ::label {
     text-fill: #333;
     text-face-name: "Frutiger LT 45 Light Bold";
+    /*
     text-transform: uppercase;
+    */
     text-min-padding: 0;
     text-min-distance: 0;
     text-wrap-width: 48;

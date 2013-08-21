@@ -728,6 +728,16 @@
       line-color: @local_road_stroke;
       line-width: 0;
 
+      
+      [zoom>=17] {
+        [tunnel='yes'] {
+          line-opacity: 0.3;
+        }
+
+        line-width: 12;
+        line-opacity: 0.8;
+      }
+      /*
       [zoom>=15] {
         [tunnel='yes'] {
           line-opacity: 0.3;
@@ -744,6 +754,7 @@
       [zoom>=17] {
         line-width: 12;
       }
+      */
     }
       
     line-color: @local_road_low_zoom;
@@ -758,7 +769,6 @@
     }
 
     [zoom>=14] {
-      line-color: @local_road;
       line-width: 1;
     }
 
@@ -767,8 +777,8 @@
         line-opacity: 0.2;
       }
 
-      line-opacity: 0.8;
       line-width: 3.5;
+      line-color: #edede6;
     }
 
     [zoom>=16] {
@@ -777,6 +787,7 @@
 
     [zoom>=17] {
       line-width: 10.5;
+      line-color: #fff;
     }
 
     [bridge='yes'] {
