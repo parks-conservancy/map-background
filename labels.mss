@@ -2,14 +2,12 @@
 {
   text-face-name: "Frutiger LT 45 Light Bold";
   text-name: [name];
-  text-fill: #15984d;
+  text-fill: #000;
   text-opacity: 0.9;
   text-size: 9;
   text-min-distance: 10;
   // text-min-padding: 15;
   text-wrap-width: 32;
-  text-halo-fill: @land;
-  text-halo-radius: 1.5;
 
   text-placement-type: simple;
   text-placements: "X,S,W,N,E,SW,NE,SE,NE";
@@ -28,16 +26,19 @@
   }
 
   [zoom>=14] {
+    text-face-name: "Frutiger LT 45 Light Bold";
+    text-halo-fill: @land;
+    text-halo-radius: 1.25;
+    text-fill: #15984d;
     text-transform: uppercase;
     text-character-spacing: 2;
     text-dx: 32;
     text-dy: 32;
-    text-size: 16;
+    text-size: 15;
   }
 
   [zoom>=15] {
     text-size: 16;
-    text-halo-fill: @managed_park;
   }
 }
 
