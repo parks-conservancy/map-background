@@ -16,8 +16,9 @@
     text-transform: uppercase;
     text-min-padding: 0;
     text-min-distance: 0;
-    text-wrap-width: 32;
+    text-wrap-width: 48;
 
+    text-size: 10;
     text-name: "''";
     text-dx: 14;
     text-placement-type: simple;
@@ -31,8 +32,8 @@
 
   shield-face-name: "Symbola Medium";
   shield-name: "''";
-  shield-min-distance: 25;
-  shield-min-padding: 50;
+  shield-min-distance: 5;
+  shield-min-padding: 5;
 
   [type='Access'] {
     [zoom>=14] {
@@ -215,8 +216,6 @@
 
     [zoom>=15] {
       ::label {
-        text-wrap-width: 48;
-
         text-name: [name];
         text-dx: 7;
         text-placements: "W,E,N,S";
