@@ -546,11 +546,11 @@ Layer:
                 AND NOT tags ? 'historic'
                 AND (
                   (
-                    zoom(!scale_denominator!) <= 10
-                    AND tags -> 'place' IN ('city','town','village')
+                    zoom(!scale_denominator!) <= 12
+                    AND tags -> 'place' IN ('city','town')
                   )
                   OR (
-                    zoom(!scale_denominator!) > 10
+                    zoom(!scale_denominator!) > 12
                     -- island is intentionally omitted
                     AND tags -> 'place' IN ('city','town','village','suburb','neighbourhood','hamlet','islet','locale','locality')
                   )
@@ -576,12 +576,12 @@ Layer:
                 AND tags -> 'name' NOT LIKE '%Trailer Court%'
                 AND (
                   (
-                    zoom(!scale_denominator!) <= 10
+                    zoom(!scale_denominator!) <= 12
                     AND tags -> 'place' IN ('city','town','village')
                   )
                   OR (
                     -- island is intentionally omitted
-                    zoom(!scale_denominator!) > 10
+                    zoom(!scale_denominator!) > 12
                     AND tags -> 'place' IN ('city','town','village','suburb','neighbourhood','hamlet','islet','locale','locality')
                   )
                 )
