@@ -294,7 +294,7 @@
   [type='Water Fountain'] {
     [zoom>=16] {
       shield-file: url("images/box20px.png");
-      shield-name: "'Ω'"; // &#x2126; (water fountain)
+      shield-name: "'Ω'"; // &#x2126; (water fountain)
       // alternately, glass of water: &#x21e1;
 
       shield-size: 16;
