@@ -51,6 +51,21 @@ Map {
   polygon-fill: @managed_park;
 }
 
+#offshore-boundaries {
+  line-color: #aaa;
+  line-opacity: 0.5;
+  line-width: 0.25;
+  line-dasharray: 10, 2, 2, 2;
+
+  [zoom>=12] {
+    line-width: 0.75;
+  }
+
+  [zoom>=14] {
+    line-width: 1.5;
+  }
+}
+
 #school
 {
   polygon-fill: @school;

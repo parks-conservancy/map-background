@@ -239,6 +239,23 @@ Layer:
             GROUP BY ftype
         ) AS _
 
+  # ---- GGNRA Boundaries (offshore) -----------------------------------
+
+  - <<: *layer
+    name: offshore-boundaries
+    id:   offshore-boundaries
+    status: on
+    Datasource:
+      <<: *postgis
+      geometry_field: geom
+      table: >
+        (
+          SELECT goga_man, geom
+          FROM park_units
+          WHERE geom && !bbox!
+            AND goga_man = 'Offshore'
+        ) AS _
+
   # ---- Ferries--------------------------------------------------------
 
   - <<: *layer
