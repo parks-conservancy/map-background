@@ -256,6 +256,34 @@ Layer:
             AND goga_man = 'Offshore'
         ) AS _
 
+  # ---- Parking Areas -------------------------------------------------
+
+  - <<: *layer
+    name: parking
+    id:   parking
+    status: on
+    Datasource:
+      <<: *postgis
+      geometry_field: geom
+      table: >
+        (
+          SELECT ST_Union(geom) geom
+          FROM (
+            SELECT geom
+            FROM boundary_parkingareas
+            -- TODO
+            -- WHERE geom && !bbox!
+            --   AND zoom(!scale_denominator!) >= 15
+            WHERE zoom(!scale_denominator!) >= 15
+          UNION
+            SELECT geom
+            FROM pt_parking_areas
+            WHERE geom && !bbox!
+              AND (public_ IS NULL OR public_ IN ('yes/no', 'yes'))
+              AND zoom(!scale_denominator!) >= 15
+          ) AS _
+        ) AS _
+
   # ---- Ferries--------------------------------------------------------
 
   - <<: *layer

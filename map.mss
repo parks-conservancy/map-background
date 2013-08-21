@@ -66,6 +66,14 @@ Map {
   }
 }
 
+#parking
+{
+  polygon-fill: #e6e2dc;
+  polygon-opacity: 0.8;
+  line-color: #cfd0d2;
+  line-width: 0.75;
+}
+
 #school
 {
   polygon-fill: @school;
