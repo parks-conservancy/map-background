@@ -4,7 +4,7 @@ name:             GGNPC Features
 description:      ''
 attribution:      'Map Data © OpenStreetMap'
 bounds:           [-123.640, 36.791, -121.025, 38.719]
-center:           [-122.5369, 37.8704, 11]
+center:           [-122.5369, 37.8704, 13]
 format:           png
 interactivity:    false
 minzoom:          0
