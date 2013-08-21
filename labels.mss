@@ -130,7 +130,7 @@
   [highway='unclassified'],
   [highway='road'],
   {
-    [zoom>=18] {
+    [zoom>=17] {
       text-name: [name];
       text-halo-fill: #fff;
       text-halo-radius: 1.5;
