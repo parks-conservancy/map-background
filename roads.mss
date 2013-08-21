@@ -734,6 +734,7 @@
         }
 
         line-width: 5;
+        line-opacity: 0.8;
       }
 
       [zoom>=16] {
@@ -766,6 +767,7 @@
       }
 
       line-color: @local_road;
+      line-opacity: 0.8;
       line-width: 3.5;
     }
 
