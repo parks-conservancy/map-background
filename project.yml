@@ -396,6 +396,7 @@ Layer:
           FROM locations
           WHERE geom && !bbox!
             AND type='Park'
+            AND zoom(!scale_denominator!) >= 11
         ) AS _
 
   # ---- Recreational Opportunities (OSM) ------------------------------
