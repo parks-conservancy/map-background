@@ -11,7 +11,8 @@
 @minor_arterial: #fff;
 @minor_arterial_stroke: #cfd0d2;
 
-@local_road_low_zoom: #cfc7bb;
+@local_road_low_zoom: #d9d9d9;
+@local_road_medium_zoom: #cfc7bb;
 @local_road: #fff;
 @local_road_stroke: #cfd0d2;
 
@@ -749,6 +750,10 @@
 
     [zoom>=11] {
       line-width: 0.5;
+    }
+
+    [zoom>=13] {
+      line-color: @local_road_medium_zoom;
     }
 
     [zoom>=14] {
