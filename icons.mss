@@ -10,20 +10,19 @@
 }
 
 #locations {
-/*
   ::label {
     text-fill: #333;
     text-face-name: "Frutiger LT 45 Light Bold";
-    text-name: "''";
     text-transform: uppercase;
-    text-min-padding: 10;
-    text-min-distance: 2.5;
+    text-min-padding: 0;
+    text-min-distance: 0;
     text-wrap-width: 32;
 
+    text-name: "''";
+    text-dx: 14;
     text-placement-type: simple;
-    text-placements: "X,S,W,N,E,SW,NE,SE,NE";
+    text-placements: "E,W";
   }
-  */
 
   shield-file: url("images/px.png");
   shield-size: 1;
@@ -97,17 +96,7 @@
 
     [zoom>=16] {
       ::label {
-        text-fill: #333;
-        text-face-name: "Frutiger LT 45 Light Bold";
-        text-transform: uppercase;
-        text-min-padding: 0;
-        text-min-distance: 0;
-        text-wrap-width: 32;
-
         text-name: [name];
-        text-dx: 12;
-        text-placement-type: simple;
-        text-placements: "E,W";
       }
 
       shield-min-distance: 0;
@@ -126,17 +115,7 @@
 
     [zoom>=15] {
       ::label {
-        text-fill: #333;
-        text-face-name: "Frutiger LT 45 Light Bold";
-        text-transform: uppercase;
-        text-min-padding: 0;
-        text-min-distance: 0;
-        text-wrap-width: 32;
-
         text-name: [name];
-        text-dx: 12;
-        text-placement-type: simple;
-        text-placements: "E,W";
       }
 
       shield-size: 16;
@@ -169,17 +148,7 @@
 
     [zoom>=15] {
       ::label {
-        text-fill: #333;
-        text-face-name: "Frutiger LT 45 Light Bold";
-        text-transform: uppercase;
-        text-min-padding: 0;
-        text-min-distance: 0;
-        text-wrap-width: 48;
-
         text-name: [name];
-        text-dx: 12;
-        text-dy: -4.75;
-        text-placement-type: simple;
         text-placements: "W,E";
       }
 
@@ -246,16 +215,10 @@
 
     [zoom>=15] {
       ::label {
-        text-fill: #333;
-        text-face-name: "Frutiger LT 45 Light Bold";
-        text-transform: uppercase;
-        text-min-padding: 0;
-        text-min-distance: 0;
         text-wrap-width: 48;
 
         text-name: [name];
-        text-dx: 6;
-        text-placement-type: simple;
+        text-dx: 7;
         text-placements: "W,E,N,S";
       }
     }
@@ -271,17 +234,7 @@
 
     [zoom>=15] {
       ::label {
-        text-fill: #333;
-        text-face-name: "Frutiger LT 45 Light Bold";
-        text-transform: uppercase;
-        text-min-padding: 0;
-        text-min-distance: 0;
-        text-wrap-width: 32;
-
         text-name: [name];
-        text-dx: 12;
-        text-placement-type: simple;
-        text-placements: "E,W";
       }
 
       shield-size: 16;
@@ -304,17 +257,8 @@
   [type='Visitor Center'] {
     [zoom>=14] {
       ::label {
-        text-fill: #333;
-        text-face-name: "Frutiger LT 45 Light Bold";
-        text-transform: uppercase;
-        text-min-padding: 0;
-        text-min-distance: 0;
         text-wrap-width: 56;
-
         text-name: [name];
-        text-dx: 12;
-        text-placement-type: simple;
-        text-placements: "E,W";
       }
 
       shield-file: url("images/box20px.png");
