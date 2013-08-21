@@ -483,7 +483,7 @@ Layer:
           FROM locations
           WHERE geom && !bbox!
             AND type NOT IN ('Park')
-            AND type IN ('Campground', 'Trailhead', 'Visitor Center', 'Site of Interest', 'Overlook', 'Restroom', 'Water Fountain', 'Parking Lot')
+            AND type IN ('Campground', 'Trailhead', 'Visitor Center', 'Site of Interest', 'Cafe', 'Overlook', 'Restroom', 'Water Fountain', 'Parking Lot')
             AND zoom(!scale_denominator!) >= 14
           ORDER BY priority
         ) AS x

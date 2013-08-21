@@ -88,23 +88,31 @@
   }
 
   [type='Cafe'] {
-    [zoom>=14] {
+    [zoom>=15] {
       shield-file: url("images/box20px.png");
       shield-name: "'ℰ'"; // &#x2130; (cafe)
 
-      shield-size: 14;
-      shield-text-dy: 0;
+      shield-size: 16;
     }
 
-    [zoom>=15] {
-    /*
+    [zoom>=16] {
       ::label {
-        text-name: [name];
+        text-fill: #333;
+        text-face-name: "Frutiger LT 45 Light Bold";
         text-transform: uppercase;
-      }
-      */
+        text-min-padding: 0;
+        text-min-distance: 0;
+        text-wrap-width: 32;
 
-      shield-size: 16;
+        text-name: [name];
+        text-dx: 12;
+        text-placement-type: simple;
+        text-placements: "E,W";
+      }
+
+      shield-min-distance: 0;
+      shield-min-padding: 0;
+      shield-dy: -5.75;
     }
   }
 
