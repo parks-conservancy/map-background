@@ -7,23 +7,25 @@
   text-size: 9;
   text-min-distance: 10;
   // text-min-padding: 15;
-  text-wrap-width: 48;
-  text-transform: uppercase;
-  text-halo-fill: @managed_park;
+  text-wrap-width: 32;
+  text-halo-fill: @land;
   text-halo-radius: 1.5;
-  text-character-spacing: 2;
 
   text-placement-type: simple;
-  text-placements: "X,S,W,N,E,SW,NE,SE,NE,14,13,12,11,10";
+  text-placements: "X,S,W,N,E,SW,NE,SE,NE";
   text-dx: 5;
   text-dy: 5;
 
   [zoom>=12] {
     text-dx: 10;
     text-dy: 10;
+    text-size: 11;
   }
 
   [zoom>=13] {
+    text-transform: uppercase;
+    text-character-spacing: 2;
+    text-wrap-width: 48;
     text-size: 10;
   }
 
@@ -36,6 +38,7 @@
 
   [zoom>=15] {
     text-size: 16;
+    text-halo-fill: @managed_park;
   }
 }
 
@@ -123,12 +126,11 @@
   // local roads
   //
   [highway='residential'],
-  [highway='residential_link'],
   [highway='service'],
   [highway='unclassified'],
   [highway='road'],
   {
-    [zoom>=15] {
+    [zoom>=18] {
       text-name: [name];
       text-halo-fill: #fff;
       text-halo-radius: 1.5;
