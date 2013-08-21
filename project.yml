@@ -524,7 +524,8 @@ Layer:
                    priority, size
             FROM
             (
-              SELECT tags -> 'name' AS name, way,
+              SELECT way,
+                     (string_to_array(tags -> 'name', ';'))[1] AS name,
                      tags -> 'place' AS place,
                      COALESCE(replace(tags -> 'population', ',', '')::numeric, 0) AS population,
                      CASE
@@ -555,8 +556,10 @@ Layer:
                   )
                 )
             UNION
-              SELECT tags -> 'name' AS name, way, tags -> 'place' AS place,
-                way_area size,
+              SELECT way,
+                     tags -> 'place' AS place,
+                     (string_to_array(tags -> 'name', ';'))[1] AS name,
+                     way_area size,
               COALESCE(replace(tags -> 'population', ',', '')::numeric, 0) AS population,
               CASE
                 WHEN tags->'place' IN ('city') THEN 1
@@ -714,7 +717,7 @@ Layer:
       table: >
         (
           SELECT tags -> 'highway' AS highway,
-            tags -> 'name' AS name,
+            (string_to_array(tags -> 'name', ';'))[1] AS name,
             way,
             (CASE
             WHEN tags -> 'highway' IN ('motorway') THEN 1
