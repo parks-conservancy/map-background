@@ -23,16 +23,15 @@
   }
 
   [zoom>=13] {
-    text-transform: uppercase;
-    text-character-spacing: 2;
     text-wrap-width: 48;
-    text-size: 10;
+    text-size: 12;
   }
 
   [zoom>=14] {
+    text-transform: uppercase;
+    text-character-spacing: 2;
     text-dx: 32;
     text-dy: 32;
-
     text-size: 16;
   }
 
