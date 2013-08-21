@@ -319,7 +319,7 @@
 
       shield-file: url("images/box20px.png");
 
-      shield-name: "'Å'"; // &#x212b; (information)
+      shield-name: "'Å'"; // &#x212b; (information)
       // shield-name: "'↌'"; // &#x218c; (ranger station)
 
       shield-size: 14;
