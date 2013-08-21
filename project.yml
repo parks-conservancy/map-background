@@ -453,41 +453,55 @@ Layer:
       geometry_field: geom
       table: >
         (
-          SELECT name, type,
-            (CASE WHEN type IN ('Campground', 'Trailhead', 'Visitor Center', 'Cafe', 'Overlook', 'Restroom', 'Water Fountain', 'Parking Lot') THEN
+          SELECT * FROM (
+            SELECT name, type,
+              (CASE WHEN type IN ('Campground', 'Trailhead', 'Visitor Center', 'Cafe', 'Overlook', 'Restroom', 'Water Fountain', 'Parking Lot') THEN
+                ST_SnapToGrid(geom,
+                  ST_MakePoint(ST_XMin(!bbox!), ST_YMax(!bbox!)),
+                  !pixel_width! * 16,
+                  !pixel_height! * 16,
+                  0,
+                  0)
+                ELSE geom
+              END) AS geom,
+              (CASE
+              WHEN type = 'Park' THEN 1
+              WHEN type = 'Visitor Center' THEN 2
+              WHEN type = 'Trailhead' THEN 3
+              WHEN type = 'Site of Interest' THEN 4
+              WHEN type = 'Cafe' THEN 5
+              WHEN type = 'Overlook' THEN 6
+              WHEN type = 'Campground' THEN 8
+
+              WHEN type = 'Beach' THEN 8
+              WHEN type = 'Meeting Place' THEN 9
+              WHEN type = 'Restroom' THEN 10
+              WHEN type = 'Parking Lot' THEN 11
+              WHEN type = 'Restoration Site' THEN 12
+              WHEN type = 'Access' THEN 13
+              WHEN type = 'Building' THEN 14
+              WHEN type = 'Water Fountain' THEN 15
+              WHEN type = 'Bike Rack' THEN 16
+              ELSE 100
+              END) AS priority
+            FROM locations
+            WHERE geom && !bbox!
+              AND type NOT IN ('Park')
+              AND type IN ('Campground', 'Trailhead', 'Visitor Center', 'Site of Interest', 'Cafe', 'Overlook', 'Water Fountain', 'Parking Lot')
+              AND zoom(!scale_denominator!) >= 14
+          UNION
+            SELECT name,
+              type,
               ST_SnapToGrid(geom,
                 ST_MakePoint(ST_XMin(!bbox!), ST_YMax(!bbox!)),
-                !pixel_width! * 16,
-                !pixel_height! * 16,
-                0,
-                0)
-              ELSE geom
-            END) AS geom,
-            (CASE
-             WHEN type = 'Park' THEN 1
-             WHEN type = 'Visitor Center' THEN 2
-             WHEN type = 'Trailhead' THEN 3
-             WHEN type = 'Site of Interest' THEN 4
-             WHEN type = 'Cafe' THEN 5
-             WHEN type = 'Overlook' THEN 6
-             WHEN type = 'Campground' THEN 8
-
-             WHEN type = 'Beach' THEN 8
-             WHEN type = 'Meeting Place' THEN 9
-             WHEN type = 'Restroom' THEN 10
-             WHEN type = 'Parking Lot' THEN 11
-             WHEN type = 'Restoration Site' THEN 12
-             WHEN type = 'Access' THEN 13
-             WHEN type = 'Building' THEN 14
-             WHEN type = 'Water Fountain' THEN 15
-             WHEN type = 'Bike Rack' THEN 16
-             ELSE 100
-             END) AS priority
-          FROM locations
-          WHERE geom && !bbox!
-            AND type NOT IN ('Park')
-            AND type IN ('Campground', 'Trailhead', 'Visitor Center', 'Site of Interest', 'Cafe', 'Overlook', 'Restroom', 'Water Fountain', 'Parking Lot')
-            AND zoom(!scale_denominator!) >= 14
+                !pixel_width! * 16, !pixel_width! * 16,
+                0, 0) geom,
+                10 AS priority
+            FROM ggnra_restrooms
+            WHERE geom && !bbox!
+              AND type = 'Restroom'
+          ) AS _
+          WHERE zoom(!scale_denominator!) >= 14
           ORDER BY priority
         ) AS x
 
