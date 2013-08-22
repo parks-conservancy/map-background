@@ -52,26 +52,44 @@ Map {
 }
 
 #offshore-boundaries {
-  line-color: #aaa;
+  line-color: #6eac77;
   line-opacity: 0.5;
   line-width: 0.25;
-  line-dasharray: 10, 2, 2, 2;
+  line-dasharray: 5, 2;
 
   [zoom>=12] {
-    line-width: 0.75;
+    line-width: 0.5;
+  }
+  
+  [zoom>=13] {
+    line-width: 0.7;
   }
 
   [zoom>=14] {
-    line-width: 1.5;
+    line-dasharray: 10, 2, 2, 2;
+    line-width: 0.5;
+  }
+  
+  [zoom>=15] {
+    line-width: 1;
+    line-dasharray: 15, 2, 3.5, 2;
+  }
+  
+  [zoom>=14] {
+    line-width: 2;
   }
 }
 
 #parking
 {
-  polygon-fill: #ff0000;
-  polygon-opacity: 0.8;
-  line-color: #cfd0d2;
+  polygon-fill: #f5f5e4;
+  line-color: #f5f5e4;
   line-width: 0.75;
+  
+  [zoom>=16] {
+    line-width: 0;
+    polygon-smooth: 0.5;
+  }
 }
 
 #school
