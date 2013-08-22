@@ -45,10 +45,18 @@ Map {
 
 #cpad_units {
   polygon-fill: @park;
+
+  [zoom>=15] {
+    polygon-smooth: 0.5;
+  }
 }
 
 #park_units {
   polygon-fill: @managed_park;
+
+  [zoom>=15] {
+    polygon-smooth: 0.5;
+  }
 }
 
 #offshore-boundaries {
