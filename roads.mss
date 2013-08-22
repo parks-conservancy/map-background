@@ -13,7 +13,8 @@
 
 @local_road_low_zoom: #e8e8e3;
 @local_road_medium_zoom: #dfdfdd;
-@local_road: #fff;
+@local_road: #edede6;
+@local_road_high_zoom: #fff;
 @local_road_stroke: #cfd0d2;
 
 @runway: #efeee9;
@@ -779,7 +780,7 @@
       }
 
       line-width: 3.5;
-      line-color: #edede6;
+      line-color: @local_road;
     }
 
     [zoom>=16] {
@@ -788,7 +789,7 @@
 
     [zoom>=17] {
       line-width: 10.5;
-      line-color: #fff;
+      line-color: @local_road_high_zoom;
     }
 
     [bridge='yes'] {
