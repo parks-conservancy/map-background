@@ -91,11 +91,8 @@ Map {
 #parking
 {
   polygon-fill: #f5f5e4;
-  line-color: #f5f5e4;
-  line-width: 0.75;
   
   [zoom>=16] {
-    line-width: 0;
     polygon-smooth: 0.5;
   }
 }
