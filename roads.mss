@@ -16,7 +16,7 @@
 @local_road: #fff;
 @local_road_stroke: #cfd0d2;
 
-@runway: #cfc7bb;
+@runway: #efeee9;
 
 #road
 {
