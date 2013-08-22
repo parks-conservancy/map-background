@@ -905,20 +905,33 @@
   line-color: @coastline;
 
   [zoom>=11] {
-    line-dasharray: 7.5, 2.5;
-    line-width: 0.25;
+    line-color: #8ed1f3;
+    line-dasharray: 6, 1.5;
+    line-width: 0.5;
   }
 
   [zoom>=12] {
-    line-dasharray: 15, 5;
+    line-dasharray: 8, 2;
     line-width: 0.75;
+  }
+  
+  [zoom>=13] {
+    line-color: #81cbf2;
+    line-dasharray: 13, 4;
+    line-width: 1.3;
   }
 
   [zoom>=14] {
-    line-width: 1.5;
+    line-dasharray: 13, 4;
+  }
+  
+  [zoom>=15] {
+    line-dasharray: 14, 5;
+    line-width: 1.8;
   }
 
   [zoom>=16] {
+    line-dasharray: 16, 5;
     line-width: 2;
   }
 }
