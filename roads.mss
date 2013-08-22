@@ -728,7 +728,7 @@
       line-color: @local_road_stroke;
       line-width: 0;
 
-      
+      /*
       [zoom>=17] {
         [tunnel='yes'] {
           line-opacity: 0.3;
@@ -737,7 +737,8 @@
         line-width: 12;
         line-opacity: 0.8;
       }
-      /*
+      */
+      
       [zoom>=15] {
         [tunnel='yes'] {
           line-opacity: 0.3;
@@ -754,7 +755,7 @@
       [zoom>=17] {
         line-width: 12;
       }
-      */
+      
     }
       
     line-color: @local_road_low_zoom;
