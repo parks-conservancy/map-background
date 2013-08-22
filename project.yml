@@ -423,11 +423,17 @@ Layer:
   - <<: *layer
     name: trails
     id:   trails
-    status: off
+    status: on
     Datasource:
       <<: *postgis
       geometry_field: geom
-      table: trails
+      table: >
+        (
+          SELECT *
+          FROM trails
+          WHERE geom && !bbox!
+            AND zoom(!scale_denominator!) >= 13
+        ) AS _
 
   # ---- GGNRA Unit Names ----------------------------------------------
 
@@ -553,7 +559,24 @@ Layer:
           ORDER BY priority
         ) AS x
 
-    # ---- Lighthouses ---------------------------------------------------
+  # ---- Trail Labels --------------------------------------------------
+
+  - <<: *layer
+    name: trail-labels
+    id:   trail-labels
+    status: on
+    Datasource:
+      <<: *postgis
+      geometry_field: geom
+      table: >
+        (
+          SELECT *
+          FROM trails
+          WHERE zoom(!scale_denominator!) >= 14
+            AND geom && !bbox!
+        ) AS _
+
+  # ---- Lighthouses ---------------------------------------------------
 
   - <<: *layer
     name: lighthouses

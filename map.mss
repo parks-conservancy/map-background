@@ -98,36 +98,63 @@ Map {
 }
 
 #trails {
-  ::stroke {
-    line-color: lighten(#7e4c39, 30%);
-    line-width: 0;
-    line-join: miter;
-    line-cap: round;
-  }
-
   line-width: 0;
   line-join: miter;
   line-cap: round;
 
+  // remove noise by simplifying to 10m
+  line-simplify: 10;
+  line-simplify-algorithm: visvalingam-whyatt;
+
+  // fully smooth
+  line-smooth: 1;
+
+  line-color: pink;
+
+  [use_type='Hiking'] {
+    line-color: brown;
+  }
+
+  [use_type='Multi-Use'] {
+    line-color: green;
+  }
+
+  [use_type='Hiking and Horses'] {
+    line-color: orange;
+  }
+
+  [use_type='Hiking and Bikes'] {
+    line-color: blue;
+  }
+
+  [use_type='CLOSED'] {
+    line-dasharray: 5,5;
+    line-opacity: 0.5;
+  }
+
   [zoom>=13] {
-    line-color: lighten(#7e4c39, 40%);
-    line-width: 0.5;
+    line-width: 0.25;
   }
 
   [zoom>=14] {
-    line-color: lighten(#7e4c39, 30%);
-    line-width: 0.5;
+    line-width: 0.75;
   }
 
   [zoom>=15] {
-    ::stroke {
-      line-width: 3;
-    }
-
-    line-color: lighten(#7e4c39, 40%);
     line-width: 2;
-    line-dasharray: 10, 2;
+    line-simplify: 0;
   }
+}
+
+#trail-labels {
+  text-fill: #5a5c5b;
+  text-halo-radius: 1.5;
+  text-halo-fill: @land;
+  text-size: 11;
+  text-dy: 8;
+  text-name: [trail_name];
+  text-face-name: "Frutiger LT 45 Light Bold";
+  text-placement: line;
 }
 
 #dual-carriageways {
