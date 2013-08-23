@@ -537,11 +537,8 @@ Layer:
           UNION
             SELECT name,
               type,
-              ST_SnapToGrid(geom,
-                ST_MakePoint(ST_XMin(!bbox!), ST_YMax(!bbox!)),
-                !pixel_width! * 16, !pixel_width! * 16,
-                0, 0) geom,
-                10 AS priority
+              geom,
+              10 AS priority
             FROM ggnra_restrooms
             WHERE geom && !bbox!
               AND type = 'Restroom'
