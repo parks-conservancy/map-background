@@ -92,34 +92,35 @@
   }
 
   [type='Site of Interest'] {
-    [zoom>=14] {
-      ::marker {
-        marker-width: 5;
-        marker-height: 5;
-        marker-fill: #333;
-        marker-line-width: 0;
-      }
+    [zoom=14] {
+      marker-width: 5;
+      marker-height: 5;
+      marker-fill: #333;
+      marker-line-width: 0;
     }
 
     [zoom>=15] {
-      ::label {
-        text-fill: #333;
-        text-halo-fill: @land;
-        text-halo-radius: 0.75;
-        text-face-name: "Frutiger LT 45 Light Bold";
-        /*
-        text-transform: uppercase;
-        */
-        text-min-padding: 0;
-        text-min-distance: 0;
-        text-wrap-width: 48;
+      marker-width: 5;
+      marker-height: 5;
+      marker-fill: #333;
+      marker-line-width: 0;
 
-        text-size: 10;
-        text-placement-type: simple;
-        text-name: [name];
-        text-dx: 7;
-        text-placements: "W,E,N,S";
-      }
+      text-fill: #333;
+      text-halo-fill: @land;
+      text-halo-radius: 0.75;
+      text-face-name: "Frutiger LT 45 Light Bold";
+      /*
+      text-transform: uppercase;
+      */
+      text-min-padding: 0;
+      text-min-distance: 0;
+      text-wrap-width: 48;
+
+      text-size: 10;
+      text-placement-type: simple;
+      text-name: [name];
+      text-dx: 7;
+      text-placements: "W,E,N,S";
     }
   }
 
