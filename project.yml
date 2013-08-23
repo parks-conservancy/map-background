@@ -270,7 +270,7 @@ Layer:
           SELECT ST_Union(geom) geom
           FROM (
             SELECT geom
-            FROM boundary_parkingareas
+            FROM ggnra_parking_areas
             -- TODO
             -- WHERE geom && !bbox!
             --   AND zoom(!scale_denominator!) >= 15
