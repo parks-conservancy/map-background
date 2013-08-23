@@ -508,16 +508,7 @@ Layer:
       table: >
         (
           SELECT * FROM (
-            SELECT name, type,
-              (CASE WHEN type IN ('Campground', 'Trailhead', 'Visitor Center', 'Cafe', 'Overlook', 'Restroom', 'Water Fountain', 'Parking Lot') THEN
-                ST_SnapToGrid(geom,
-                  ST_MakePoint(ST_XMin(!bbox!), ST_YMax(!bbox!)),
-                  !pixel_width! * 16,
-                  !pixel_height! * 16,
-                  0,
-                  0)
-                ELSE geom
-              END) AS geom,
+            SELECT name, type, geom,
               (CASE
               WHEN type = 'Park' THEN 1
               WHEN type = 'Visitor Center' THEN 2
