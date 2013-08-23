@@ -103,6 +103,17 @@ Map {
 }
 
 #trails {
+  ::outline {
+    line-width: 0;
+    line-color: #fff;
+    line-opacity: 0.75;
+    line-join: miter;
+    line-cap: round;
+    line-simplify: 10;
+    line-simplify-algorithm: visvalingam-whyatt;
+    line-smooth: 1;
+  }
+
   line-width: 0;
   line-join: miter;
   line-cap: round;
@@ -115,6 +126,24 @@ Map {
   line-smooth: 1;
 
   line-color: pink;
+
+  [zoom>=13] {
+    line-width: 0.25;
+  }
+
+  [zoom>=14] {
+    line-width: 0.75;
+  }
+
+  [zoom>=15] {
+    ::outline {
+      line-width: 3.5;
+      line-simplify: 0;
+    }
+
+    line-width: 2;
+    line-simplify: 0;
+  }
 
   [use_type='Hiking'] {
     line-color: brown;
@@ -135,19 +164,6 @@ Map {
   [use_type='CLOSED'] {
     line-dasharray: 5,5;
     line-opacity: 0.5;
-  }
-
-  [zoom>=13] {
-    line-width: 0.25;
-  }
-
-  [zoom>=14] {
-    line-width: 0.75;
-  }
-
-  [zoom>=15] {
-    line-width: 2;
-    line-simplify: 0;
   }
 }
 
