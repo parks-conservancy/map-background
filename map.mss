@@ -146,7 +146,24 @@ Map {
   }
 
   [use_type='Hiking'] {
+    ::outline {
+      line-dasharray: 7.5, 5;
+    }
+    
     line-color: brown;
+    line-dasharray: 7.5, 5;
+    
+    [zoom>=14] {
+      line-width: 0.25;
+    }
+    
+    [zoom>=15] {
+      ::outline {
+        line-width: 2.5;
+      }
+      
+      line-width: 1;
+    }
   }
 
   [use_type='Multi-Use'] {
