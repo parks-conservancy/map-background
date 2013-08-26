@@ -12,7 +12,7 @@
 #locations {
   [type='Cafe'] {
     [zoom=15] {
-      point-file: url("images/cafe_16x16px.png");
+      point-file: url("images/cafe_14x14px.png");
     }
 
     [zoom>=16] {
@@ -34,7 +34,7 @@
 
   [type='Campground'] {
     [zoom=14] {
-      point-file: url("images/campground_16x16px.png");
+      point-file: url("images/campground_14x14px.png");
     }
 
     [zoom>=15] {
@@ -58,7 +58,7 @@
 
   [type='Overlook'] {
     [zoom=14] {
-      point-file: url("images/overlook_16x16px.png");
+      point-file: url("images/overlook_14x14px.png");
     }
 
     [zoom>=15] {
@@ -72,22 +72,22 @@
       shield-name: [name];
       shield-min-distance: 5;
       shield-min-padding: 5;
-      shield-file: url("images/overlook_32x16px.png");
+      shield-file: url("images/overlook_28x14px.png");
       shield-unlock-image: true;
       shield-size: 10;
 
-      point-file: url("images/overlook_16x16px.png");
+      point-file: url("images/overlook_14x14px.png");
     }
   }
   [type='Parking Lot'] {
     [zoom>=16] {
-      point-file: url("images/parkinglot_16x16px.png");
+      point-file: url("images/parkinglot_14x14px.png");
     }
   }
 
   [type='Restroom'] {
     [zoom>=16] {
-      point-file: url("images/restroom_16x16px.png");
+      point-file: url("images/restroom_14x14px.png");
     }
   }
 
@@ -126,7 +126,7 @@
 
   [type='Trailhead'] {
     [zoom>=13] {
-      point-file: url("images/trailhead_16x16px.png");
+      point-file: url("images/trailhead_14x14px.png");
     }
   }
 
@@ -148,11 +148,11 @@
       shield-name: [name];
       shield-min-distance: 5;
       shield-min-padding: 5;
-      shield-file: url("images/visitors_32x16px.png");
+      shield-file: url("images/visitors_28x14px.png");
       shield-unlock-image: true;
       shield-size: 10;
 
-      point-file: url("images/visitors_16x16px.png");
+      point-file: url("images/visitors_14x14px.png");
     }
   }
 }
