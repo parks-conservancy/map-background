@@ -102,7 +102,7 @@
     
     [zoom>=16] {
       shield-size: 12;
-      shield-face-name: "Frutiger LT 45 Light Bold";
+      shield-face-name: "Frutiger LT 55 Roman Bold";
       shield-file: url("images/overlook_32x16px.png");
       
       point-file: url("images/overlook_16x16px.png");
@@ -176,6 +176,8 @@
     
     [zoom>=17] {
       text-size: 13;
+      text-face-name: "Frutiger LT 55 Roman Bold";
+      text-wrap-width: 60;
     }
   }
 
