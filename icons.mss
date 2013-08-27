@@ -20,13 +20,13 @@
       shield-text-dx: 0.1;
       shield-text-dy: -12;
       shield-wrap-width: 48;
-      shield-face-name: "Frutiger LT 55 Roman Regular";
+      shield-face-name: "Frutiger LT 45 Light Bold";
       shield-name: [name];
       shield-min-distance: 5;
       shield-min-padding: 5;
       shield-file: url("images/cafe_32x16px.png");
       shield-unlock-image: true;
-      shield-size: 10;
+      shield-size: 11;
 
       point-file: url("images/cafe_16x16px.png");
     }
@@ -37,7 +37,6 @@
     }
     
     [zoom>=18] {
-      shield-face-name: "Frutiger LT 45 Light Bold";
       shield-size: 13;
     }
   }
@@ -102,7 +101,7 @@
     
     [zoom>=16] {
       shield-size: 12;
-      shield-face-name: "Frutiger LT 55 Roman Bold";
+      shield-face-name: "Frutiger LT 45 Light Bold";
       shield-file: url("images/overlook_32x16px.png");
       
       point-file: url("images/overlook_16x16px.png");
@@ -115,7 +114,7 @@
   }
   [type='Parking Lot'] {
     [zoom>=16] {
-      point-file: url("images/parkinglot_11x11px.png");
+      point-file: url("images/parkinglot_11x11px3.png");
     }
     
     [zoom>=17] {
@@ -176,7 +175,6 @@
     
     [zoom>=17] {
       text-size: 13;
-      text-face-name: "Frutiger LT 55 Roman Bold";
       text-wrap-width: 60;
     }
   }
@@ -225,6 +223,8 @@
     }
     
     [zoom>=17] {
+      shield-face-name: "Frutiger LT 55 Roman Bold";
+      shield-wrap-width: 60;
       shield-size: 13;
     }
   }
