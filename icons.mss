@@ -49,7 +49,7 @@
     [zoom>=15] {
       shield-fill: #333;
       shield-halo-fill: @land;
-      shield-halo-radius: 0;
+      shield-halo-radius: 2;
       shield-text-dx: 0.1;
       shield-text-dy: -12;
       shield-wrap-width: 32;
@@ -84,7 +84,7 @@
     [zoom>=15] {
       shield-fill: #333;
       shield-halo-fill: @land;
-      shield-halo-radius: 0;
+      shield-halo-radius: 2;
       shield-text-dx: 0.1;
       shield-text-dy: -12;
       shield-wrap-width: 40;
@@ -152,7 +152,7 @@
 
       text-fill: #333;
       text-halo-fill: @land;
-      text-halo-radius: 0;
+      text-halo-radius: 2;
       text-face-name: "Frutiger LT 55 Roman Regular";
       /*
       text-transform: uppercase;
@@ -199,7 +199,7 @@
     [zoom>=13] {
       shield-fill: #333;
       shield-halo-fill: @land;
-      shield-halo-radius: 0;
+      shield-halo-radius: 2;
       shield-text-dx: 1;
       shield-text-dy: -12;
       shield-wrap-width: 40;
