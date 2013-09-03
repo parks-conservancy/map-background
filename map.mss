@@ -125,37 +125,32 @@ Map {
   // fully smooth
   line-smooth: 1;
 
-  line-color: #43af77;
+  line-color: #91785b;
 
   [zoom>=13] {
     line-width: 0.22;
   }
 
   [zoom>=14] {
-    line-width: 0.75;
-    line-dasharray: 0.75, 2.25;
+    line-width: 0.55;
   }
 
   [zoom>=15] {
     ::outline {
       line-width: 3.5;
       line-simplify: 0;
-      line-dasharray: 1.25, 4;
     }
 
-    line-width: 2;
+    line-width: 1.75;
     line-simplify: 0;
-    line-dasharray: 1.25, 4;
   }
   
   [zoom>=16] {
     ::outline {
-      line-width: 3.5;
-      line-dasharray: 2, 5;
+      line-width: 2.5;
     }
 
     line-width: 2.5;
-    line-dasharray: 2, 5;
   }
   
   [zoom>=18] {
@@ -169,11 +164,11 @@ Map {
   }
 
   [use_type='Hiking'] {
-    line-color: #43af77;  
+    line-color: #58a618;  
   }
 
   [use_type='Multi-Use'] {
-    line-color: #a5a5a5;
+    line-color: #6e7645;
   }
 
   [use_type='Hiking and Horses'] {
@@ -181,7 +176,7 @@ Map {
   }
 
   [use_type='Hiking and Bikes'] {
-    line-color: blue;
+    line-color: #008542;
   }
 
   [use_type='CLOSED'] {
