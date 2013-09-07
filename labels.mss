@@ -63,6 +63,7 @@
     
     [zoom>=14] {
       text-size: 13;
+      text-spacing: 400;
     }
 
   }
@@ -82,6 +83,7 @@
     
     [zoom>=15] {
       text-size: 13;
+      text-spacing: 400;
     }
   }
 
@@ -100,6 +102,7 @@
     
     [zoom>=15] {
       text-size: 12;
+      text-spacing: 400;
     }
   }
 
@@ -119,6 +122,7 @@
     
     [zoom>=15] {
       text-size: 12;
+      text-spacing: 400;
     }
   }
 
@@ -134,6 +138,7 @@
       text-name: [name];
       text-halo-fill: #fff;
       text-halo-radius: 1.5;
+      text-spacing: 400;
 
       text-size: 11;
     }

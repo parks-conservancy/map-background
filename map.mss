@@ -156,11 +156,9 @@ Map {
   [zoom>=18] {
     ::outline {
       line-width: 3.5;
-      line-dasharray: 2.25, 5;
     }
 
     line-width: 3;
-    line-dasharray: 2.25, 5;
   }
 
   [use_type='Hiking'] {
@@ -168,7 +166,7 @@ Map {
   }
 
   [use_type='Multi-Use'] {
-    line-color: #6e7645;
+    line-color: #999999;
   }
 
   [use_type='Hiking and Horses'] {
