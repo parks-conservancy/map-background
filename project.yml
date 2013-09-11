@@ -271,15 +271,12 @@ Layer:
           FROM (
             SELECT geom
             FROM ggnra_parking_areas
-            -- TODO
-            -- WHERE geom && !bbox!
-            --   AND zoom(!scale_denominator!) >= 15
-            WHERE zoom(!scale_denominator!) >= 15
+            WHERE geom && !bbox!
+              AND zoom(!scale_denominator!) >= 15
           UNION
             SELECT geom
             FROM pt_parking_areas
             WHERE geom && !bbox!
-              AND (public_ IS NULL OR public_ IN ('yes/no', 'yes'))
               AND zoom(!scale_denominator!) >= 15
           ) AS _
         ) AS _
