@@ -365,6 +365,22 @@ Layer:
           ORDER BY z_order ASC
         ) AS _
 
+  # ---- Buildings -----------------------------------------------------
+
+  - <<: *layer
+    name: buildings
+    id:   buildings
+    status: on
+    Datasource:
+      <<: *postgis
+      geometry_field: geom
+      table: >
+        (
+          SELECT geom
+          FROM ggnra_buildings
+          WHERE geom && !bbox!
+            AND zoom(!scale_denominator!) >= 15
+        ) AS _
 
   # ---- Dual Carriageways ---------------------------------------------
 

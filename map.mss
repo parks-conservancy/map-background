@@ -102,6 +102,17 @@ Map {
   polygon-fill: @school;
 }
 
+#buildings
+{
+  building-fill: #d9d9d9;
+  building-height: 1;
+
+  [zoom>=18]
+  {
+    building-height: 2;
+  }
+}
+
 #trails {
   ::outline {
     line-width: 0;
