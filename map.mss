@@ -113,6 +113,20 @@ Map {
   }
 }
 
+#fields
+{
+  polygon-fill: #f7edde;
+
+  [leisure='golf_course']
+  {
+    polygon-fill: #eeeed1;
+  }
+
+  [zoom>=16] {
+    polygon-smooth: 0.5;
+  }
+}
+
 #trails {
   ::outline {
     line-width: 0;

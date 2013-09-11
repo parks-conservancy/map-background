@@ -284,6 +284,23 @@ Layer:
           ) AS _
         ) AS _
 
+  # ---- Sports Fields -------------------------------------------------
+
+  - <<: *layer
+    name: fields
+    id:   fields
+    status: on
+    Datasource:
+      <<: *postgis
+      table: >
+        (
+        SELECT tags -> 'leisure' leisure, way
+        FROM planet_osm_polygon
+        WHERE way && !bbox!
+        AND tags -> 'leisure' IN ('pitch', 'playground', 'stadium', 'recreation_ground', 'court', 'tennis', 'track', 'dog_park', 'golf_course')
+          AND zoom(!scale_denominator!) >= 14
+        ) AS _
+
   # ---- Ferries--------------------------------------------------------
 
   - <<: *layer
