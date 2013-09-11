@@ -115,6 +115,25 @@ Map {
   {
     building-height: 2;
   }
+
+  // treat batteries separately, as they're in the ground
+  [battery=true]
+  {
+    building-fill: #c9c9c9;
+    building-height: 0;
+  }
+}
+
+#battery-labels
+{
+  text-fill: #5a5c5b;
+  text-halo-radius: 1.5;
+  text-halo-fill: @land;
+  text-size: 10;
+  text-name: [name];
+  text-transform: capitalize;
+  text-face-name: "Frutiger LT 55 Roman Italic";
+  text-wrap-width: 20;
 }
 
 #fields

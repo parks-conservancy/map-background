@@ -391,7 +391,11 @@ Layer:
       geometry_field: geom
       table: >
         (
-          SELECT geom
+          SELECT geom,
+            (CASE
+            WHEN name ILIKE 'battery %' THEN true
+            ELSE false
+            END) battery
           FROM ggnra_buildings
           WHERE geom && !bbox!
             AND zoom(!scale_denominator!) >= 15
@@ -592,6 +596,24 @@ Layer:
           FROM trails
           WHERE zoom(!scale_denominator!) >= 14
             AND geom && !bbox!
+        ) AS _
+
+  # ---- Battery Labels ------------------------------------------------
+
+  - <<: *layer
+    name: battery-labels
+    id:   battery-labels
+    status: on
+    Datasource:
+      <<: *postgis
+      geometry_field: geom
+      table: >
+        (
+          SELECT name, geom
+          FROM ggnra_buildings
+          WHERE geom && !bbox!
+            AND name ILIKE 'battery %'
+            AND zoom(!scale_denominator!) >= 18
         ) AS _
 
   # ---- Lighthouses ---------------------------------------------------
