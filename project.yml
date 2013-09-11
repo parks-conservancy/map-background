@@ -229,7 +229,8 @@ Layer:
               SELECT geom
               FROM nhdwaterbody
               WHERE geom && !bbox!
-                AND areasqkm >= 0.1
+                -- TODO zoom dependent threshold
+                AND areasqkm >= 0.05
                 AND fcode IN (
                   39000, -- Lake/Pond
                   39004, -- Lake/Pond: Hydrographic Category = Perennial
@@ -268,7 +269,8 @@ Layer:
               SELECT geom
               FROM nhdarea
               WHERE geom && !bbox!
-                AND areasqkm >= 0.1
+                -- TODO zoom dependent threshold
+                AND areasqkm >= 0.05
                 AND fcode IN (
                   33600, -- Canal/Ditch
                   33601, -- Canal/Ditch: Canal/Ditch Type = Aqueduct
