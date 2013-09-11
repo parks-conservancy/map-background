@@ -253,6 +253,7 @@ Layer:
           SELECT geom
           FROM ggnra_offshore_boundaries
           WHERE geom && !bbox!
+            AND zoom(!scale_denominator!) >= 12
         ) AS _
 
   # ---- Parking Areas -------------------------------------------------
