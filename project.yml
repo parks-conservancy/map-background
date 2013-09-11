@@ -564,7 +564,7 @@ Layer:
             FROM locations
             WHERE geom && !bbox!
               AND type NOT IN ('Park')
-              AND type IN ('Campground', 'Trailhead', 'Visitor Center', 'Site of Interest', 'Cafe', 'Overlook', 'Water Fountain', 'Parking Lot')
+              AND type IN ('Campground', 'Visitor Center', 'Site of Interest', 'Cafe', 'Overlook', 'Water Fountain', 'Parking Lot')
               AND zoom(!scale_denominator!) >= 14
           UNION
             SELECT name,
@@ -574,6 +574,13 @@ Layer:
             FROM ggnra_restrooms
             WHERE geom && !bbox!
               AND type = 'Restroom'
+          UNION
+            SELECT name,
+              'Trailhead' AS type,
+              geom,
+              3 AS priority
+            FROM trailheads
+            WHERE geom && !bbox!
           ) AS _
           WHERE zoom(!scale_denominator!) >= 14
           ORDER BY priority

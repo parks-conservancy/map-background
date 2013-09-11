@@ -185,6 +185,20 @@
     }
     
     [zoom>=16] {
+      shield-fill: #333;
+      shield-halo-fill: @land;
+      shield-halo-radius: 1;
+      shield-text-dx: 10;
+      shield-wrap-width: 80;
+      shield-line-spacing: -2;
+      shield-face-name: "Frutiger LT 45 Light Bold";
+      shield-name: [name];
+      shield-min-distance: 5;
+      shield-min-padding: 5;
+      shield-file: url("images/trailhead_16x16px.png");
+      shield-unlock-image: true;
+      shield-size: 9;
+
       point-file: url("images/trailhead_16x16px.png");
     }
   }
