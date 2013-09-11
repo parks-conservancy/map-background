@@ -202,8 +202,6 @@ Layer:
                 33600, -- Canal/Ditch
                 33601, -- Canal/Ditch: Canal/Ditch Type = Aqueduct
 
-                36400, -- Foreshore
-
                 44500, -- Sea/Ocean
 
                 45500, -- Spillway
@@ -227,16 +225,64 @@ Layer:
       geometry_field: geom
       table: >
         (
-            SELECT ftype, ST_Collect(geom) AS geom
-            FROM nhdflowline
-            WHERE geom && !bbox!
-              AND fcode IN (
-                56600, -- Coastline
-                -- 56700, -- Shoreline
+          SELECT ST_Union(geom) AS geom FROM (
+              SELECT geom
+              FROM nhdwaterbody
+              WHERE geom && !bbox!
+                AND areasqkm >= 0.1
+                AND fcode IN (
+                  39000, -- Lake/Pond
+                  39004, -- Lake/Pond: Hydrographic Category = Perennial
+                  39009, -- Lake/Pond: Hydrographic Category = Perennial; Stage = Average Water Elevation
+                  39010, -- Lake/Pond: Hydrographic Category = Perennial; Stage = Normal Pool
+                  39011, -- Lake/Pond: Hydrographic Category = Perennial; Stage = Date of Photography
+                  39012, -- Lake/Pond: Hydrographic Category = Perennial; Stage = Spillway Elevation
 
-                 -1
-              )
-            GROUP BY ftype
+                  43600, -- Reservoir
+                  43601, -- Reservoir: Reservoir Type = Aquaculture
+                  43603, -- Reservoir: Reservoir Type = Decorative Pool
+                  43604, -- Reservoir: Reservoir Type = Tailings Pond; Construction Material = Earthen
+                  43605, -- Reservoir: Reservoir Type = Tailings Pond
+                  43606, -- Reservoir: Reservoir Type = Disposal
+                  43607, -- Reservoir: Reservoir Type = Evaporator
+                  43608, -- Reservoir: Reservoir Type = Swimming Pool
+                  43609, -- Reservoir: Reservoir Type = Cooling Pond
+                  43610, -- Reservoir: Reservoir Type = Filtration Pond
+                  43611, -- Reservoir: Reservoir Type = Settling Pond
+                  43612, -- Reservoir: Reservoir Type = Sewage Treatment Pond
+                  43613, -- Reservoir: Reservoir Type = Water Storage; Construction Material = Nonearthen
+                  43614, -- Reservoir: Reservoir Type = Water Storage; Construction Material = Earthen; Hydrographic Category = Intermittent
+                  43615, -- Reservoir: Reservoir Type = Water Storage; Construction Material = Earthen; Hydrographic Category = Perennial
+                  43617, -- Reservoir: Reservoir Type = Water Storage
+                  43618, -- Reservoir: Construction Material = Earthen
+                  43619, -- Reservoir: Construction Material = Nonearthen
+                  43621, -- Reservoir: Reservoir Type = Water Storage; Hydrographic Category = Perennial
+                  43623, -- Reservoir: Reservoir Type = Evaporator; Construction Material = Earthen
+                  43624, -- Reservoir; Reservoir Type = Treatment
+                  43625, -- Reservoir: Reservoir Type = Disposal; Construction Material = Earthen
+                  43626, -- Reservoir: Reservoir Type = Disposal; Construction Material = Nonearthen
+
+                  -1
+                )
+            UNION
+              SELECT geom
+              FROM nhdarea
+              WHERE geom && !bbox!
+                AND areasqkm >= 0.1
+                AND fcode IN (
+                  33600, -- Canal/Ditch
+                  33601, -- Canal/Ditch: Canal/Ditch Type = Aqueduct
+
+                  44500, -- Sea/Ocean
+
+                  45500, -- Spillway
+
+                  46000, -- Stream/River
+                  46006, -- Stream/River: Hydrographic Category = Perennial
+
+                  -1
+                )
+          ) AS _
         ) AS _
 
   # ---- GGNRA Boundaries (offshore) -----------------------------------
