@@ -120,7 +120,7 @@ Map {
   [battery=true]
   {
     building-fill: #c9c9c9;
-    building-height: 0;
+    building-height: 0.5;
   }
 }
 
