@@ -100,7 +100,7 @@ Layer:
           SELECT way
           FROM planet_osm_polygon
           WHERE way && !bbox!
-            AND tags -> 'amenity' = 'university'
+            AND tags @> 'amenity=>university'
         ) AS school
 
   # ---- Foreshore (NHD) -----------------------------------------------
@@ -138,7 +138,7 @@ Layer:
             SELECT way
             FROM planet_osm_polygon
             WHERE way && !bbox!
-              AND tags -> 'natural' = 'beach'
+              AND tags @> 'natural=>beach'
         ) AS beach
 
   # ---- Water (NHD) ---------------------------------------------------
@@ -294,6 +294,7 @@ Layer:
         SELECT tags -> 'leisure' leisure, way
         FROM planet_osm_polygon
         WHERE way && !bbox!
+        AND tags ? 'leisure'
         AND tags -> 'leisure' IN ('pitch', 'playground', 'stadium', 'recreation_ground', 'court', 'tennis', 'track', 'dog_park', 'golf_course')
           AND zoom(!scale_denominator!) >= 14
         ) AS _
@@ -310,7 +311,7 @@ Layer:
           SELECT way
           FROM planet_osm_line
           WHERE way && !bbox!
-            AND tags -> 'route' = 'ferry'
+            AND tags @> 'route=>ferry'
           ORDER BY z_order ASC
         ) AS _
 
@@ -338,25 +339,27 @@ Layer:
           WHERE way && !bbox!
             AND (
               (zoom(!scale_denominator!) >= 14 AND
-                ((tags -> 'highway' IN ('motorway', 'trunk', 'primary',
-                                     'motorway_link', 'trunk_link', 'primary_link',
-                                     'secondary_link', 'tertiary_link',
-                                     'secondary', 'tertiary', 'residential',
-                                     'unclassified', 'service', 'road')
+                ((tags ? 'highway'
+                  AND tags -> 'highway' IN ('motorway', 'trunk', 'primary',
+                                            'motorway_link', 'trunk_link', 'primary_link',
+                                            'secondary_link', 'tertiary_link',
+                                            'secondary', 'tertiary', 'residential',
+                                            'unclassified', 'service', 'road')
                   AND
                   (NOT tags ? 'access' OR tags -> 'access' NOT IN ('no', 'false')))
                 OR
-                tags -> 'aeroway' IN ('runway', 'taxiway'))
+                (tags ? 'aeroway' AND tags -> 'aeroway' IN ('runway', 'taxiway')))
               )
               OR
               (zoom(!scale_denominator!) >= 11 AND
-                ((tags -> 'highway' IN ('motorway', 'trunk', 'primary',
-                                      'secondary', 'tertiary', 'residential',
-                                      'unclassified', 'service', 'road')
+                ((tags ? 'highway'
+                  AND tags -> 'highway' IN ('motorway', 'trunk', 'primary',
+                                            'secondary', 'tertiary', 'residential',
+                                            'unclassified', 'service', 'road')
                   AND
                   (NOT tags ? 'access' OR tags -> 'access' NOT IN ('no', 'false')))
                 OR
-                tags -> 'aeroway' IN ('runway', 'taxiway'))
+                (tags ? 'aeroway' AND tags -> 'aeroway' IN ('runway', 'taxiway')))
               )
               OR
               (zoom(!scale_denominator!) >= 10 AND
@@ -432,8 +435,7 @@ Layer:
               SELECT ARRAY_AGG(osm_id) AS ids
               FROM planet_osm_line
               WHERE way && !bbox!
-                AND tags ? 'highway'
-                AND tags ? 'name'
+                AND tags ?& ARRAY['highway', 'name']
                 GROUP BY tags -> 'name'
                 HAVING COUNT(osm_id) > 1
             ) AS _
@@ -501,32 +503,28 @@ Layer:
             SELECT COALESCE(tags -> 'sport', tags -> 'leisure') AS sport, way
             FROM planet_osm_point
             WHERE way && !bbox!
+              AND tags ?| ARRAY['sport', 'leisure']
               AND (
-                (tags ? 'sport'
-                AND string_to_array(tags -> 'sport', ';') && ARRAY['surfing',
-                                                                   'kiteboarding',
-                                                                   'windsurfing',
-                                                                   'paddleboarding'
-                                                                   'free_flying'])
+                string_to_array(tags -> 'sport', ';') && ARRAY['surfing',
+                                                               'kiteboarding',
+                                                               'windsurfing',
+                                                               'paddleboarding'
+                                                               'free_flying']
                 OR
-                (tags ? 'leisure'
-                AND string_to_array(tags -> 'leisure', ';') && ARRAY['fishing'])
-              )
+                string_to_array(tags -> 'leisure', ';') && ARRAY['fishing'])
           UNION
             SELECT COALESCE(tags -> 'sport', tags -> 'leisure') AS sport, way
             FROM planet_osm_polygon
             WHERE way && !bbox!
+              AND tags ?| ARRAY['sport', 'leisure']
               AND (
-                (tags ? 'sport'
-                AND string_to_array(tags -> 'sport', ';') && ARRAY['surfing',
-                                                                   'kiteboarding',
-                                                                   'windsurfing',
-                                                                   'paddleboarding'
-                                                                   'free_flying'])
+                string_to_array(tags -> 'sport', ';') && ARRAY['surfing',
+                                                               'kiteboarding',
+                                                               'windsurfing',
+                                                               'paddleboarding'
+                                                               'free_flying']
                 OR
-                (tags ? 'leisure'
-                AND string_to_array(tags -> 'leisure', ';') && ARRAY['fishing'])
-              )
+                string_to_array(tags -> 'leisure', ';') && ARRAY['fishing'])
           ) AS x
         ) AS x
 
@@ -629,7 +627,7 @@ Layer:
           SELECT tags -> 'name', way
           FROM planet_osm_point
           WHERE way && !bbox!
-            AND tags -> 'man_made' = 'lighthouse'
+            AND tags @> 'man_made=>lighthouse'
             AND zoom(!scale_denominator!) >= 14
         ) AS _
 
@@ -665,7 +663,7 @@ Layer:
                     1 as size
               FROM planet_osm_point
               WHERE way && !bbox!
-                AND tags ? 'name'
+                AND tags ?& ARRAY['name', 'place']
                 AND tags -> 'name' NOT LIKE '%Home%'
                 AND tags -> 'name' NOT LIKE '%Trailer Court%'
                 AND tags -> 'name' NOT IN ('Doelger City')
@@ -697,7 +695,7 @@ Layer:
               END AS priority
               FROM planet_osm_polygon
               WHERE way && !bbox!
-                AND tags ? 'name'
+                AND tags ?& ARRAY['name', 'place']
                 AND tags -> 'name' NOT LIKE '%Home%'
                 AND tags -> 'name' NOT LIKE '%Trailer Court%'
                 AND (
@@ -825,7 +823,7 @@ Layer:
           SELECT tags -> 'name' AS name, way
           FROM planet_osm_point
           WHERE way && !bbox!
-            AND tags -> 'natural' = 'bay'
+            AND tags @> 'natural=>bay'
             AND tags ? 'name'
             AND (zoom(!scale_denominator!) >= 13
               OR tags -> 'name' IN ('San Pablo Bay', 'San Francisco Bay', 'Gulf of the Farallones')
