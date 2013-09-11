@@ -250,10 +250,9 @@ Layer:
       geometry_field: geom
       table: >
         (
-          SELECT goga_man, geom
-          FROM park_units
+          SELECT geom
+          FROM ggnra_offshore_boundaries
           WHERE geom && !bbox!
-            AND goga_man = 'Offshore'
         ) AS _
 
   # ---- Parking Areas -------------------------------------------------
