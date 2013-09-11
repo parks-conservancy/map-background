@@ -41,6 +41,10 @@ Map {
   [zoom>=14] {
     line-width: 1.5;
   }
+
+  [zoom>=16] {
+    line-smooth: 0.5;
+  }
 }
 
 #cpad_units {
