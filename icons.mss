@@ -189,7 +189,7 @@
       shield-halo-fill: @land;
       shield-halo-radius: 1;
       shield-text-dx: 10;
-      shield-wrap-width: 80;
+      shield-wrap-width: 60;
       shield-line-spacing: -2;
       shield-face-name: "Frutiger LT 45 Light Bold";
       shield-name: [name];

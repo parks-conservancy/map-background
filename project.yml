@@ -575,7 +575,7 @@ Layer:
             WHERE geom && !bbox!
               AND type = 'Restroom'
           UNION
-            SELECT name,
+            SELECT regexp_replace(name, '(\s-|:)\s+', E'\n') AS name,
               'Trailhead' AS type,
               geom,
               3 AS priority
