@@ -108,8 +108,13 @@ Map {
 
 #buildings
 {
-  building-fill: #d9d9d9;
-  building-height: 1;
+  polygon-fill: #d8decf;
+  
+  [zoom>=16]
+  {
+    building-fill: #d9d9d9;
+    building-height: 1;
+  }
 
   [zoom>=18]
   {
@@ -119,8 +124,13 @@ Map {
   // treat batteries separately, as they're in the ground
   [battery=true]
   {
-    building-fill: #c9c9c9;
-    building-height: 0.5;
+    polygon-fill: #d8decf;
+    
+    [zoom>=16]
+    {
+      building-fill: #c9c9c9;
+      building-height: 0.5;
+    }
   }
 }
 
@@ -138,11 +148,11 @@ Map {
 
 #fields
 {
-  polygon-fill: #f7edde;
+  polygon-fill: #d6e0b5;
 
   [leisure='golf_course']
   {
-    polygon-fill: #eeeed1;
+    polygon-fill: #cce1c5;
   }
 
   [zoom>=16] {

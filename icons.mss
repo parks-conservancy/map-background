@@ -17,22 +17,24 @@
 
     [zoom>=16] {
       shield-fill: #333;
+      shield-halo-fill: @land;
+      shield-halo-radius: 2;
       shield-text-dx: 0.1;
       shield-text-dy: -12;
       shield-wrap-width: 48;
-      shield-face-name: "Frutiger LT 45 Light Bold";
+      shield-face-name: "Frutiger LT 55 Roman Regular";
       shield-name: [name];
       shield-min-distance: 5;
       shield-min-padding: 5;
       shield-file: url("images/cafe_32x16px.png");
       shield-unlock-image: true;
-      shield-size: 11;
+      shield-size: 12;
 
       point-file: url("images/cafe_16x16px.png");
     }
     
     [zoom>=17] {
-      shield-size: 12;
+      shield-size: 13;
       shield-wrap-width: 60;
     }
     
@@ -78,7 +80,7 @@
 
   [type='Overlook'] {
     [zoom=14] {
-      point-file: url("images/overlook_14x14px.png");
+      point-file: url("images/overlook_12x12px.png");
     }
 
     [zoom>=15] {
@@ -181,25 +183,37 @@
 
   [type='Trailhead'] {
     [zoom>=13] {
+      point-file: url("images/trailhead_12x12px2.png");
+    }
+    
+    [zoom>=15] {
       point-file: url("images/trailhead_14x14px.png");
     }
     
     [zoom>=16] {
       shield-fill: #333;
       shield-halo-fill: @land;
-      shield-halo-radius: 1;
-      shield-text-dx: 10;
-      shield-wrap-width: 60;
+      shield-halo-radius: 2;
+      shield-text-dx: 0.1;
+      shield-text-dy: -12;
+      shield-wrap-width: 80;
       shield-line-spacing: -2;
-      shield-face-name: "Frutiger LT 45 Light Bold";
+      shield-face-name: "Frutiger LT 55 Roman Regular";
       shield-name: [name];
       shield-min-distance: 5;
       shield-min-padding: 5;
-      shield-file: url("images/trailhead_16x16px.png");
+      shield-file: url("images/trailhead_32x16px.png");
       shield-unlock-image: true;
-      shield-size: 9;
+      shield-size: 12;
 
-      point-file: url("images/trailhead_16x16px.png");
+      point-file: url("images/trailhead_32x16px.png");
+    }
+    
+    [zoom>=17] {
+      shield-size: 13;
+      shield-face-name: "Frutiger LT 55 Roman Regular";
+      shield-wrap-width: 120;
+      shield-halo-radius: 2;
     }
   }
 
