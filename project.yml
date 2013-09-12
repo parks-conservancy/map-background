@@ -141,6 +141,23 @@ Layer:
               AND tags @> 'natural=>beach'
         ) AS beach
 
+  # ---- Contours ------------------------------------------------------
+
+  - <<: *layer
+    name: contour
+    id:   contour
+    status: on
+    Datasource:
+      <<: *postgis
+      geometry_field: geom
+      table: >
+        (
+          SELECT geom
+          FROM contour
+          WHERE geom && !bbox!
+            AND zoom(!scale_denominator!) >= 14
+        ) AS _
+
   # ---- Water (lines) (NHD) -------------------------------------------
 
   - <<: *layer

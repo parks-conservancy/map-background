@@ -171,6 +171,13 @@ Map {
     line-width: 1;
   }
 }
+
+#contour
+{
+  line-width: 1;
+  line-color: brown;
+}
+
 #trails {
   ::outline {
     line-width: 0;
