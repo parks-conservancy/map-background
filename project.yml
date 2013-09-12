@@ -170,7 +170,13 @@ Layer:
       geometry_field: geom
       table: >
         (
-          SELECT geom
+          SELECT geom,
+          (CASE
+          WHEN ((elev / 3.048) * 10) % 500 = 0 THEN 500
+          WHEN ((elev / 3.048) * 10) % 100 = 0 THEN 100
+          WHEN ((elev / 3.048) * 10) % 50 = 0 THEN 50
+          WHEN ((elev / 3.048) * 10) % 10 = 0 THEN 10
+          END) AS int
           FROM contour
           WHERE geom && !bbox!
             AND zoom(!scale_denominator!) >= 14

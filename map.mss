@@ -174,8 +174,37 @@ Map {
 
 #contour
 {
-  line-width: 1;
-  line-color: brown;
+  [zoom>=15][int=500]
+  {
+    line-width: 0.25;
+    line-color: darken(#d5e1c4, 25%);
+    line-smooth: 0.5;
+    comp-op: multiply;
+  }
+
+  [zoom>=17][int=100]
+  {
+    line-width: 0.5;
+    line-color: darken(#d5e1c4, 25%);
+    line-smooth: 0.5;
+    comp-op: multiply;
+  }
+
+  [zoom>=17][int=50]
+  {
+    line-width: 0.25;
+    line-color: darken(#d5e1c4, 25%);
+    line-smooth: 0.5;
+    comp-op: multiply;
+  }
+
+  [zoom>=17][int=10]
+  {
+    line-width: 0.25;
+    line-color: darken(#d5e1c4, 10%);
+    line-smooth: 0.5;
+    comp-op: multiply;
+  }
 }
 
 #trails {
