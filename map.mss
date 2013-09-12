@@ -160,6 +160,17 @@ Map {
   }
 }
 
+#water-lines
+{
+  line-width: 0.4;
+  line-color: lighten(@coastline, 10%);
+  line-dasharray: 30, 5, 2, 5, 2, 5;
+
+  [zoom>=15]
+  {
+    line-width: 1;
+  }
+}
 #trails {
   ::outline {
     line-width: 0;

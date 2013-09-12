@@ -141,6 +141,23 @@ Layer:
               AND tags @> 'natural=>beach'
         ) AS beach
 
+  # ---- Water (lines) (NHD) -------------------------------------------
+
+  - <<: *layer
+    name: water-lines
+    id:   water-lines
+    status: on
+    Datasource:
+      <<: *postgis
+      geometry_field: geom
+      table: >
+        (
+          SELECT geom
+          FROM nhdflowline
+          WHERE geom && !bbox!
+            AND zoom(!scale_denominator!) >= 14
+        ) AS _
+
   # ---- Water (NHD) ---------------------------------------------------
 
   - <<: *layer
