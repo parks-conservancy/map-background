@@ -176,7 +176,8 @@ Layer:
           WHEN ((elev / 3.048) * 10) % 100 = 0 THEN 100
           WHEN ((elev / 3.048) * 10) % 50 = 0 THEN 50
           WHEN ((elev / 3.048) * 10) % 10 = 0 THEN 10
-          END) AS int
+          END) AS int,
+          elev / 3.048 * 10 AS elev
           FROM contour
           WHERE geom && !bbox!
             AND zoom(!scale_denominator!) >= 14

@@ -176,32 +176,46 @@ Map {
 {
   [zoom>=15][int=500]
   {
-    line-width: 0.25;
-    line-color: darken(#d5e1c4, 25%);
+    line-width: 0.2;
+    line-color: darken(#ccc, 15%);
     line-smooth: 0.5;
     comp-op: multiply;
+    
+    text-fill: darken(#ccc, 15%);
+	text-halo-radius: 0;
+    text-size: 9;
+    text-name: [elev];
+    text-face-name: "Frutiger LT 45 Light Bold";
+    text-placement: line;
   }
 
   [zoom>=17][int=100]
   {
-    line-width: 0.5;
-    line-color: darken(#d5e1c4, 25%);
+    line-width: 0.3;
+    line-color: darken(#ccc, 5%);
     line-smooth: 0.5;
     comp-op: multiply;
+
+    text-fill: darken(#ccc, 5%);
+    text-halo-radius: 0;
+    text-size: 9;
+    text-name: [elev];
+    text-face-name: "Frutiger LT 45 Light Regular";
+    text-placement: line;
   }
 
   [zoom>=17][int=50]
   {
-    line-width: 0.25;
-    line-color: darken(#d5e1c4, 25%);
+    line-width: 0.15;
+    line-color: darken(#ccc, 5%);
     line-smooth: 0.5;
     comp-op: multiply;
   }
 
   [zoom>=17][int=10]
   {
-    line-width: 0.25;
-    line-color: darken(#d5e1c4, 10%);
+    line-width: 0.15;
+    line-color: darken(#ccc, 2%);
     line-smooth: 0.5;
     comp-op: multiply;
   }
