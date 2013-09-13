@@ -112,6 +112,11 @@ Map {
   
   [zoom>=16]
   {
+    polygon-fill: #d0d0d0;
+  }
+  
+  [zoom>=17]
+  {
     building-fill: #d9d9d9;
     building-height: 1;
   }
@@ -126,7 +131,7 @@ Map {
   {
     polygon-fill: #d8decf;
     
-    [zoom>=16]
+    [zoom>=17]
     {
       building-fill: #c9c9c9;
       building-height: 0.5;
