@@ -506,42 +506,42 @@ Layer:
   #   AND s.tags ? 'name'
   #   AND t.tags ? 'name';
 
-  - <<: *layer
-    name: dual-carriageways
-    id:   dual-carriageways
-    status: off
-    Datasource:
-      <<: *postgis
-      table: >
-        ( 
-        SELECT * FROM (
-        SELECT tags -> 'name' AS name,
-          way
-        FROM planet_osm_line ms
-        WHERE osm_id IN (
-            SELECT UNNEST(ids)
-            FROM (
-              SELECT ARRAY_AGG(osm_id) AS ids
-              FROM planet_osm_line
-              WHERE way && !bbox!
-                AND tags ?& ARRAY['highway', 'name']
-                GROUP BY tags -> 'name'
-                HAVING COUNT(osm_id) > 1
-            ) AS _
-          )
-          AND (
-            SELECT COUNT(osm_id) AS count
-            FROM planet_osm_line n
-            WHERE way && !bbox!
-              AND tags ? 'highway'
-              AND tags -> 'name' = ms.tags -> 'name'
-              AND ST_DWithin(ms.way, n.way, 25)
-              AND ST_Disjoint(ms.way, n.way)
-          ) > 1
-        ORDER BY tags -> 'name'
-        ) AS _
-        WHERE zoom(!scale_denominator!) >= 15
-        ) AS _
+  # - <<: *layer
+  #   name: dual-carriageways
+  #   id:   dual-carriageways
+  #   status: off
+  #   Datasource:
+  #     <<: *postgis
+  #     table: >
+  #       ( 
+  #       SELECT * FROM (
+  #       SELECT tags -> 'name' AS name,
+  #         way
+  #       FROM planet_osm_line ms
+  #       WHERE osm_id IN (
+  #           SELECT UNNEST(ids)
+  #           FROM (
+  #             SELECT ARRAY_AGG(osm_id) AS ids
+  #             FROM planet_osm_line
+  #             WHERE way && !bbox!
+  #               AND tags ?& ARRAY['highway', 'name']
+  #               GROUP BY tags -> 'name'
+  #               HAVING COUNT(osm_id) > 1
+  #           ) AS _
+  #         )
+  #         AND (
+  #           SELECT COUNT(osm_id) AS count
+  #           FROM planet_osm_line n
+  #           WHERE way && !bbox!
+  #             AND tags ? 'highway'
+  #             AND tags -> 'name' = ms.tags -> 'name'
+  #             AND ST_DWithin(ms.way, n.way, 25)
+  #             AND ST_Disjoint(ms.way, n.way)
+  #         ) > 1
+  #       ORDER BY tags -> 'name'
+  #       ) AS _
+  #       WHERE zoom(!scale_denominator!) >= 15
+  #       ) AS _
 
   # ---- Trails --------------------------------------------------------
 
@@ -580,42 +580,42 @@ Layer:
 
   # ---- Recreational Opportunities (OSM) ------------------------------
 
-  - <<: *layer
-    name: sports
-    id:   sports
-    status: off
-    Datasource:
-      <<: *postgis
-      table: >
-        (
-          SELECT * FROM (
-            SELECT COALESCE(tags -> 'sport', tags -> 'leisure') AS sport, way
-            FROM planet_osm_point
-            WHERE way && !bbox!
-              AND tags ?| ARRAY['sport', 'leisure']
-              AND (
-                string_to_array(tags -> 'sport', ';') && ARRAY['surfing',
-                                                               'kiteboarding',
-                                                               'windsurfing',
-                                                               'paddleboarding'
-                                                               'free_flying']
-                OR
-                string_to_array(tags -> 'leisure', ';') && ARRAY['fishing'])
-          UNION
-            SELECT COALESCE(tags -> 'sport', tags -> 'leisure') AS sport, way
-            FROM planet_osm_polygon
-            WHERE way && !bbox!
-              AND tags ?| ARRAY['sport', 'leisure']
-              AND (
-                string_to_array(tags -> 'sport', ';') && ARRAY['surfing',
-                                                               'kiteboarding',
-                                                               'windsurfing',
-                                                               'paddleboarding'
-                                                               'free_flying']
-                OR
-                string_to_array(tags -> 'leisure', ';') && ARRAY['fishing'])
-          ) AS x
-        ) AS x
+  # - <<: *layer
+  #   name: sports
+  #   id:   sports
+  #   status: off
+  #   Datasource:
+  #     <<: *postgis
+  #     table: >
+  #       (
+  #         SELECT * FROM (
+  #           SELECT COALESCE(tags -> 'sport', tags -> 'leisure') AS sport, way
+  #           FROM planet_osm_point
+  #           WHERE way && !bbox!
+  #             AND tags ?| ARRAY['sport', 'leisure']
+  #             AND (
+  #               string_to_array(tags -> 'sport', ';') && ARRAY['surfing',
+  #                                                              'kiteboarding',
+  #                                                              'windsurfing',
+  #                                                              'paddleboarding'
+  #                                                              'free_flying']
+  #               OR
+  #               string_to_array(tags -> 'leisure', ';') && ARRAY['fishing'])
+  #         UNION
+  #           SELECT COALESCE(tags -> 'sport', tags -> 'leisure') AS sport, way
+  #           FROM planet_osm_polygon
+  #           WHERE way && !bbox!
+  #             AND tags ?| ARRAY['sport', 'leisure']
+  #             AND (
+  #               string_to_array(tags -> 'sport', ';') && ARRAY['surfing',
+  #                                                              'kiteboarding',
+  #                                                              'windsurfing',
+  #                                                              'paddleboarding'
+  #                                                              'free_flying']
+  #               OR
+  #               string_to_array(tags -> 'leisure', ';') && ARRAY['fishing'])
+  #         ) AS x
+  #       ) AS x
 
   # ---- GGNPC Locations -----------------------------------------------
 
@@ -712,20 +712,20 @@ Layer:
 
   # ---- Lighthouses ---------------------------------------------------
 
-  - <<: *layer
-    name: lighthouses
-    id:   lighthouses
-    status: off
-    Datasource:
-      <<: *postgis
-      table: >
-        (
-          SELECT tags -> 'name', way
-          FROM planet_osm_point
-          WHERE way && !bbox!
-            AND tags @> 'man_made=>lighthouse'
-            AND zoom(!scale_denominator!) >= 14
-        ) AS _
+  # - <<: *layer
+  #   name: lighthouses
+  #   id:   lighthouses
+  #   status: off
+  #   Datasource:
+  #     <<: *postgis
+  #     table: >
+  #       (
+  #         SELECT tags -> 'name', way
+  #         FROM planet_osm_point
+  #         WHERE way && !bbox!
+  #           AND tags @> 'man_made=>lighthouse'
+  #           AND zoom(!scale_denominator!) >= 14
+  #       ) AS _
 
   # ---- Places --------------------------------------------------------
 
@@ -813,98 +813,98 @@ Layer:
 
   # ---- CPAD Labels ---------------------------------------------------
 
-  - <<: *layer
-    name: cpad-labels
-    id:   cpad-labels
-    status: off
-    Datasource:
-      <<: *postgis
-      geometry_field: geom
-      table: >
-        (
-          SELECT unit_name AS name, gis_acres, geom
-          FROM cpad_superunits
-          WHERE geom && !bbox!
-            AND unit_name IS NOT NULL
-            AND gis_acres > 5
-          ORDER BY gis_acres DESC
-        ) AS cpad
+  # - <<: *layer
+  #   name: cpad-labels
+  #   id:   cpad-labels
+  #   status: off
+  #   Datasource:
+  #     <<: *postgis
+  #     geometry_field: geom
+  #     table: >
+  #       (
+  #         SELECT unit_name AS name, gis_acres, geom
+  #         FROM cpad_superunits
+  #         WHERE geom && !bbox!
+  #           AND unit_name IS NOT NULL
+  #           AND gis_acres > 5
+  #         ORDER BY gis_acres DESC
+  #       ) AS cpad
 
   # ---- Water Labels --------------------------------------------------
 
-  - <<: *layer
-    name: water-labels
-    id:   water-labels
-    status: off
-    Datasource:
-      <<: *postgis
-      geometry_field: geom
-      table: >
-        (
-          SELECT * FROM (
-            SELECT gnis_name AS name, ftype, geom, areasqkm
-            FROM nhdwaterbody
-            WHERE geom && !bbox!
-              AND gnis_name IS NOT NULL
-              AND ftype IN (
-                39000, -- Lake/Pond
-                39004, -- Lake/Pond: Hydrographic Category = Perennial
-                39009, -- Lake/Pond: Hydrographic Category = Perennial; Stage = Average Water Elevation
-                39010, -- Lake/Pond: Hydrographic Category = Perennial; Stage = Normal Pool
-                39011, -- Lake/Pond: Hydrographic Category = Perennial; Stage = Date of Photography
-                39012, -- Lake/Pond: Hydrographic Category = Perennial; Stage = Spillway Elevation
+  # - <<: *layer
+  #   name: water-labels
+  #   id:   water-labels
+  #   status: off
+  #   Datasource:
+  #     <<: *postgis
+  #     geometry_field: geom
+  #     table: >
+  #       (
+  #         SELECT * FROM (
+  #           SELECT gnis_name AS name, ftype, geom, areasqkm
+  #           FROM nhdwaterbody
+  #           WHERE geom && !bbox!
+  #             AND gnis_name IS NOT NULL
+  #             AND ftype IN (
+  #               39000, -- Lake/Pond
+  #               39004, -- Lake/Pond: Hydrographic Category = Perennial
+  #               39009, -- Lake/Pond: Hydrographic Category = Perennial; Stage = Average Water Elevation
+  #               39010, -- Lake/Pond: Hydrographic Category = Perennial; Stage = Normal Pool
+  #               39011, -- Lake/Pond: Hydrographic Category = Perennial; Stage = Date of Photography
+  #               39012, -- Lake/Pond: Hydrographic Category = Perennial; Stage = Spillway Elevation
 
-                43600, -- Reservoir
-                43601, -- Reservoir: Reservoir Type = Aquaculture
-                43603, -- Reservoir: Reservoir Type = Decorative Pool
-                43604, -- Reservoir: Reservoir Type = Tailings Pond; Construction Material = Earthen
-                43605, -- Reservoir: Reservoir Type = Tailings Pond
-                43606, -- Reservoir: Reservoir Type = Disposal
-                43607, -- Reservoir: Reservoir Type = Evaporator
-                43608, -- Reservoir: Reservoir Type = Swimming Pool
-                43609, -- Reservoir: Reservoir Type = Cooling Pond
-                43610, -- Reservoir: Reservoir Type = Filtration Pond
-                43611, -- Reservoir: Reservoir Type = Settling Pond
-                43612, -- Reservoir: Reservoir Type = Sewage Treatment Pond
-                43613, -- Reservoir: Reservoir Type = Water Storage; Construction Material = Nonearthen
-                43614, -- Reservoir: Reservoir Type = Water Storage; Construction Material = Earthen; Hydrographic Category = Intermittent
-                43615, -- Reservoir: Reservoir Type = Water Storage; Construction Material = Earthen; Hydrographic Category = Perennial
-                43617, -- Reservoir: Reservoir Type = Water Storage
-                43618, -- Reservoir: Construction Material = Earthen
-                43619, -- Reservoir: Construction Material = Nonearthen
-                43621, -- Reservoir: Reservoir Type = Water Storage; Hydrographic Category = Perennial
-                43623, -- Reservoir: Reservoir Type = Evaporator; Construction Material = Earthen
-                43624, -- Reservoir; Reservoir Type = Treatment
-                43625, -- Reservoir: Reservoir Type = Disposal; Construction Material = Earthen
-                43626, -- Reservoir: Reservoir Type = Disposal; Construction Material = Nonearthen
+  #               43600, -- Reservoir
+  #               43601, -- Reservoir: Reservoir Type = Aquaculture
+  #               43603, -- Reservoir: Reservoir Type = Decorative Pool
+  #               43604, -- Reservoir: Reservoir Type = Tailings Pond; Construction Material = Earthen
+  #               43605, -- Reservoir: Reservoir Type = Tailings Pond
+  #               43606, -- Reservoir: Reservoir Type = Disposal
+  #               43607, -- Reservoir: Reservoir Type = Evaporator
+  #               43608, -- Reservoir: Reservoir Type = Swimming Pool
+  #               43609, -- Reservoir: Reservoir Type = Cooling Pond
+  #               43610, -- Reservoir: Reservoir Type = Filtration Pond
+  #               43611, -- Reservoir: Reservoir Type = Settling Pond
+  #               43612, -- Reservoir: Reservoir Type = Sewage Treatment Pond
+  #               43613, -- Reservoir: Reservoir Type = Water Storage; Construction Material = Nonearthen
+  #               43614, -- Reservoir: Reservoir Type = Water Storage; Construction Material = Earthen; Hydrographic Category = Intermittent
+  #               43615, -- Reservoir: Reservoir Type = Water Storage; Construction Material = Earthen; Hydrographic Category = Perennial
+  #               43617, -- Reservoir: Reservoir Type = Water Storage
+  #               43618, -- Reservoir: Construction Material = Earthen
+  #               43619, -- Reservoir: Construction Material = Nonearthen
+  #               43621, -- Reservoir: Reservoir Type = Water Storage; Hydrographic Category = Perennial
+  #               43623, -- Reservoir: Reservoir Type = Evaporator; Construction Material = Earthen
+  #               43624, -- Reservoir; Reservoir Type = Treatment
+  #               43625, -- Reservoir: Reservoir Type = Disposal; Construction Material = Earthen
+  #               43626, -- Reservoir: Reservoir Type = Disposal; Construction Material = Nonearthen
 
-                46600, -- Swamp/Marsh
-                46601, -- Swamp/Marsh: Hydrographic Category = Intermittent
-                46602, -- Swamp/Marsh: Hydrographic Category = Perennial
+  #               46600, -- Swamp/Marsh
+  #               46601, -- Swamp/Marsh: Hydrographic Category = Intermittent
+  #               46602, -- Swamp/Marsh: Hydrographic Category = Perennial
 
-                 -1
-              )
-          UNION
-            SELECT gnis_name AS name, ftype, geom, areasqkm
-            FROM nhdarea
-            WHERE geom && !bbox!
-              AND gnis_name IS NOT NULL
-              AND ftype IN (
-                33600, -- Canal/Ditch
-                33601, -- Canal/Ditch: Canal/Ditch Type = Aqueduct
+  #                -1
+  #             )
+  #         UNION
+  #           SELECT gnis_name AS name, ftype, geom, areasqkm
+  #           FROM nhdarea
+  #           WHERE geom && !bbox!
+  #             AND gnis_name IS NOT NULL
+  #             AND ftype IN (
+  #               33600, -- Canal/Ditch
+  #               33601, -- Canal/Ditch: Canal/Ditch Type = Aqueduct
 
-                36400, -- Foreshore
+  #               36400, -- Foreshore
 
-                45500, -- Spillway
+  #               45500, -- Spillway
 
-                46000, -- Stream/River
-                46006, -- Stream/River: Hydrographic Category = Perennial
+  #               46000, -- Stream/River
+  #               46006, -- Stream/River: Hydrographic Category = Perennial
 
-                 -1
-              )
-          ) AS water
-          ORDER BY areasqkm DESC
-        ) AS labels
+  #                -1
+  #             )
+  #         ) AS water
+  #         ORDER BY areasqkm DESC
+  #       ) AS labels
 
   # ---- Bay Labels ----------------------------------------------------
 
