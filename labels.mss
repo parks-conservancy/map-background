@@ -18,19 +18,21 @@
     text-dx: 10;
     text-dy: 10;
     text-size: 11;
+    text-character-spacing: 1;
   }
 
   [zoom>=13] {
     text-wrap-width: 48;
-    text-size: 12;
+    text-size: 14;
+    text-character-spacing: 1;
+    text-halo-fill: @land;
+    text-halo-radius: 1;
+    text-fill: #15984d;
+    text-transform: uppercase;
   }
 
   [zoom>=14] {
     text-face-name: "Frutiger LT 45 Light Bold";
-    text-halo-fill: @land;
-    text-halo-radius: 1.25;
-    text-fill: #15984d;
-    text-transform: uppercase;
     text-character-spacing: 2;
     text-dx: 32;
     text-dy: 32;
