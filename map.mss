@@ -68,6 +68,7 @@ Map {
   line-opacity: 0.5;
   line-width: 0.25;
   line-dasharray: 5, 2;
+  line-cap: round;
 
   [zoom>=12] {
     line-width: 0.5;
@@ -170,6 +171,7 @@ Map {
   line-width: 0.4;
   line-color: lighten(@coastline, 10%);
   line-dasharray: 30, 5, 2, 5, 2, 5;
+  line-cap: round;
 
   [zoom>=15]
   {
@@ -304,6 +306,7 @@ Map {
   [use_type='CLOSED'] {
     line-dasharray: 5,5;
     line-opacity: 0.5;
+    line-cap: round;
   }
 }
 
