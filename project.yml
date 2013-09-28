@@ -271,6 +271,10 @@ Layer:
                  -1
               )
             GROUP BY ftype
+          UNION
+            SELECT 445, geom
+            FROM water_fill
+            WHERE geom && !bbox!
         ) AS _
 
   # ---- Coastline (NHD) -----------------------------------------------
@@ -284,12 +288,10 @@ Layer:
       geometry_field: geom
       table: >
         (
-          SELECT ST_Union(geom) AS geom FROM (
-              SELECT geom
+          SELECT ST_Union(geom) AS geom, SUM(areasqkm) AS areasqkm FROM (
+              SELECT geom, areasqkm
               FROM nhdwaterbody
               WHERE geom && !bbox!
-                -- TODO zoom dependent threshold
-                AND areasqkm >= 0.05
                 AND fcode IN (
                   39000, -- Lake/Pond
                   39004, -- Lake/Pond: Hydrographic Category = Perennial
@@ -325,11 +327,9 @@ Layer:
                   -1
                 )
             UNION
-              SELECT geom
+              SELECT geom, areasqkm
               FROM nhdarea
               WHERE geom && !bbox!
-                -- TODO zoom dependent threshold
-                AND areasqkm >= 0.05
                 AND fcode IN (
                   33600, -- Canal/Ditch
                   33601, -- Canal/Ditch: Canal/Ditch Type = Aqueduct
@@ -343,7 +343,13 @@ Layer:
 
                   -1
                 )
+            UNION
+              SELECT geom, 9999
+              FROM water_fill
+              WHERE geom && !bbox!
           ) AS _
+          -- TODO zoom-dependent factor (0.075 makes sense at z14)
+          WHERE areasqkm >= 0.075
         ) AS _
 
   # ---- GGNRA Boundaries (offshore) -----------------------------------
