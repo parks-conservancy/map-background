@@ -51,8 +51,11 @@ Layer:
     id:   land
     Datasource:
       <<: *postgis
-      table: coastline
       geometry_field: geom
+      table: >
+        (
+          SELECT !bbox! geom
+        ) AS _
 
   # ---- Protected Areas (CPAD) ----------------------------------------
 

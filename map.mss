@@ -8,7 +8,6 @@
 @school: #e6e2dc;
 
 Map {
-  background-color: @land;
   buffer-size: 384;
   font-directory: url("fonts/");
 }
