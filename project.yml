@@ -330,7 +330,7 @@ Layer:
                   -1
                 )
             UNION
-              SELECT geom, areasqkm
+              SELECT geom, 9999
               FROM nhdarea
               WHERE geom && !bbox!
                 AND fcode IN (
