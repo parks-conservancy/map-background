@@ -12,6 +12,16 @@ Map {
   font-directory: url("fonts/");
 }
 
+#border {
+  line-color: #777;
+
+  line-width: 5;
+
+  [zoom>=13] {
+    line-width: 10;
+  }
+}
+
 #water {
   polygon-fill: @water;
 

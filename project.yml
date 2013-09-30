@@ -973,3 +973,16 @@ Layer:
           ORDER BY priority ASC
         ) AS _
 
+  # ---- Map border ----------------------------------------------------
+
+  - <<: *layer
+    name: border
+    id:   border
+    Datasource:
+      <<: *postgis
+      geometry_field: geom
+      table: >
+        (
+          SELECT ST_MakeEnvelope(-13763541.8416803, 4410014.78335954, -13472441.3732559, 4681500.2899002, 900913) geom
+        ) AS _
+
