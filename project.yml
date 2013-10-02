@@ -150,6 +150,8 @@ Layer:
     name: fields
     id:   fields
     status: on
+    properties:
+      minzoom: 14
     Datasource:
       <<: *postgis
       table: >
@@ -159,7 +161,6 @@ Layer:
         WHERE way && !bbox!
         AND tags ? 'leisure'
         AND tags -> 'leisure' IN ('pitch', 'playground', 'stadium', 'recreation_ground', 'court', 'tennis', 'track', 'dog_park', 'golf_course')
-          AND zoom(!scale_denominator!) >= 14
         ) AS _
 
   # ---- Contours ------------------------------------------------------
@@ -192,6 +193,8 @@ Layer:
     name: water-lines
     id:   water-lines
     status: on
+    properties:
+      minzoom: 14
     Datasource:
       <<: *postgis
       geometry_field: geom
@@ -200,7 +203,6 @@ Layer:
           SELECT geom
           FROM nhdflowline
           WHERE geom && !bbox!
-            AND zoom(!scale_denominator!) >= 14
         ) AS _
 
   # ---- Water (NHD) ---------------------------------------------------
@@ -361,6 +363,8 @@ Layer:
     name: offshore-boundaries
     id:   offshore-boundaries
     status: on
+    properties:
+      minzoom: 12
     Datasource:
       <<: *postgis
       geometry_field: geom
@@ -369,7 +373,6 @@ Layer:
           SELECT geom
           FROM ggnra_offshore_boundaries
           WHERE geom && !bbox!
-            AND zoom(!scale_denominator!) >= 12
         ) AS _
 
   # ---- Parking Areas -------------------------------------------------
@@ -378,6 +381,8 @@ Layer:
     name: parking
     id:   parking
     status: on
+    properties:
+      minzoom: 15
     Datasource:
       <<: *postgis
       geometry_field: geom
@@ -388,12 +393,10 @@ Layer:
             SELECT geom
             FROM ggnra_parking_areas
             WHERE geom && !bbox!
-              AND zoom(!scale_denominator!) >= 15
           UNION
             SELECT geom
             FROM pt_parking_areas
             WHERE geom && !bbox!
-              AND zoom(!scale_denominator!) >= 15
           ) AS _
         ) AS _
 
@@ -418,6 +421,8 @@ Layer:
   - <<: *layer
     name: road
     id:   road
+    properties:
+      cache-features: on
     Datasource:
       <<: *postgis
       table: >
@@ -487,6 +492,8 @@ Layer:
     name: buildings
     id:   buildings
     status: on
+    properties:
+      minzoom: 15
     Datasource:
       <<: *postgis
       geometry_field: geom
@@ -499,7 +506,6 @@ Layer:
             END) battery
           FROM ggnra_buildings
           WHERE geom && !bbox!
-            AND zoom(!scale_denominator!) >= 15
         ) AS _
 
   # ---- Dual Carriageways ---------------------------------------------
@@ -558,6 +564,9 @@ Layer:
     name: trails
     id:   trails
     status: on
+    properties:
+      minzoom: 13
+      cache-features: on
     Datasource:
       <<: *postgis
       geometry_field: geom
@@ -566,7 +575,6 @@ Layer:
           SELECT *
           FROM trails
           WHERE geom && !bbox!
-            AND zoom(!scale_denominator!) >= 13
         ) AS _
 
   # ---- GGNRA Unit Names ----------------------------------------------
@@ -575,6 +583,8 @@ Layer:
     name: unit_labels
     id:   unit_labels
     status: on
+    properties:
+      minzoom: 11
     Datasource:
       <<: *postgis
       geometry_field: geom
@@ -584,7 +594,6 @@ Layer:
           FROM locations
           WHERE geom && !bbox!
             AND type='Park'
-            AND zoom(!scale_denominator!) >= 11
         ) AS _
 
   # ---- Recreational Opportunities (OSM) ------------------------------
@@ -632,6 +641,8 @@ Layer:
     name: locations
     id:   locations
     status: on
+    properties:
+      minzoom: 14
     Datasource:
       <<: *postgis
       geometry_field: geom
@@ -663,7 +674,6 @@ Layer:
             WHERE geom && !bbox!
               AND type NOT IN ('Park')
               AND type IN ('Campground', 'Visitor Center', 'Site of Interest', 'Cafe', 'Overlook', 'Water Fountain', 'Parking Lot')
-              AND zoom(!scale_denominator!) >= 14
           UNION
             SELECT name,
               type,
@@ -680,7 +690,6 @@ Layer:
             FROM trailheads
             WHERE geom && !bbox!
           ) AS _
-          WHERE zoom(!scale_denominator!) >= 14
           ORDER BY priority
         ) AS x
 
@@ -690,6 +699,8 @@ Layer:
     name: trail-labels
     id:   trail-labels
     status: on
+    properties:
+      minzoom: 14
     Datasource:
       <<: *postgis
       geometry_field: geom
@@ -697,8 +708,7 @@ Layer:
         (
           SELECT *
           FROM trails
-          WHERE zoom(!scale_denominator!) >= 14
-            AND geom && !bbox!
+          WHERE geom && !bbox!
         ) AS _
 
   # ---- Battery Labels ------------------------------------------------
@@ -707,6 +717,8 @@ Layer:
     name: battery-labels
     id:   battery-labels
     status: on
+    properties:
+      minzoom: 18
     Datasource:
       <<: *postgis
       geometry_field: geom
@@ -716,7 +728,6 @@ Layer:
           FROM ggnra_buildings
           WHERE geom && !bbox!
             AND name ILIKE 'battery %'
-            AND zoom(!scale_denominator!) >= 18
         ) AS _
 
   # ---- Lighthouses ---------------------------------------------------
