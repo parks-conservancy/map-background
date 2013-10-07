@@ -405,6 +405,8 @@ Layer:
   - <<: *layer
     name: ferry
     id:   ferry
+    properties:
+      minzoom: 11
     Datasource:
       <<: *postgis
       table: >
@@ -419,10 +421,13 @@ Layer:
   # ---- Roads ---------------------------------------------------------
 
   - <<: *layer
-    name: road
-    id:   road
+    name: road_z6-8
+    id:   road_z6-8
+    class: road
     properties:
       cache-features: on
+      minzoom: 6
+      maxzoom: 8
     Datasource:
       <<: *postgis
       table: >
@@ -440,49 +445,140 @@ Layer:
             way
           FROM planet_osm_line
           WHERE way && !bbox!
-            AND (
-              (zoom(!scale_denominator!) >= 14 AND
-                ((tags ? 'highway'
-                  AND tags -> 'highway' IN ('motorway', 'trunk', 'primary',
-                                            'motorway_link', 'trunk_link', 'primary_link',
-                                            'secondary_link', 'tertiary_link',
-                                            'secondary', 'tertiary', 'residential',
-                                            'unclassified', 'service', 'road')
-                  AND
-                  (NOT tags ? 'access' OR tags -> 'access' NOT IN ('no', 'false')))
-                OR
-                (tags ? 'aeroway' AND tags -> 'aeroway' IN ('runway', 'taxiway')))
-              )
+            AND tags -> 'highway' IN ('motorway', 'trunk')
+            AND (NOT tags ? 'access' OR tags -> 'access' NOT IN ('no', 'false'))
+          ORDER BY z_order ASC
+        ) AS _
+
+  - <<: *layer
+    name: road_z9
+    id:   road_z9
+    class: road
+    properties:
+      cache-features: on
+      minzoom: 9
+      maxzoom: 9
+    Datasource:
+      <<: *postgis
+      table: >
+        (
+          SELECT tags -> 'highway' AS highway,
+            tags -> 'aeroway' AS aeroway,
+            (CASE
+            WHEN tags ? 'bridge' AND tags -> 'bridge' NOT IN ('no', 'false') THEN 'yes'
+            ELSE NULL
+            END) bridge,
+            (CASE
+            WHEN tags ? 'tunnel' AND tags -> 'tunnel' NOT IN ('no', 'false') THEN 'yes'
+            ELSE NULL
+            END) tunnel,
+            way
+          FROM planet_osm_line
+          WHERE way && !bbox!
+            AND tags -> 'highway' IN ('motorway', 'trunk', 'primary')
+            AND (NOT tags ? 'access' OR tags -> 'access' NOT IN ('no', 'false'))
+          ORDER BY z_order ASC
+        ) AS _
+
+  - <<: *layer
+    name: road_z10
+    id:   road_z10
+    properties:
+      cache-features: on
+      minzoom: 10
+      maxzoom: 10
+    Datasource:
+      <<: *postgis
+      table: >
+        (
+          SELECT tags -> 'highway' AS highway,
+            tags -> 'aeroway' AS aeroway,
+            (CASE
+            WHEN tags ? 'bridge' AND tags -> 'bridge' NOT IN ('no', 'false') THEN 'yes'
+            ELSE NULL
+            END) bridge,
+            (CASE
+            WHEN tags ? 'tunnel' AND tags -> 'tunnel' NOT IN ('no', 'false') THEN 'yes'
+            ELSE NULL
+            END) tunnel,
+            way
+          FROM planet_osm_line
+          WHERE way && !bbox!
+            AND tags -> 'highway' IN ('motorway', 'trunk', 'primary', 'secondary', 'tertiary')
+            AND (NOT tags ? 'access' OR tags -> 'access' NOT IN ('no', 'false'))
+          ORDER BY z_order ASC
+        ) AS _
+
+  - <<: *layer
+    name: road_z11-13
+    id:   road_z11-13
+    class: road
+    properties:
+      cache-features: on
+      minzoom: 11
+      maxzoom: 13
+    Datasource:
+      <<: *postgis
+      table: >
+        (
+          SELECT tags -> 'highway' AS highway,
+            tags -> 'aeroway' AS aeroway,
+            (CASE
+            WHEN tags ? 'bridge' AND tags -> 'bridge' NOT IN ('no', 'false') THEN 'yes'
+            ELSE NULL
+            END) bridge,
+            (CASE
+            WHEN tags ? 'tunnel' AND tags -> 'tunnel' NOT IN ('no', 'false') THEN 'yes'
+            ELSE NULL
+            END) tunnel,
+            way
+          FROM planet_osm_line
+          WHERE way && !bbox!
+            AND 
+              (tags -> 'highway' IN ('motorway', 'trunk', 'primary',
+                                     'secondary', 'tertiary', 'residential',
+                                     'unclassified', 'service', 'road')
+              AND (NOT tags ? 'access' OR tags -> 'access' NOT IN ('no', 'false')))
+            OR
+              (tags ? 'aeroway' AND tags -> 'aeroway' IN ('runway', 'taxiway'))
+          ORDER BY z_order ASC
+        ) AS _
+
+  - <<: *layer
+    name: road_z14plus
+    id:   road_z14plus
+    class: road
+    properties:
+      cache-features: on
+      minzoom: 14
+    Datasource:
+      <<: *postgis
+      table: >
+        (
+          SELECT tags -> 'highway' AS highway,
+            tags -> 'aeroway' AS aeroway,
+            (CASE
+            WHEN tags ? 'bridge' AND tags -> 'bridge' NOT IN ('no', 'false') THEN 'yes'
+            ELSE NULL
+            END) bridge,
+            (CASE
+            WHEN tags ? 'tunnel' AND tags -> 'tunnel' NOT IN ('no', 'false') THEN 'yes'
+            ELSE NULL
+            END) tunnel,
+            way
+          FROM planet_osm_line
+          WHERE way && !bbox!
+            AND
+              (tags ? 'highway'
+                AND tags -> 'highway' IN ('motorway', 'trunk', 'primary',
+                                          'motorway_link', 'trunk_link', 'primary_link',
+                                          'secondary_link', 'tertiary_link',
+                                          'secondary', 'tertiary', 'residential',
+                                          'unclassified', 'service', 'road')
+                AND
+                (NOT tags ? 'access' OR tags -> 'access' NOT IN ('no', 'false')))
               OR
-              (zoom(!scale_denominator!) >= 11 AND
-                ((tags ? 'highway'
-                  AND tags -> 'highway' IN ('motorway', 'trunk', 'primary',
-                                            'secondary', 'tertiary', 'residential',
-                                            'unclassified', 'service', 'road')
-                  AND
-                  (NOT tags ? 'access' OR tags -> 'access' NOT IN ('no', 'false')))
-                OR
-                (tags ? 'aeroway' AND tags -> 'aeroway' IN ('runway', 'taxiway')))
-              )
-              OR
-              (zoom(!scale_denominator!) >= 10 AND
-                (tags -> 'highway' IN ('motorway', 'trunk', 'primary', 'secondary', 'tertiary')
-                  AND
-                  (NOT tags ? 'access' OR tags -> 'access' NOT IN ('no', 'false')))
-              )
-              OR
-              (zoom(!scale_denominator!) >= 9 AND
-                (tags -> 'highway' IN ('motorway', 'trunk', 'primary')
-                  AND
-                  (NOT tags ? 'access' OR tags -> 'access' NOT IN ('no', 'false')))
-              )
-              OR
-              (zoom(!scale_denominator!) >= 6 AND
-                (tags -> 'highway' IN ('motorway', 'trunk')
-                  AND
-                  (NOT tags ? 'access' OR tags -> 'access' NOT IN ('no', 'false')))
-              )
-            )
+              (tags ? 'aeroway' AND tags -> 'aeroway' IN ('runway', 'taxiway'))
           ORDER BY z_order ASC
         ) AS _
 
@@ -750,9 +846,12 @@ Layer:
   # ---- Places --------------------------------------------------------
 
   - <<: *layer
-    name: places
-    id:   places
+    name: places_z12minus
+    id:   places_z12minus
+    class: places
     status: on
+    properties:
+      maxzoom: 12
     Datasource:
       <<: *postgis
       table: >
@@ -780,21 +879,11 @@ Layer:
               FROM planet_osm_point
               WHERE way && !bbox!
                 AND tags ?& ARRAY['name', 'place']
+                AND tags -> 'place' IN ('city', 'town')
                 AND tags -> 'name' NOT LIKE '%Home%'
                 AND tags -> 'name' NOT LIKE '%Trailer Court%'
                 AND tags -> 'name' NOT IN ('Doelger City')
                 AND NOT tags ? 'historic'
-                AND (
-                  (
-                    zoom(!scale_denominator!) <= 12
-                    AND tags -> 'place' IN ('city','town')
-                  )
-                  OR (
-                    zoom(!scale_denominator!) > 12
-                    -- island is intentionally omitted
-                    AND tags -> 'place' IN ('city','town','village','suburb','neighbourhood','hamlet','islet','locale','locality')
-                  )
-                )
             UNION
               SELECT (string_to_array(tags -> 'name', ';'))[1] AS name,
                      way,
@@ -812,19 +901,76 @@ Layer:
               FROM planet_osm_polygon
               WHERE way && !bbox!
                 AND tags ?& ARRAY['name', 'place']
+                AND tags -> 'place' IN ('city','town','village')
                 AND tags -> 'name' NOT LIKE '%Home%'
                 AND tags -> 'name' NOT LIKE '%Trailer Court%'
-                AND (
-                  (
-                    zoom(!scale_denominator!) <= 12
-                    AND tags -> 'place' IN ('city','town','village')
-                  )
-                  OR (
-                    -- island is intentionally omitted
-                    zoom(!scale_denominator!) > 12
-                    AND tags -> 'place' IN ('city','town','village','suburb','neighbourhood','hamlet','islet','locale','locality')
-                  )
-                )
+            ) AS stuff
+            ORDER BY name
+          ) AS stuff
+          ORDER BY priority ASC, population DESC, size DESC
+        ) AS places
+
+  - <<: *layer
+    name: places_z13plus
+    id:   places_z13plus
+    class: places
+    status: on
+    properties:
+      minzoom: 13
+    Datasource:
+      <<: *postgis
+      table: >
+        (
+          SELECT *
+          FROM 
+          (
+            SELECT DISTINCT ON (name) name, way, place, population,
+                   priority, size
+            FROM
+            (
+              SELECT (string_to_array(tags -> 'name', ';'))[1] AS name,
+                     way,
+                     tags -> 'place' AS place,
+                     COALESCE(replace(tags -> 'population', ',', '')::numeric, 0) AS population,
+                     CASE
+                      WHEN tags -> 'place' IN ('city') THEN 1
+                      WHEN tags -> 'place' IN ('suburb') THEN 2
+                      WHEN tags -> 'place' IN ('town') THEN 3
+                      WHEN tags -> 'place' IN ('neighbourhood') THEN 4
+                      WHEN tags -> 'place' IN ('village') THEN 5
+                      ELSE 10
+                    END AS priority,
+                    1 as size
+              FROM planet_osm_point
+              WHERE way && !bbox!
+                AND tags ?& ARRAY['name', 'place']
+                -- island is intentionally omitted
+                AND tags -> 'place' IN ('city','town','village','suburb','neighbourhood','hamlet','islet','locale','locality')
+                AND tags -> 'name' NOT LIKE '%Home%'
+                AND tags -> 'name' NOT LIKE '%Trailer Court%'
+                AND tags -> 'name' NOT IN ('Doelger City')
+                AND NOT tags ? 'historic'
+            UNION
+              SELECT (string_to_array(tags -> 'name', ';'))[1] AS name,
+                     way,
+                     tags -> 'place' AS place,
+                     way_area size,
+              COALESCE(replace(tags -> 'population', ',', '')::numeric, 0) AS population,
+              CASE
+                WHEN tags->'place' IN ('city') THEN 1
+                WHEN tags->'place' IN ('suburb') THEN 2
+                WHEN tags->'place' IN('town') THEN 3
+                WHEN tags->'place' IN ('neighbourhood') THEN 4
+                WHEN tags->'place' IN ('village') THEN 5
+                ELSE 10
+              END AS priority
+              FROM planet_osm_polygon
+              WHERE way && !bbox!
+                AND tags ?& ARRAY['name', 'place']
+                -- island is intentionally omitted
+                AND tags -> 'place' IN ('city','town','village','suburb','neighbourhood','hamlet','islet','locale','locality')
+                AND tags -> 'name' NOT LIKE '%Home%'
+                AND tags -> 'name' NOT LIKE '%Trailer Court%'
             ) AS stuff
             ORDER BY name
           ) AS stuff
@@ -949,9 +1095,12 @@ Layer:
   # ---- Road Labels ---------------------------------------------------
 
   - <<: *layer
-    name: highway-labels
-    id:   highway-labels
+    name: highway-labels_z13minus
+    id:   highway-labels_z13minus
+    class: highway-labels
     status: on
+    properties:
+      maxzoom: 13
     Datasource:
       <<: *postgis
       table: >
@@ -970,15 +1119,40 @@ Layer:
             END) priority
           FROM planet_osm_line
           WHERE way && !bbox!
-            AND (
-              (zoom(!scale_denominator!) >= 14 AND
-               tags -> 'highway' IN ('motorway', 'trunk', 'primary',
-                                    'secondary', 'tertiary', 'residential',
-                                    'unclassified', 'service', 'road')
-              )
-              OR
-              tags -> 'highway' IN ('motorway', 'trunk', 'primary')
-            )
+            AND tags -> 'highway' IN ('motorway', 'trunk', 'primary')
+            AND (NOT tags ? 'access' OR tags -> 'access' NOT IN ('no', 'false'))
+            AND NOT tags ?| ARRAY['bridge', 'tunnel']
+          ORDER BY priority ASC
+        ) AS _
+
+  - <<: *layer
+    name: highway-labels_z14plus
+    id:   highway-labels_z14plus
+    class: highway-labels
+    status: on
+    properties:
+      minzoom: 14
+    Datasource:
+      <<: *postgis
+      table: >
+        (
+          SELECT tags -> 'highway' AS highway,
+            (string_to_array(tags -> 'name', ';'))[1] AS name,
+            way,
+            (CASE
+            WHEN tags -> 'highway' IN ('motorway') THEN 1
+            WHEN tags -> 'highway' IN ('trunk') THEN 2
+            WHEN tags -> 'highway' IN ('primary') THEN 3
+            WHEN tags -> 'highway' IN ('secondary') THEN 4
+            WHEN tags -> 'highway' IN ('tertiary') THEN 5
+            WHEN tags -> 'highway' IN ('residential', 'unclassified', 'service', 'road') THEN 6
+            ELSE 100
+            END) priority
+          FROM planet_osm_line
+          WHERE way && !bbox!
+            AND tags -> 'highway' IN ('motorway', 'trunk', 'primary',
+                                      'secondary', 'tertiary', 'residential',
+                                      'unclassified', 'service', 'road')
             AND (NOT tags ? 'access' OR tags -> 'access' NOT IN ('no', 'false'))
             AND NOT tags ?| ARRAY['bridge', 'tunnel']
           ORDER BY priority ASC

@@ -44,7 +44,7 @@
   }
 }
 
-#highway-labels {
+.highway-labels {
   text-fill: #5a5c5b;
   text-name: "''";
   text-face-name: "Frutiger LT 55 Roman Regular";
@@ -147,7 +147,7 @@
   }
 }
 
-#places
+.places
 {
   text-face-name: "Frutiger LT 45 Light Bold";
   text-name: [name];
@@ -167,7 +167,7 @@
 }
 
 // seem right for zoom 12
-#places[place='city']
+.places[place='city']
 {
   text-wrap-width: 32;
   text-size: 15;
@@ -184,7 +184,7 @@
   }
 }
 
-#places[place='town']
+.places[place='town']
 {
   text-halo-radius: 1.5;
   text-character-spacing: 2;
@@ -197,13 +197,13 @@
   }
 }
 
-#places[place='suburb']
+.places[place='suburb']
 {
   text-character-spacing: 1;
   text-size: 11;
 }
 
-#places[place='neighbourhood']
+.places[place='neighbourhood']
 {
   text-face-name: "Frutiger LT 55 Roman Regular";
 
@@ -216,27 +216,27 @@
   }
 }
 
-#places[place='village']
+.places[place='village']
 {
 }
 
-#places[place='hamlet']
+.places[place='hamlet']
 {
 }
 
-#places[place='locality'],
-#places[place='locale'],
+.places[place='locality'],
+.places[place='locale'],
 {
 }
 
-#places[place='island']
+.places[place='island']
 {
 }
 
 
 #bay,
-#places[place='islet'],
-#places[place='island']
+.places[place='islet'],
+.places[place='island']
 {
   text-face-name: "Frutiger LT 55 Roman Italic";
   text-name: [name];

@@ -19,7 +19,7 @@
 
 @runway: #efeee9;
 
-#road
+.road
 {
   ::stroke {
     line-color: transparent;
