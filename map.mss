@@ -8,7 +8,6 @@
 @school: #e6e2dc;
 
 Map {
-  font-directory: url("fonts/");
 }
 
 #border {
