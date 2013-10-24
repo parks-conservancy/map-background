@@ -17,7 +17,7 @@
   polygon-fill: @park;
 
   [zoom>=15] {
-    polygon-smooth: 0.5;
+    //polygon-smooth: 0.5;
   }
 }
 
@@ -25,7 +25,7 @@
   polygon-fill: @managed_park;
 
   [zoom>=15] {
-    polygon-smooth: 0.5;
+    //polygon-smooth: 0.5;
   }
 }
 
@@ -34,7 +34,7 @@
   polygon-fill: #f5f5e4;
   
   [zoom>=16] {
-    polygon-smooth: 0.5;
+    //polygon-smooth: 0.5;
   }
 }
 
@@ -53,6 +53,6 @@
   }
 
   [zoom>=16] {
-    polygon-smooth: 0.5;
+    //polygon-smooth: 0.5;
   }
 }
