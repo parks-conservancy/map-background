@@ -58,16 +58,30 @@ Layer:
   # ---- Protected Areas (CPAD) ----------------------------------------
 
   - <<: *layer
-    name: cpad_units
-    id:   cpad_units
+    name: cpad
+    id:   cpad
     status: on
     Datasource:
       <<: *postgis
       geometry_field: geom
       table: >
         (
-          SELECT access_typ AS access_type, geom
+          SELECT access_typ AS access_type,
+            'protected' AS type,
+            geom
           FROM cpad_units
+          WHERE geom && !bbox!
+        UNION
+          SELECT NULL AS access_type,
+            'military' AS type,
+            geom
+          FROM cpad_dod
+          WHERE geom && !bbox!
+        UNION
+          SELECT NULL AS access_type,
+            'reservation' AS type,
+            geom
+          FROM cpad_res
           WHERE geom && !bbox!
         ) AS _
 

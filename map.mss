@@ -3,6 +3,8 @@
 @park: #f3ebc4;
 @managed_park: #dce8cb;
 @school: #e6e2dc;
+@military: #eeebe7;
+@reservation: #f8f3db;
 
 #land {
   polygon-fill: @land;
@@ -13,11 +15,17 @@
   polygon-fill: @beach;
 }
 
-#cpad_units {
-  polygon-fill: @park;
+#cpad {
+  [type='protected'] {
+    polygon-fill: @park;
+  }
 
-  [zoom>=15] {
-    //polygon-smooth: 0.5;
+  [type='military'] {
+    polygon-fill: @military;
+  }
+
+  [type='reservation'] {
+    polygon-fill: @reservation;
   }
 }
 
