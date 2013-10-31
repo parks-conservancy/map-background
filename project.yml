@@ -99,7 +99,8 @@ Layer:
           SELECT goga_man, geom
           FROM park_units
           WHERE geom && !bbox!
-            AND goga_man IN ('Yes', 'Trust', 'Offshore')
+            AND goga_man IN ('Yes', 'Trust', 'Offshore', 'Pore')
+            AND COALESCE(ownership, '') != 'PORE'
         ) AS _
 
   # ---- School (OSM) --------------------------------------------------
