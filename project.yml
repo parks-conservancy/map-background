@@ -1,6 +1,6 @@
 # == Global project settings ===========================================
 
-name:             GGNPC Background
+name:             ggnpc-background
 description:      ''
 attribution:      'Map Data © OpenStreetMap'
 bounds:           [-123.640, 36.791, -121.025, 38.719]
