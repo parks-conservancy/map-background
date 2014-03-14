@@ -3,9 +3,6 @@ mml: project.mml
 install:
 	mkdir -p ${HOME}/Documents/MapBox/project
 	ln -sf "`pwd`" ${HOME}/Documents/MapBox/project/ggnpc-background
-	mkdir -p .git/hooks
-	ln -sf bin/hook .git/hooks/post-checkout
-	ln -sf bin/hook .git/hooks/post-merge
 	npm install && npm rebuild
 	echo DATABASE_URL=postgres://ggnpc@geo.local:5432/ggnpc > .env
 
